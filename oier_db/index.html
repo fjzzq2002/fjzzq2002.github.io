@@ -18674,29 +18674,44 @@ pre();
 </table>
 </div>
 </div>
+<div style="display:none" id="inner"></div>
+<div id="disqus_thread" style="display:none"></div>
 <script>
+var disqus_config;
 var id=arg('id');
 var ys=["小一","小二","小三","小四","小五","小六","初一","初二","初三","高一","高二","高三"]
 for(var i=0;i<1000;i++) ys.push('高三以上');
 if(id!=null&&id!='')
 {
-    id=U2U(id);
-    document.write('<font size=4>');
-    document.write('<p>'+person[id][1]+'OIer'+person[id][0]+'，');
-    if(person[id][4]==1) document.write('男，');
-    if(person[id][4]==0) document.write('女，');
+    id=U2U(id);var rs='';
+    rs+=('<font size=4>');
+    rs+=('<p>'+person[id][1]+'OIer'+person[id][0]+'，');
+    if(person[id][4]==1) rs+=('男，');
+    if(person[id][4]==0) rs+=('女，');
     if(person[id][3]!=null)
     {
         var s=new Date().toISOString();
         var y=s.substr(0,4)*1,m=s.substr(5,2);
         if(m<'09') --y;
-        document.write('现在'+ys[y-person[id][3]]+'，');
+        rs+=('现在'+ys[y-person[id][3]]+'，');
     }
-    document.write('在'+person[id][2]+'学习。</p>');
+    rs+=('在'+person[id][2]+'学习。</p>');
     t=person[id][5]; r=[];
     for(var gg of t) r.push(gg);
-    document.write('曾获得'+r.join('、')+'。');
-    document.write('</font>');
+    rs+=('曾获得'+r.join('、')+'。</font>');
+    inner.innerHTML=rs;
+    inner.setAttribute('style','display:block');
+    disqus_thread.setAttribute('style','display:block');
+    //Disqus Comment
+    disqus_config = function () {
+    this.page.identifier = 'OIER '+id;
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://oier-db.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
 }
 else
 {

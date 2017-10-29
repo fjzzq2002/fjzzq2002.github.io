@@ -46,16 +46,19 @@ def readfile(fn):
             continue
         if line[0:1]=='#':
             cn='"'+line[1:]+'"'
+            print 'f=%s;'%(cn)
             continue
         ip=line.split(',')
-        name="undefined" if di.get('名')==None else '"'+ip[di.get('名')]+'"'
-        prov="undefined" if di.get('省')==None else '"'+ip[di.get('省')]+'"'
-        scho="undefined" if di.get('校')==None else '"'+ip[di.get('校')]+'"'
-        year="undefined" if di.get('年')==None else py(y,off.get(ip[di.get('年')]))
-        if year==None:
-            year="undefined"
-        male="undefined" if di.get('性')==None else ("1" if ip[di.get('性')]=='男' or ip[di.get('性')]=='男生' else "0")
-        print 'rec(%s,%s,%s,%s,%s,%s);'%(name,prov,scho,year,male,cn)
+        name="u" if di.get('名')==None else '"'+ip[di.get('名')]+'"'
+        prov="u" if di.get('省')==None else '"'+ip[di.get('省')]+'"'
+        scho="u" if di.get('校')==None else '"'+ip[di.get('校')]+'"'
+        year="u" if di.get('年')==None else py(y,off.get(ip[di.get('年')]))
+        if year==None or year=="u":
+            year="u"
+        else:
+            year=str(int(year)-2000)
+        male="u" if di.get('性')==None else ("1" if ip[di.get('性')]=='男' or ip[di.get('性')]=='男生' else "0")
+        print '_(%s,%s,%s,%s,%s);'%(name,prov,scho,year,male)
     fo.close()
 while 1:
     t=raw_input()

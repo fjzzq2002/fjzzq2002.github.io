@@ -19326,21 +19326,26 @@ if(id!=null&&id!='')
     rs+=('<p>'+person[id][1]+'OIer'+person[id][0]+'，');
     if(person[id][4]==1) rs+=('男，');
     if(person[id][4]==0) rs+=('女，');
+    var high=0;
     if(person[id][3]!=null)
     {
         var s=new Date().toISOString();
         var y=s.substr(0,4)*1,m=s.substr(5,2);
         if(m<'09') --y;
         rs+=('现在'+ys[y-person[id][3]]+'，');
+        if(ys[y-person[id][3]]=='高三以上') high=1;
     }
-    if(person[id][7].size>=2)
+    if(high) person[id][2]='';
+    if(person[id][7].size>=2||high)
     {
         rs+="曾在"; var tmp=[];
         for(var g of person[id][7])
             if(g!=person[id][2]) tmp.push(g);
-        rs+=tmp.join('、')+'学习，现在';
+        rs+=tmp.join('、')+'学习';
+        if(!high) rs+='，现在'; else rs+='。';
     }
-    rs+=('在'+person[id][2]+'学习。<font color=white>评分：'+(person[id][6]/100.0)+'。</font></p>');
+    if(!high) rs+=('在'+person[id][2]+'学习。');
+    rs+=('<font color=white>评分：'+(person[id][6]/100.0)+'。</font></p>');
     t=person[id][5]; r=[];
     for(var gg of t) r.push(gg);
     rs+=('曾获得'+r.join('、')+'。</font>');

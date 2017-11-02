@@ -201,10 +201,95 @@ function gpy(x)
 }
 </script>
 <script>
-//对于每个人，我们可以得到名字，省份，学校，year-offset，性别，奖项(array)
 person={}
+tot={}
+avs={}
+fff={}
+ds={}
+names={}
+sf=new Set()
+function gf(x)
+{
+    if(fff[x]==undefined) return x;
+    return fff[x]=gf(fff[x]);
+}
+function uni(a,b)
+{
+    var ga=gf(a),gb=gf(b);
+    if(ga!=gb) fff[ga]=gb;
+}
+function py(a) //运用人类智慧剔除信息
+{
+    a=a.replace('分校','')
+    a=a.replace('学','')
+    a=a.replace('大','')
+    a=a.replace('师范','师')
+    a=a.replace('附属','附')
+    a=a.replace('第','')
+    a=a.replace('市','')
+    a=a.replace('学校','')
+    a=a.replace('省','')
+    var cs=0
+    if(a.indexOf('初')!=-1)
+        cs=1
+    a=a.replace('书院','')
+    a=a.replace('初级','初中')
+    a=a.replace('高中','')
+    a=a.replace('初级','初中')
+    a=a.replace('初中','')
+    a=a.replace('中学','')
+    a=a.replace('中','')
+    for(var g of sf)
+        a=a.replace(g,'')
+    if(cs) cs=cs+'初'
+    return a
+}
+function isd(x) {return x.length==1&&'0'<=x&&x<='9';}
+function num(a)
+{
+    g=''
+    for(var i=0;i<a.length;++i)
+    {
+        var s=a[i];
+        if(isd(s)) g=g+s;
+        if(s=='一') g=g+'1'
+        if(s=='二') g=g+'2'
+        if(s=='三') g=g+'3'
+        if(s=='四') g=g+'4'
+        if(s=='五') g=g+'5'
+        if(s=='六') g=g+'6'
+        if(s=='七') g=g+'7'
+        if(s=='八') g=g+'8'
+        if(s=='九') g=g+'9'
+        if(s=='零') g=g+'0'
+    }
+    return g
+}
+function LCS(a,b)
+{
+    a='!'+a; b='!'+b;
+    var g=new Array();
+    for(var i=0;i<a.length;++i)
+    {
+        g[i]=new Array();
+        for(var j=0;j<b.length;++j) g[i][j]=0;
+    }
+    for(var i=1;i<a.length;++i)
+        for(var j=1;j<b.length;++j)
+            if(a[i]==b[j]) g[i][j]=g[i-1][j-1]+1;
+            else g[i][j]=Math.max(g[i][j-1],g[i-1][j]);
+    return g[a.length-1][b.length-1];
+}
+//对于每个人，我们可以得到名字，省份，学校，year-offset，性别，奖项(array)
 function rec(a,b,c,d,e,f)
 {
+    var r;
+    for(var g=0;g+3<f.length;++g)
+        if(isd(f[g])&&isd(f[g+1])&&isd(f[g+2])&&isd(f[g+3]))
+            r=f[g]*1000+f[g+1]*100+f[g+2]*10+f[g+3]*1;
+    if(tot[c]==undefined) tot[c]=avs[c]=0;
+    if(d!=undefined)
+        avs[c]=avs[c]+(r-d),tot[c]=tot[c]+1;
     var ii=c+' '+a;
     if(person[ii]==undefined)
     {
@@ -227,9 +312,20 @@ function rec(a,b,c,d,e,f)
 }
 function pre()
 {
+    for(s in tot)
+        avs[s]=avs[s]/(tot[s]+0.0);
+    rr={}
+    scr={}
+    ps={}
     for(s in person)
     {
+        sf.add(person[s][1])
+        ds[person[s][2]]=person[s][1]
         var z=person[s][3],mx=-1,r=undefined;
+        var sg=person[s][0]+'|'+person[s][1],sc=person[s][2];
+        if(rr[sg]==undefined)
+            rr[sg]=new Set();
+        rr[sg].add(sc);
         for(g in z)
         {
             var k=z[g];
@@ -237,6 +333,64 @@ function pre()
         }
         person[s][3]=r;
     }
+    for(s in rr)
+    {
+        g=rr[s];
+        if(g.size<=1) continue;
+        for(var i of g)
+        {
+            for(var j of g)
+            {
+                if(j<=i) continue;
+                if(ds[i]!=ds[j]) continue;
+                var ss=i+'#'+j;
+                //console.log(ss);
+                if(scr[ss]==undefined) scr[ss]=0;
+                scr[ss]=scr[ss]+1;
+            }
+        }
+    }
+    for(s in scr)
+    {
+        if(scr[s]>=2)
+        {
+            a=s.split('#');
+            var gg=Math.abs(avs[a[0]]-avs[a[1]]);
+            if(gg!=gg||gg>=2) continue;
+            g=[py(a[0]),py(a[1])]
+            if(num(g[0])!=num(g[1])) continue;
+            if(g[0]==g[1]||(LCS(g[0],g[1])>=Math.min(g[0].length,g[1].length)-(Math.min(g[0].length,g[1].length)>=3)));
+            else continue;
+            //console.log('match '+s);
+            uni(a[0],a[1]);
+        }
+    }
+    for(s in tot)
+    {
+        var g=gf(s);
+        if(names[g]==undefined) names[g]=new Set();
+        names[g].add(s);
+    }
+    for(s in names)
+    {
+        var g=names[s],md=-1,mx;
+        for(var x of g)
+        {
+            var c=tot[x];
+            if(c>md) md=c,mx=x;
+        }
+        names[s]=mx;
+    }
+    for(s in person)
+    {
+        var gg=person[s];
+        //console.log(gg[2],gf(gg[2]));
+        gg[2]=names[gf(gg[2])];
+        var ii=gg[2]+' '+gg[0];
+        if(ps[ii]==undefined) ps[ii]=gg;
+        else for(var s of gg[5]) ps[ii][5].add(s);
+    }
+    person=ps;
 }
 function arg(name)
 {
@@ -247,7 +401,7 @@ function arg(name)
 </script>
 <script>
 u=undefined; f=''; function _(a,b,c,d,e){if(d!=u)d=d+2000;rec(a,b,c,d,e,f);}
-<!--OI Contests After 2014-->
+<!--Real Data Begins Here-->
 f="APIO2014金牌";
 _("袁宇韬","湖南","长沙南雅中学",u,u);
 _("刘研绎","湖南","长沙市雅礼中学",u,u);
@@ -19079,6 +19233,7 @@ _("谢松江","湖南","长沙市雅礼中学",6,1);
 _("乔羽佳","河南","郑州市第一中学",6,1);
 _("杨丰华","河南","郑州外国语学校",6,1);
 _("罗焯","湖南","长沙市雅礼中学",6,1);
+<!--Real Data Ends Here-->
 pre();
 </script>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>

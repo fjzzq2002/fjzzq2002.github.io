@@ -280,13 +280,35 @@ function LCS(a,b)
             else g[i][j]=Math.max(g[i][j-1],g[i-1][j]);
     return g[a.length-1][b.length-1];
 }
-//对于每个人，我们可以得到名字，省份，学校，year-offset，性别，奖项(array)
-function rec(a,b,c,d,e,f)
+function year(f)
 {
-    var r;
+    var r=undefined;
     for(var g=0;g+3<f.length;++g)
         if(isd(f[g])&&isd(f[g+1])&&isd(f[g+2])&&isd(f[g+3]))
             r=f[g]*1000+f[g+1]*100+f[g+2]*10+f[g+3]*1;
+    return r;
+}
+function score(f)
+{
+    var s;
+    if(f.indexOf('CTSC')!=-1) s=0.85;
+    else if(f.indexOf('APIO')!=-1) s=0.8;
+    else if(f.indexOf('WC')!=-1) s=0.75;
+    else if(f.indexOf('NOIP')!=-1) s=0.55;
+    else if(f.indexOf('NOI')!=-1) s=1;
+    else console.log('unrecognized contest');
+    if(f.indexOf('D类')!=-1) s=s*0.95;
+    if(f.indexOf('普及')!=-1) s=s*0.8;
+    if(f.indexOf('二等')!=-1||f.indexOf('银牌')!=-1) s=s*0.8;
+    if(f.indexOf('三等')!=-1||f.indexOf('铜牌')!=-1) s=s*0.6;
+    s=s.toFixed(2)*100;
+    return s;
+}
+var ls;
+//对于每个人，我们可以得到名字，省份，学校，year-offset，性别，奖项(array)
+function rec(a,b,c,d,e,f)
+{
+    var r=year(f);
     if(tot[c]==undefined) tot[c]=avs[c]=0;
     if(d!=undefined)
         avs[c]=avs[c]+(r-d),tot[c]=tot[c]+1;
@@ -391,6 +413,12 @@ function pre()
         else for(var s of gg[5]) ps[ii][5].add(s);
     }
     person=ps;
+    for(s in person)
+    {
+        var rat=0;
+        for(var ss of person[s][5]) rat=Math.max(rat,score(ss));
+        person[s].push(rat);
+    }
 }
 function arg(name)
 {
@@ -19239,8 +19267,8 @@ pre();
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <div style="padding: 15px;">
-<h2>OIer数据库</h2>
-<h4>一个用来查找OIer的数据库，导入了2014~2017年的noi系列竞赛数据，目前数据库中有<script>t=0;for(g in person) ++t; document.write(t);</script>人次，由于访问较慢，建议直接<a href="https://fjzzq2002.github.io/oier_db/index.html">将本网页右键另存为</a></h4>
+<h2><a style="text-decoration:none; color:inherit" id="hh">OIer数据库</a></h2>
+<h4>一个用来查找OIer的数据库，导入了2014~2017年的noi系列竞赛数据，目前数据库中有<script>t=0;for(g in person) ++t; document.write(t);</script>人次，如果访问较慢，可以直接<a href="https://fjzzq2002.github.io/oier_db/index.html">将本网页右键另存为</a></h4>
 <form role="form" class="form-inline" style="display:none" id="ff">
   <div class="form-group">
   <input type="text" class="form-control" name="py" placeholder="拼音">
@@ -19252,6 +19280,7 @@ pre();
 </form>
 <div style="display:none" id="rsp">
 <h4>共查询到<font color="red" id="rst"></font>条结果。</h4>
+<h4>排序方式：<span id="ra_w"><a id="ra">评分降序</a></span> | <span id="as_w"><a id="as">字典序</a></span></h4>
 <div class="col-sm-12">
 <table class="table table-hover table-condensed table-bordered">
 <tbody id="tg">
@@ -19264,6 +19293,12 @@ pre();
 <div style="display:none" id="inner"></div>
 <div id="disqus_thread" style="display:none"></div>
 <script>
+function changeUrlArg(url, arg, val){
+    var pattern = arg+'=([^&]*)';
+    var replaceText = arg+'='+val;
+    return url.match(pattern) ? url.replace(eval('/('+ arg+'=)([^&]*)/gi'), replaceText) : (url.match('[\?]') ? url+'&'+replaceText : url+'?'+replaceText);
+}
+document.getElementById('hh').setAttribute('href',window.location.href.split('?')[0]);
 var disqus_config;
 var id=arg('id');
 var ys=["小一","小二","小三","小四","小五","小六","初一","初二","初三","高一","高二","高三"]
@@ -19282,7 +19317,7 @@ if(id!=null&&id!='')
         if(m<'09') --y;
         rs+=('现在'+ys[y-person[id][3]]+'，');
     }
-    rs+=('在'+person[id][2]+'学习。</p>');
+    rs+=('在'+person[id][2]+'学习。<font color=white>评分：'+(person[id][6]/100.0)+'。</font></p>');
     t=person[id][5]; r=[];
     for(var gg of t) r.push(gg);
     rs+=('曾获得'+r.join('、')+'。</font>');
@@ -19302,11 +19337,16 @@ if(id!=null&&id!='')
 }
 else
 {
-    var py=arg('py'),sc=arg('sc'),nm=arg('nm'),disp=0,ls=[],pv=arg('pv');
+    var py=arg('py'),sc=arg('sc'),nm=arg('nm'),disp=0,ls=[],pv=arg('pv'),ord=arg('ord');
     if(py!=null&&py!='') py=py.toUpperCase(),disp=1;
     if(sc!=null&&sc!='') sc=U2U(sc),disp=1;
     if(nm!=null&&nm!='') nm=U2U(nm),disp=1;
     if(pv!=null&&pv!='') pv=U2U(pv),disp=1;
+    if(ord!='asc'&&ord!='rat') ord='rat';
+    if(ord=='rat') document.getElementById('as').setAttribute('href',changeUrlArg(window.location.href,'ord','asc')),
+    document.getElementById('ra_w').innerHTML=document.getElementById('ra_w').innerHTML.replace('a','span');
+    else document.getElementById('ra').setAttribute('href',changeUrlArg(window.location.href,'ord','rat')),
+    document.getElementById('as_w').innerHTML=document.getElementById('as_w').innerHTML.replace('a','span');
     if(!disp) ff.setAttribute('style','display:block');
     else
     {
@@ -19320,6 +19360,8 @@ else
             if(nm!=null&&nm!=''&&person[g][0].indexOf(nm)==-1) ok=0;
             if(ok) ls.push(g);
         }
+        ls=ls.sort();
+        if(ord=='rat') ls=ls.sort(function(a,b){return -person[a][6]+person[b][6];})
         rst.innerHTML=ls.length;
         for(p=0;p<ls.length;p++)
         {

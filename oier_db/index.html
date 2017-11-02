@@ -408,16 +408,32 @@ function pre()
         var gg=person[s];
         //console.log(gg[2],gf(gg[2]));
         gg[2]=names[gf(gg[2])];
-        var ii=gg[2]+' '+gg[0];
-        if(ps[ii]==undefined) ps[ii]=gg;
-        else for(var s of gg[5]) ps[ii][5].add(s);
+        var ii=gg[3]+' '+gg[0];
+        gg.push(0);
+        if(ps[ii]==undefined)
+        {
+            var tmp=new Set();
+            tmp.add(gg[2]); gg.push(tmp);
+            ps[ii]=gg;
+        }
+        else
+        {
+            ps[ii][7].add(gg[2]); ps[ii][2]=gg[2];
+            for(var s of gg[5]) ps[ii][5].add(s);
+        }
     }
-    person=ps;
+    person={};
+    for(s in ps)
+    {
+        //get a better name
+        var tmp=ps[s],bn=tmp[2]+' '+tmp[0];
+        person[bn]=tmp;
+    }
     for(s in person)
     {
         var rat=0;
         for(var ss of person[s][5]) rat=Math.max(rat,score(ss));
-        person[s].push(rat);
+        person[s][6]=rat;
     }
 }
 function arg(name)
@@ -19316,6 +19332,13 @@ if(id!=null&&id!='')
         var y=s.substr(0,4)*1,m=s.substr(5,2);
         if(m<'09') --y;
         rs+=('现在'+ys[y-person[id][3]]+'，');
+    }
+    if(person[id][7].size>=2)
+    {
+        rs+="曾在"; var tmp=[];
+        for(var g of person[id][7])
+            if(g!=person[id][2]) tmp.push(g);
+        rs+=tmp.join('、')+'学习，现在';
     }
     rs+=('在'+person[id][2]+'学习。<font color=white>评分：'+(person[id][6]/100.0)+'。</font></p>');
     t=person[id][5]; r=[];

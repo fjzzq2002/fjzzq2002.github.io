@@ -308,7 +308,7 @@ function score(f) //这个评分是ysy给的，我不背锅
     else if(f.indexOf('NOI')!=-1) s=100;
     else if(f.indexOf('IOI')!=-1) s=10000; //迟早会有的
     else console.log('unrecognized contest');
-    if(f.indexOf('D类')!=-1) s=s*0.9;
+    /*不歧视D类 if(f.indexOf('D类')!=-1) s=s*0.9;*/
     if(f.indexOf('普及')!=-1) s=s*0.5;
     if(f.indexOf('二等')!=-1||f.indexOf('银牌')!=-1) s=s*0.3;
     if(f.indexOf('三等')!=-1||f.indexOf('铜牌')!=-1) s=s*0.1;

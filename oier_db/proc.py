@@ -100,7 +100,7 @@ for p in man:
                 edg[t]=0
             edg[t]=edg[t]+1
 for e in edg:
-    if edg[e]<2 or (not tot.has_key(e[0])) or (not tot.has_key(e[1])):
+    if edg[e]<5 or (not tot.has_key(e[0])) or (not tot.has_key(e[1])):
         continue
     a0=sum[e[0]]*1.0/tot[e[0]]
     a1=sum[e[1]]*1.0/tot[e[1]]
@@ -147,8 +147,9 @@ for a in range(0,len(rp)):
     #elif ps[ky][3]!=rp[a][3] and rp[a][3]!='@':
     #    print u'年龄不一致',rp[a][2],ps[ky][3],rp[a][3]
     # 年龄不一致一般是由于数据错误、留级等
-    if not rp[a][4] in ps[ky][4]:
-        ps[ky][4].append(rp[a][4])
+    if rp[a][4] in ps[ky][4]:
+        ps[ky][4].remove(rp[a][4])
+    ps[ky][4].append(rp[a][4])
     if not rk.has_key(rp[a][0]):
         rk[rp[a][0]]=0
     rk[rp[a][0]]=rk[rp[a][0]]+1

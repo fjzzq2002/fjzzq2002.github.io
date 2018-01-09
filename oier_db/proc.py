@@ -100,7 +100,8 @@ for p in man:
                 edg[t]=0
             edg[t]=edg[t]+1
 for e in edg:
-    if edg[e]<5 or (not tot.has_key(e[0])) or (not tot.has_key(e[1])):
+    #Merging schools is temporarily blocked because of low accuracy :(
+    if True: #edg[e]<5 or (not tot.has_key(e[0])) or (not tot.has_key(e[1])):
         continue
     a0=sum[e[0]]*1.0/tot[e[0]]
     a1=sum[e[1]]*1.0/tot[e[1]]

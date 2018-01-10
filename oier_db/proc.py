@@ -29,6 +29,8 @@ def isd(x):
     return len(x)==1 and '0'<=x and x<='9'
 def num(a):
     g=''
+    for b in prov:
+        a=a.replace(b,'')
     for c in a:
         if isd(c):
             g=g+c
@@ -36,7 +38,7 @@ def num(a):
             g=g+str(ys[c])
     return g
 def tc(a):
-    bk=[u'校',u'学',u'大',u'分',u'范',u'属',u'省',u'市',u'区',u'书院',u'初级',u'初中',u'高中',u'中']
+    bk=[u'校',u'学',u'大',u'分',u'范',u'属',u'省',u'市',u'区',u'书院',u'初级',u'初中',u'高中',u'中',u'第']
     tmp=(a.find(u'初')!=-1)
     for b in bk:
         a=a.replace(b,'')

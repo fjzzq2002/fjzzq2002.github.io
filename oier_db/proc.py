@@ -100,16 +100,15 @@ for p in man:
                 edg[t]=0
             edg[t]=edg[t]+1
 for e in edg:
-    #Merging schools is temporarily blocked because of low accuracy :(
-    if True: #edg[e]<5 or (not tot.has_key(e[0])) or (not tot.has_key(e[1])):
-        continue
-    a0=sum[e[0]]*1.0/tot[e[0]]
-    a1=sum[e[1]]*1.0/tot[e[1]]
-    if abs(a0-a1)>=2:
-        continue
+    #if edg[e]<2 or (not tot.has_key(e[0])) or (not tot.has_key(e[1])):
+    #    continue
+    #a0=sum[e[0]]*1.0/tot[e[0]]
+    #a1=sum[e[1]]*1.0/tot[e[1]]
+    #if abs(a0-a1)>=2:
+    #    continue
     if num(e[0])!=num(e[1]):
         continue
-    r,s=tc(e[0]),tc(e[1])
+    r,s=tc(e[0])+'$',tc(e[1])+'$'
     if not (r==s or LCS(r,s)>=min(len(r),len(s))-(min(len(r),len(s))>=3)):
         continue
     uni(e[0],e[1])

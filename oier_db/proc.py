@@ -109,7 +109,7 @@ for e in edg:
     if num(e[0])!=num(e[1]):
         continue
     r,s=tc(e[0])+'$',tc(e[1])+'$'
-    if not (r==s or LCS(r,s)>=min(len(r),len(s))-(min(len(r),len(s))>=3)):
+    if not (r[:len(s)]==s[:] or s[:len(r)]==r[:]):
         continue
     uni(e[0],e[1])
 for c in sch:

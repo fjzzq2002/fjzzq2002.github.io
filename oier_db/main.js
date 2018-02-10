@@ -5,10 +5,12 @@ function change_h()
     $("#filter_box_ghost").val($("#filter_box").val());
     $("#filter_box").height($("#filter_box_ghost").prop("scrollHeight"));
 }
-function gen_td(txt)
+function gen_td(txt,clas='')
 {
     var node=document.createElement("td");
-    node.appendChild(document.createTextNode(txt)); return node;
+    node.appendChild(document.createTextNode(txt));
+    if(clas!='') node.setAttribute('class',clas);
+    return node;
 }
 function gen_span(txt)
 {
@@ -30,12 +32,11 @@ function tryload(s)
 {
     $("#filter_box").val(unescape(s)); change_h(); filter();
 }
+var ys=["小一","小二","小三","小四","小五","小六","初一","初二","初三","高一","高二","高三"]
+for(var i=0;i<1000;i++) ys.push('高三以上');
 function disp(id)
 {
-    var p=tb[id],txt='<h4>'+p[2]+'OIer'+p[0]+'，',sc=p[4].slice(0);
-    var ys=["小一","小二","小三","小四","小五","小六","初一","初二","初三","高一","高二","高三"]
-    for(var i=0;i<1000;i++) ys.push('高三以上');
-    var high=0;
+    var p=tb[id],txt='<h4>'+p[2]+'OIer'+p[0]+'，',sc=p[4].slice(0),high=0;
     if(p[1]!='@') txt+=p[1]+'，';
     if(p[3]!='@')
     {
@@ -80,7 +81,7 @@ function filter()
     var f=$("#filter_box").val();
     var ur=location.href.split('?')[0]+'?f='+escape(f);
     history.pushState({},null,ur);
-    tmp=function(nm,pv,sc,rating,full){return eval(f);}
+    tmp=function(nm,pv,sc,score,full){return eval(f);}
     rst=new Array();
     for(var s=0;s<tb.length;++s)
     {
@@ -96,6 +97,15 @@ function filter()
         ts.appendChild(gen_span(rst[g]));
         node.appendChild(ts);
         node.appendChild(gen_td(tb[rst[g]][2]));
+        if(tb[rst[g]][3]!='@')
+        {
+            var s=new Date().toISOString();
+            var y=s.substr(0,4)*1,m=s.substr(5,2);
+            if(m<'09') --y;
+            var str=ys[y-tb[rst[g]][3]];
+            node.appendChild(gen_td(str,'hidden-xs'));
+        }
+        else node.appendChild(gen_td('未知','hidden-xs'));
         node.appendChild(gen_td(tb[rst[g]][4][tb[rst[g]][4].length-1]));
         node.appendChild(gen_td(prt(tb[rst[g]][6])));
         $('#filter_result_body')[0].appendChild(node);

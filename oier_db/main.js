@@ -17,16 +17,14 @@ function gen_span(txt)
     node.setAttribute('style','display:none');
     return node;
 }
-function draw(lb,dt,de)
+function prt(x)
 {
-    $('#rating_graph_ct >canvas').remove();
-    var c=document.createElement("canvas");
-    $('#rating_graph_ct')[0].appendChild(c);
-    var cxt=c.getContext("2d");
-    cxt.clearRect(0,0,c.width,c.height);
-    new Chart(cxt,{type:'line',data:{labels:lb,datasets:[{fillColor:'rgb(54,162,235)',
-    borderColor:'rgb(54,162,235)',fill:false,lineTension:0,label:de,data:dt,}]},options:
-    {responsive:true,hover:{mode:'nearest',intersect:true},scales:{xAxes:[{display:false}]}}});
+    var f=Math.round(x*100)/100;
+    var s=f.toString();
+    var rs=s.indexOf('.');
+    if(rs<0) rs=s.length,s+='.';
+    while(s.length<=rs+2) s+='0';
+    return s;
 }
 function tryload(s)
 {
@@ -55,7 +53,7 @@ function disp(id)
         if(g!='') txt+='，现在'; else txt+='。';
     }
     if(g!='') txt+='在'+g+'学习。';
-    txt+='Rating '+p[6]+'（Rank '+(id+1)+'）';
+    txt+='评分 '+prt(p[6])+'（Rank '+(id+1)+'）';
     var func='pv=="'+p[2]+'"&&nm=="'+p[0]+'"';
     txt+='<a href="javascript:tryload(\''+escape(func)+'\');void(0);">';
     txt+='<i class="fa fa-external-link" style="font-size:18px;"></i></a>';
@@ -68,20 +66,14 @@ function disp(id)
     $('#rating_change_body > tr').remove();
     $('#display_info').html(txt);
     $('#rating_change_body > tr').remove();
-    var cr=1500;
-    var ps=['初始rating'],rt=['1500'];
     for(var s=0;s<p[5].length;++s)
     {
         var node=document.createElement("tr");
         node.appendChild(gen_td(p[5][s][1]));
-        node.appendChild(gen_td(cr));
-        node.appendChild(gen_td('#'+(p[5][s][2]+1)+' (+'+(p[5][s][3])+')'));
-        cr=cr+p[5][s][3];
-        ps.push(p[5][s][1]+' #'+(p[5][s][2]+1)+' (+'+(p[5][s][3])+')');
-        rt.push(cr);
+        node.appendChild(gen_td('#'+(p[5][s][2]+1)));
+        node.appendChild(gen_td(prt(p[5][s][3])));
         $('#rating_change_body')[0].appendChild(node);
     }
-    draw(ps,rt,p[0]+'的rating');
 }
 function filter()
 {
@@ -105,7 +97,7 @@ function filter()
         node.appendChild(ts);
         node.appendChild(gen_td(tb[rst[g]][2]));
         node.appendChild(gen_td(tb[rst[g]][4][tb[rst[g]][4].length-1]));
-        node.appendChild(gen_td(tb[rst[g]][6]));
+        node.appendChild(gen_td(prt(tb[rst[g]][6])));
         $('#filter_result_body')[0].appendChild(node);
     }
     $("#filter_result_body > tr").click(function () {

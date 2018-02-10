@@ -49,13 +49,13 @@
 <div class="row">
 <div class="col-sm-12">
 <table class="table table-hover">
-  <caption>筛选到<span id="filter_result_num">0</span>条结果（按rating降序排列）</caption>
+  <caption>筛选到<span id="filter_result_num">0</span>条结果（按评分降序排列）</caption>
   <thead>
     <tr>
       <th>姓名</th>
       <th>省份</th>
       <th>学校</th>
-      <th>rating</th>
+      <th>评分</th>
     </tr>
   </thead>
   <tbody id="filter_result_body">
@@ -70,25 +70,10 @@
 </div>
 <div class="panel panel-default">
 <div class="panel-heading">
-<a data-toggle="collapse" href="#collapse_rating_graph" style="text-decoration:none">
-<div>
-<h4 class="panel-title">
-Rating变化图
-</h4>
-</a>
-</div>
-</div>
-<div id="collapse_rating_graph" class="panel-collapse collapse">
-<div style="width:500px;" id="rating_graph_ct">
-</div>
-</div>
-</div>
-<div class="panel panel-default">
-<div class="panel-heading">
 <a data-toggle="collapse" href="#collapse_rating_table" style="text-decoration:none">
 <div>
 <h4 class="panel-title">
-Rating变化表
+评分变化表
 </h4>
 </a>
 </div>
@@ -99,8 +84,8 @@ Rating变化表
   <thead>
     <tr>
       <th>比赛</th>
-      <th>赛前rating</th>
-      <th>排名 (rating变化)</th>
+      <th>排名</th>
+      <th>系数</th>
     </tr>
   </thead>
   <tbody id="rating_change_body">

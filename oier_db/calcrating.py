@@ -4,50 +4,20 @@
 import sys,math,random
 reload(sys)
 sys.setdefaultencoding('utf-8')
-#uoj rating
-def calc_rating(ra,w):
-    we=[0]*len(ra)
-    ex=[0]*len(ra)
-    dt=[0]*len(ra)
-    for i in range(0,len(ra)):
-        we[i]=math.pow(7,ra[i]*1.0/w)
-    for i in range(0,len(ra)):
-        for j in range(0,len(ra)):
-            if i!=j:
-                ex[i]=ex[i]+we[i]/(we[i]+we[j])
-    for i in range(0,len(ra)):
-        dt[i]=int(math.ceil(w*(len(ra)-i-1-ex[i])*1.0/(len(ra)-1)))
-    return dt
-#按2/3得奖率估计升高的rating
-def bet_rating(ra,w):
-    print 'len:',len(ra)
-    ta,su=[],0
-    for g in ra:
-        ta.append(g)
-        su=su+g
-    avr=1.0*su/len(ra)
-    ps=[0]*len(ra)
-    ex=int(len(ta)*0.5)
-    ta=ta[:len(ra)]
-    for i in range(0,ex):
-        ta.append(int(math.ceil(avr*1.1-avr*0.3*i/ex)))
-    tmp=calc_rating(ta,w)
-    ps=tmp[:len(ra)]
-    return ps
 import json
-def dts(g):
+def full_(g):
     if g=='NOIP':
-        return 200
+        return 10
     if g=='WC':
-        return 300
+        return 40
     if g=='CTSC':
-        return 300
+        return 50
     if g=='APIO':
-        return 300
+        return 25
     if g=='NOI':
-        return 400
-    if g=='IOI': #???
-        return 1000
+        return 100
+    if g=='IOI': #todo
+        return 10000
     raise Exception('GG')
 def od(g):
     if g=='NOIP':
@@ -63,25 +33,45 @@ def od(g):
     if g=='IOI':
         return 4
     raise Exception('GG')
+def typ(p):
+    if p.find('金')!=-1 or p.find('一等')!=-1:
+        return 0
+    if p.find('银')!=-1 or p.find('二等')!=-1:
+        return 1
+    if p.find('铜')!=-1 or p.find('三等')!=-1:
+        return 2
+    print p
+    raise Exception('GG')
 def ord(p):
     yr=p
     while not yr[-1:].isdigit():
         yr=yr[:-1]
     return (int(yr[-4:]),od(yr[:-4]))
-def delta(p):
+def full(p):
     yr=p
     while not yr[-1:].isdigit():
         yr=yr[:-1]
-    g=dts(yr[:-4])
+    g=full_(yr[:-4])
     if p[-2:]=='普及' or p[-2:]=='D类':
         g=g/10*6
     return g
+def calc_mark(len,p):
+    #f(0)=1  f(p)=0.6  f(len-1)=0.1
+    ans=[]
+    if p<0:
+        for g in range(0,len):
+            ans.append(math.sin(g/((len-1)*1.0)*math.pi/2+math.pi/2)*0.9+0.1)
+        return ans
+    for g in range(0,p):
+        ans.append(math.sin(g/(p*1.0)*math.pi/2+math.pi/2)*0.4+0.6)
+    for g in range(p,len):
+        ans.append((1-math.sin((g-p)/((len-1-p)*1.0)*math.pi/2))*0.5+0.1)
+    return ans
 t=open('op.txt','r').read()
 o=json.loads(t)
 s={}
 mx={}
 ps={}
-ra=[1500]*len(o)
 for g in o:
     for t in g[5]:
         t.append(0)
@@ -103,21 +93,43 @@ rr.sort(key=lambda g:ord(g[0]))
 for c in rr:
     dt=[]
     print c[0]
-    for g in c[1]:
-        dt.append(ra[g])
-    d=delta(c[0])
-    print 'delta =',d
-    nx=bet_rating(dt,d)
-    for g in range(0,len(nx)):
-        nx[g]=max(nx[g],0)+d/40
     for g in range(0,len(c[1])):
         t=c[1][g]
-        ra[t]=ra[t]+nx[g]
         for aa in range(0,len(o[t][5])):
             if o[t][5][aa][1]==c[0]:
-                o[t][5][aa][3]=nx[g]
+                dt.append(typ(o[t][5][aa][0]))
+                break
+    d=full(c[0])
+    ps=-1
+    for a in range(0,len(dt)):
+        if dt[a]==1:
+            ps=a
+            break
+    nx=calc_mark(len(dt),ps)
+    for g in range(0,len(c[1])):
+        t=c[1][g]
+        if t>=len(o):
+            raise Exception("SHIT")
+        for aa in range(0,len(o[t][5])):
+            if o[t][5][aa][1]==c[0]:
+                o[t][5][aa][3]=nx[g]*d
 for g in range(0,len(o)):
-    o[g].append(ra[g])
+    #calculate score
+    pp={}
+    for aa in o[g][5]:
+        ooo=ord(aa[1])[1]
+        if not pp.has_key(ooo):
+            pp[ooo]=[]
+        pp[ooo].append(aa[3])
+    su=0
+    for a in pp:
+        tmp=pp[a]
+        tmp.sort()
+        cc=1
+        for p in range(0,len(tmp))[::-1]:
+            su=su+tmp[p]*cc
+            cc=cc*0.5
+    o[g].append(su)
     o[g].append('BL')
 f=open('op2.txt','w')
 str=json.dumps(o,ensure_ascii=False)

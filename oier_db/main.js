@@ -1,4 +1,3 @@
-js_ver='12dh47cn10912n3919830190'; //滚键盘滚出来的
 function chkpy(s,a) {return pinyin.chk(s,a);}
 function hassub(a,s) {return a.indexOf(s)>=0;}
 function change_h()

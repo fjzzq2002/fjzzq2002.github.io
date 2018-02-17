@@ -55,17 +55,20 @@ def full(p):
     if p[-2:]=='普及' or p[-2:]=='D类':
         g=g/10*6
     return g
+#rank->score  [0,1]->[0,1]
+def ys(x):
+    return 1-math.log(x*0.5+1)/math.log(1.5)
 def calc_mark(len,p):
     #f(0)=1  f(p)=0.6  f(len-1)=0.1
     ans=[]
     if p<0:
         for g in range(0,len):
-            ans.append(math.sin(g/((len-1)*1.0)*math.pi/2+math.pi/2)*0.9+0.1)
+            ans.append(ys(g*1.0/(len-1))*0.9+0.1)
         return ans
     for g in range(0,p):
-        ans.append(math.sin(g/(p*1.0)*math.pi/2+math.pi/2)*0.4+0.6)
+        ans.append(ys(g*1.0/(p-1))*0.4+0.6)
     for g in range(p,len):
-        ans.append((1-math.sin((g-p)/((len-1-p)*1.0)*math.pi/2))*0.5+0.1)
+        ans.append((1-ys((len-1-g)*1.0/(len-1-p)))*0.5+0.1)
     return ans
 t=open('op.txt','r').read()
 o=json.loads(t)

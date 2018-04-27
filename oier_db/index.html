@@ -2,6 +2,7 @@
 <!--手写pjax-->
 <!--筛选改成了自己写个函数，每次eval-->
 <!--注意同分的会随机排名-->
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,7 +12,7 @@
 <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-<script src="data.js" charset="UTF-8"></script>
+<script src="version.js" charset="UTF-8"></script>
 <script src="pinyin.js" charset="UTF-8"></script>
 <script src="main.js" charset="UTF-8"></script>
 <title>OIer数据库</title>
@@ -32,7 +33,7 @@
 <div id="collapse_info" class="panel-collapse collapse">
 <div class="panel-body panel panel-default">
 你需要填写一个javascript表达式，接受四个参数nm、pv、sc、score、full，分别表示某个同学的姓名、省份、最新学校、评分和完整信息，你需要返回一个布尔值true或false，表示是否出现在筛选结果中。<br>
-为了方便起见提供了chkpy和hassub两个函数，比如填写这个函数可以查找姓名拼音首字母为abc，学校包含'校'这一子串的人：<br><pre>chkpy(nm,'abc')&&hassub(sc,'校');</pre>当然填写更复杂的函数也是可以的。<br>
+为了方便起见提供了chkpy和hassub两个函数，比如填写这个函数可以查找姓名拼音首字母为abc，学校包含'校'这一子串的人：<br><pre>chkpy(nm,'abc')&#38;&#38;hassub(sc,'校');</pre>当然填写更复杂的函数也是可以的。<br>
 如果你想要用老式的搜索框当然也是可以的：<br>
 <form class="form-inline" role="form" action="none">
 <input type="text" class="form-control" id="input_py" placeholder="拼音首字母">
@@ -76,8 +77,8 @@
 <h4 class="panel-title">
 评分变化表
 </h4>
-</a>
 </div>
+</a>
 </div>
 <div id="collapse_rating_table" class="panel-collapse collapse">
 <div class="panel-body" id="display_rating">

@@ -1,29 +1,6 @@
-if(location.protocol=='file:'||window.navigator.userAgent.indexOf("MSIE")>=1||!window.localStorage)
+if('undefined'==typeof tb)
+    console.log('loading failed for some reason, fallback'),
     document.write('<script src="data.js" charset="UTF-8"></script>');
-else
-{
-    var lcc=localStorage.getItem("oierdb_data");
-    if(lcc)
-    {
-        lcc=JSON.parse(lcc);
-        if(lcc['ver']!=db_ver)
-            console.log('local data is out of date!'),lcc=null;
-    }
-    if(!lcc)
-    {
-        console.log('loading data.js...');
-        $.ajaxSetup({async:false});
-        $.getScript("data.js");
-        lcc={};lcc['ver']=db_ver;lcc['tbl']=tb;
-        localStorage.setItem('oierdb_data',JSON.stringify(lcc));
-        console.log('stored in localstorage.');
-    }
-    else
-    {
-        console.log('loaded data from localstorage!');
-        tb=lcc['tbl'];
-    }
-}
 function chkpy(s,a) {return pinyin.chk(s,a);}
 function hassub(a,s) {return a.indexOf(s)>=0;}
 function change_h()

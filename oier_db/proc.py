@@ -70,6 +70,7 @@ for ss in tt:
         continue
     if p[6]=='@' or p[2]=='@' or p[4]=='@':
         print 'invalid data'
+        print p
     prov.add(p[6])
     g=p[6]+'|'+p[2]
     if not man.has_key(g):

@@ -3,6 +3,7 @@ if('undefined'==typeof tb)
     document.write('<script src="data.js" charset="UTF-8"></script>');
 function chkpy(s,a) {return pinyin.chk(s,a);}
 function hassub(a,s) {return a.indexOf(s)>=0;}
+function dump(a) {return JSON.stringify(a);}
 function change_h()
 {
     $("#filter_box_ghost").val($("#filter_box").val());
@@ -84,12 +85,17 @@ function filter()
     var f=$("#filter_box").val();
     var ur=location.href.split('?')[0]+'?f='+escape(f);
     history.pushState({},null,ur);
-    tmp=function(nm,pv,sc,score,full){return eval(f);}
+    tmp=function(nm,pv,sc,score,grade,full){return eval(f);}
     rst=new Array();
+    {
+    var s=new Date().toISOString();
+    var y=s.substr(0,4)*1,m=s.substr(5,2);
+    if(m<'09') --y;
     for(var s=0;s<tb.length;++s)
     {
         var sc=tb[s][4][tb[s][4].length-1];
-        if(tmp(tb[s][0],tb[s][2],sc,tb[s][6],tb[s])) rst.push(s);
+        if(tmp(tb[s][0],tb[s][2],sc,tb[s][6],ys[y-tb[s][3]],tb[s])) rst.push(s);
+    }
     }
     $('#filter_result_num').html(rst.length);
     $('#filter_result_body > tr').remove();
@@ -144,6 +150,8 @@ $(document).ready(function(){
         if(tmp!='') s.push('pv=="'+tmp+'"');
         tmp=$('#input_school').val();
         if(tmp!='') s.push('hassub(sc,"'+tmp+'")');
+        tmp=$('#input_grade').val();
+        if(tmp!='') s.push('grade=="'+tmp+'"');
         var ff='1';
         if(s.length) ff=s.join('&&');
         $("#filter_box").val(ff); change_h(); filter();

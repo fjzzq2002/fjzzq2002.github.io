@@ -27,7 +27,7 @@ def readfile(fn):
         if line[0:1]=='R': #column pos
             tmp=line[1:].split(',')
             for i in range(0,len(tmp)):
-                if tmp[i]!=' ':
+                if tmp[i]!=' ' and tmp[i]!='':
                     di[tmp[i]]=i
             continue
         ip=line.split(',')

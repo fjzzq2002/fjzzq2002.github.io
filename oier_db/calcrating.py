@@ -57,7 +57,7 @@ def full(p):
     return g
 #rank->score  [0,1]->[0,1]
 def ys(x):
-    return 1-math.log(x*0.5+1)/math.log(1.5)
+    return 1-math.log(x*9+1)/math.log(10)
 def calc_mark(len,p):
     #f(0)=1  f(p)=0.6  f(len-1)=0.1
     ans=[]
@@ -65,10 +65,12 @@ def calc_mark(len,p):
         for g in range(0,len):
             ans.append(ys(g*1.0/(len-1))*0.9+0.1)
         return ans
-    for g in range(0,p):
-        ans.append(ys(g*1.0/(p-1))*0.4+0.6)
-    for g in range(p,len):
-        ans.append((1-ys((len-1-g)*1.0/(len-1-p)))*0.5+0.1)
+    else:
+        for g in range(0,p):
+            ans.append(ys(g*0.5/(p-1))*0.9+0.1)
+        for g in range(p,len):
+            ans.append(ys((g-p+1)*0.5/(len-p)+0.5)*0.9+0.1)
+        return ans
     return ans
 t=open('op.txt','r').read()
 o=json.loads(t)
@@ -108,6 +110,9 @@ for c in rr:
         if dt[a]==1:
             ps=a
             break
+    if c[0].find('NOIP')!=-1:
+        print c[0],"!!"
+        ps=-1
     nx=calc_mark(len(dt),ps)
     for g in range(0,len(c[1])):
         t=c[1][g]

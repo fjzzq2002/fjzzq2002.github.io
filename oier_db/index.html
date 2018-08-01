@@ -22,26 +22,43 @@
 </h3>
 目前数据库中共有&nbsp;<script>document.write(tb.length);</script>&nbsp;人次，当前版本为&nbsp;<script>document.write(db_ver);</script>&nbsp;。有数据错误等请在&nbsp;<a href="https://github.com/fjzzq2002/fjzzq2002.github.io"><i class="fa fa-github"></i>github</a>&nbsp;上提出issue。
 </div>
-<textarea style="visibility:hidden;position:absolute;top:0;left:0;" id="filter_box_ghost"></textarea>
-筛选方式：function valid(nm,pv,sc,score,grade,full) {return&nbsp;&nbsp;&nbsp;<a data-toggle="collapse" href="#collapse_info"><i class="fa fa-info-circle" style="font-size:18px;"></i></a>
+<div id="ChooseA">
+<table style="width:100%" border="0">
+<tr>
+<td>
+<input type="text" class="form-control" id="search_box" placeholder="万能搜索">
+</td>
+<td style="width:60px;text-align:right">
+<a data-toggle="collapse" href="#collapse_info_A"><i class="fa fa-info-circle" style="font-size:18px;"></i></a>
+&nbsp;
+<a onclick="javascript:toggle_choose();void(0);"><i class="fa fa-exchange" style="font-size:18px;"></i></a>
+</td>
+</tr>
+</table>
+<div id="collapse_info_A" class="panel-collapse collapse">
+<div class="panel-body panel panel-default">
+在这里填姓名、省份、年级、奖项、参加比赛名都能搜索！<br>
+（事实上会生成形如<code>chkpy(nm,x)||grade==x||hassub(dump(full),x);</code>的函数）<br>
+如果你想用更复杂的筛选方式可以点切换按钮。
+</div>
+</div>
+</div>
+<div id="ChooseB" style="display:none">
+function valid(nm,pv,sc,score,grade,full) {return&nbsp;&nbsp;&nbsp;<a data-toggle="collapse" href="#collapse_info_B"><i class="fa fa-info-circle" style="font-size:18px;"></i></a>
+&nbsp;
+<a onclick="javascript:toggle_choose();void(0);"><i class="fa fa-exchange" style="font-size:18px;"></i></a>
 <textarea class="form-control" id="filter_box" width="height:42px"></textarea>
+<textarea style="visibility:hidden;position:absolute;top:0;left:0;width:100%" id="filter_box_ghost"></textarea>
 }
 <button type="submit" class="btn btn-default" id="filter_button">筛选</button>
-<div id="collapse_info" class="panel-collapse collapse">
+<div id="collapse_info_B" class="panel-collapse collapse">
 <div class="panel-body panel panel-default">
 你需要填写一个javascript表达式，接受六个参数nm、pv、sc、score、grade、full，分别表示某个同学的姓名、省份、最新学校、评分和完整信息，你需要返回一个布尔值true或false，表示是否出现在筛选结果中。<br>
 为了方便起见提供了chkpy、hassub、dump这些函数，比如填写这个函数可以查找姓名拼音首字母为abc，学校包含'校'这一子串的人：<br><pre>chkpy(nm,'abc')&#38;&#38;hassub(sc,'校');</pre>查询NOI2014金牌的获得者：<br><pre>hassub(dump(full),'NOI2014金牌')</pre>当然填写更复杂的函数也是可以的。<br>
-如果你想要用老式的搜索框也是可以的：<br>
-<form class="form-inline" role="form" action="none">
-<input type="text" class="form-control" id="input_py" placeholder="拼音首字母">
-<input type="text" class="form-control" id="input_name" placeholder="姓名">
-<input type="text" class="form-control" id="input_prov" placeholder="省份">
-<input type="text" class="form-control" id="input_school" placeholder="学校">
-<input type="text" class="form-control" id="input_grade" placeholder="年级">
-<button type="button" class="btn btn-default" id="gen_button">生成函数并筛选</button>
-</form>
 完整信息形如<code>["张三","男","福建","2006",["福州某某初中","福州某某高中"],[["NOIP2013普及一等奖","NOIP2013普及",443,3.50],["NOIP2014提高一等奖","NOIP2014提高",3,9.98]],233.33]</code>，大致结构是<code>[姓名,性别,省份,一个偏移过的年份,[学校列表],[[奖项名称,比赛名称,排名(0-based),系数]],评分]</code>，缺漏的信息用<code>@</code>表示。<br>
-<b>重要说明：有一定XSS风险，请不要在未确认的情况下打开他人填好函数的链接</b>
+有一定XSS风险，请不要在未确认的情况下打开他人填好函数的链接！<br>
+如果你想用更简单的筛选方式可以点切换按钮。
+</div>
 </div>
 </div>
 <hr>

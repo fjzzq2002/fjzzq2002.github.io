@@ -130,9 +130,38 @@ function GetQueryString(name)
      var r = window.location.search.substr(1).match(reg);
      if(r!=null) return unescape(r[2]); return null;
 }
+function gq(x)
+{
+    var u=escape(x);
+    if(u==x) return "_=\""+x+"\"; chkpy(nm,_)||grade==_||hassub(dump(full),_);";
+    else return "_=unescape(\""+u+"\"); chkpy(nm,_)||grade==_||hassub(dump(full),_);";
+}
+function toggle_choose()
+{
+    $("#ChooseA").toggle();
+    $("#ChooseB").toggle();
+    change_h();
+}
+function search_box_enter()
+{
+    t=$("#search_box").val();
+    if(t=="") return;
+    $("#filter_box").val(gq(t));
+    filter();
+}
 $(document).ready(function(){
+    $("#search_box").keydown(function(e){
+        if(e.which==13) {search_box_enter(); return false;}
+    });
     var s=GetQueryString('f');
-    if(s!=null) $("#filter_box").val(s);
+    if(s!=null)
+    {
+        $("#filter_box").val(s);
+        var ed="; chkpy(nm,_)||grade==_||hassub(dump(full),_);";
+        if(s.substr(0,2)=="_="&&s.substr(s.length-ed.length)==ed)
+            $("#search_box").val(eval(s.substr(2,s.length-ed.length-2)));
+        else toggle_choose();
+    }
     change_h(); $("#filter_box").bind("input",change_h);
     $("#filter_box").bind("propertychange",change_h);
     $("#filter_button").bind("click",filter);

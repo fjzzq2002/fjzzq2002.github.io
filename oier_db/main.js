@@ -87,15 +87,13 @@ function filter()
     history.pushState({},null,ur);
     tmp=function(nm,pv,sc,score,grade,full){return eval(f);}
     rst=new Array();
-    {
-    var s=new Date().toISOString();
-    var y=s.substr(0,4)*1,m=s.substr(5,2);
+    var s_=new Date().toISOString();
+    var y=s_.substr(0,4)*1,m=s_.substr(5,2);
     if(m<'09') --y;
     for(var s=0;s<tb.length;++s)
     {
         var sc=tb[s][4][tb[s][4].length-1];
         if(tmp(tb[s][0],tb[s][2],sc,tb[s][6],ys[y-tb[s][3]],tb[s])) rst.push(s);
-    }
     }
     $('#filter_result_num').html(rst.length);
     $('#filter_result_body > tr').remove();

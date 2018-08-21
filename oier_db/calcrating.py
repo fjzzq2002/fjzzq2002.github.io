@@ -67,9 +67,9 @@ def calc_mark(len,p):
         return ans
     else:
         for g in range(0,p):
-            ans.append(ys(g*0.5/(p-1))*0.9+0.1)
+            ans.append(ys(g*0.5/p)*0.9+0.1)
         for g in range(p,len):
-            ans.append(ys((g-p+1)*0.5/(len-p)+0.5)*0.9+0.1)
+            ans.append(ys((g-p)*0.5/(len-p-1)+0.5)*0.9+0.1)
         return ans
     return ans
 t=open('op.txt','r').read()

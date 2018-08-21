@@ -1,5 +1,5 @@
 #coding: utf8
-import sys 
+import sys,copy
 reload(sys)
 sys.setdefaultencoding('utf-8')
 fs=unicode(open('data-.txt','r').read(),'utf8')
@@ -135,9 +135,39 @@ def zs(s):
 #for a person [name,sex,province,{age},[school],[[award,contest,rank]]]
 ps={}
 rk={}
+tmp_rp=copy.deepcopy(rp)
+rp.sort(key=lambda x:x[3])
+typ=0
+if ''.join(sys.argv[1:]).find('merge')!=-1:
+    typ=1
+if typ:
+    sys.stderr.write(u'合并同省同名\n')
+else:
+    sys.stderr.write(u'合并同省同名同岁\n')
 for a in range(0,len(rp)):
-    ky=rp[a][6]+'|'+rp[a][2]
+    if typ:
+        ky=rp[a][6]+'|'+rp[a][2]
+    else:
+        ky=rp[a][6]+'|'+rp[a][2]+'|'+rp[a][3]
+        if rp[a][3]=='@':
+            for t in xrange(1950,2250):
+                if ps.has_key(rp[a][6]+'|'+rp[a][2]+'|'+str(t)):
+                    ky=rp[a][6]+'|'+rp[a][2]+'|'+str(t)
+                    break
     if not ps.has_key(ky):
+        ps[ky]=[]
+rp=tmp_rp
+for a in range(0,len(rp)):
+    if typ:
+        ky=rp[a][6]+'|'+rp[a][2]
+    else:
+        ky=rp[a][6]+'|'+rp[a][2]+'|'+rp[a][3]
+        if rp[a][3]=='@':
+            for t in xrange(1950,2250):
+                if ps.has_key(rp[a][6]+'|'+rp[a][2]+'|'+str(t)):
+                    ky=rp[a][6]+'|'+rp[a][2]+'|'+str(t)
+                    break
+    if not len(ps[ky]):
         ps[ky]=[rp[a][2],rp[a][7],rp[a][6],{},[rp[a][4]],[]]
     if ps[ky][1]=='@':
         ps[ky][1]=rp[a][7]

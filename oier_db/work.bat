@@ -14,4 +14,5 @@ pypy sort.py
 cp data.js ..\data2.js
 cd ..
 rd /s /Q tmp
+echo don't forget to bump version!
 pause

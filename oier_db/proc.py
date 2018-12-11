@@ -69,8 +69,9 @@ for ss in tt:
     if len(p)!=8:
         continue
     if p[6]=='@' or p[2]=='@' or p[4]=='@':
-        print 'invalid data'
-        print p
+        print>>sys.stderr, 'invalid data'
+        print>>sys.stderr, p
+        continue
     prov.add(p[6])
     g=p[6]+'|'+p[2]
     if not man.has_key(g):

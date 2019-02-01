@@ -1,10 +1,10 @@
-#coding=utf-8
+#coding=gb2312
 '''
-æœ¬æ¥æœ‰ä¸€ä¸ªå¾ˆå¥½ç”¨çš„è„šæœ¬çš„ï¼Œç”±äºä¸ªäººåŸå› æ‰¾ä¸åˆ°äº†ï¼Œå…ˆå‡‘åˆç€ç”¨å§= =
-å°†csvè½¬æ¢æˆjsï¼Œansiç¼–ç ã€‚æ ¼å¼å¦‚ä¸‹ï¼š
-@æ¯”èµ›å
-#å¥–é¡¹å
-Rä»å“ªå‡ åˆ—è¯»å–ä¸ªäººä¿¡æ¯ï¼Œcsvæ ¼å¼ï¼Œå¯ä»¥ä½¿ç”¨[å|çœ|æ ¡|å¹´|æ€§|åˆ†]ã€‚
+±¾À´ÓĞÒ»¸öºÜºÃÓÃµÄ½Å±¾µÄ£¬ÓÉÓÚ¸öÈËÔ­ÒòÕÒ²»µ½ÁË£¬ÏÈ´ÕºÏ×ÅÓÃ°É= =
+½«csv×ª»»³Éjs£¬ansi±àÂë¡£¸ñÊ½ÈçÏÂ£º
+@±ÈÈüÃû
+#½±ÏîÃû
+R´ÓÄÄ¼¸ÁĞ¶ÁÈ¡¸öÈËĞÅÏ¢£¬csv¸ñÊ½£¬¿ÉÒÔÊ¹ÓÃ[Ãû|Ê¡|Ğ£|Äê|ĞÔ|·Ö]¡£
 '''
 def readfile(fn):
     fo=open(fn)
@@ -15,7 +15,8 @@ def readfile(fn):
     jx=''
     for line_ in fo:
         line=line_
-        line=line[:-1].decode("gb2312",'ignore').encode("utf-8",'ignore')
+        #ÒÔºóÓ¦¸Ã±àÂëÎÊÌâ»áÉÙµãÁË...
+        line=line[:-1]
         if len(line)==0:
             continue
         if line[0:1]=='@': #year
@@ -31,12 +32,12 @@ def readfile(fn):
                     di[tmp[i]]=i
             continue
         ip=line.split(',')
-        scor="@" if di.get('åˆ†')==None else ip[di.get('åˆ†')]
-        name="@" if di.get('å')==None else ip[di.get('å')]
-        prov="@" if di.get('çœ')==None else ip[di.get('çœ')]
-        scho="@" if di.get('æ ¡')==None else ip[di.get('æ ¡')]
-        year="@" if di.get('å¹´')==None else ip[di.get('å¹´')]
-        male="@" if di.get('æ€§')==None else ip[di.get('æ€§')]
+        scor="@" if di.get('·Ö')==None else ip[di.get('·Ö')]
+        name="@" if di.get('Ãû')==None else ip[di.get('Ãû')]
+        prov="@" if di.get('Ê¡')==None else ip[di.get('Ê¡')]
+        scho="@" if di.get('Ğ£')==None else ip[di.get('Ğ£')]
+        year="@" if di.get('Äê')==None else ip[di.get('Äê')]
+        male="@" if di.get('ĞÔ')==None else ip[di.get('ĞÔ')]
         print '%s,%s,%s,%s,%s,%s,%s,%s'%(bs,jx,name,year,scho,scor,prov,male)
     fo.close()
 while 1:

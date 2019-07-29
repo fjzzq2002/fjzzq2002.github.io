@@ -52,7 +52,7 @@ def full(p):
     while not yr[-1:].isdigit():
         yr=yr[:-1]
     g=full_(yr[:-4])
-    if p[-2:]=='普及' or p[-2:]=='D类':
+    if p[-2:]=='普及' or p[-2:]=='D类' or p[-3:]=='夏令营':
         g=g/10*6
     return g
 #rank->score  [0,1]->[0,1]

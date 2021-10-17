@@ -29,3 +29,6 @@
 + [OI Wiki](https://github.com/OI-wiki/OI-wiki)
 + [Jieba](https://github.com/fxsjy/jieba)
 
+### Sample
+
+![sample](sample.png)

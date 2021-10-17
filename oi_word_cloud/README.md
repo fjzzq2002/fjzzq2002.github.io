@@ -23,6 +23,8 @@
 
 本项目用到了以下资源，在此一并致谢。
 
++ [D3](https://github.com/d3/d3)
+
 + [D3-Cloud](https://github.com/jasondavies/d3-cloud)
 + [Bzojch](https://github.com/Ruanxingzhi/bzojch)
 + [Libre OJ](https://loj.ac/)

@@ -1,6 +1,6 @@
 # OI Word Cloud
 
-生成OI词汇云。
+生成OI词汇云。[Github Pages](https://fjzzq2002.github.io/oi_word_cloud/)
 
 ### How To Use
 

@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<script charset="UTF-8" src="data.js"></script>
+<script src="d3.min.js"></script>
+<script src="d3.layout.cloud.js"></script>
+<title>OI Word Cloud</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<center id="controls">
+<div class="tips">
+<p style="text-align: center; font-size: 30pt;">OI字符云生成</p>
+<span style="font-size: 15pt;">选择来源词比例：</span>
+<table style="width: 100%; font-size: 14pt; border-spacing:10px;">
+<colgroup>
+<col span="1" style="width: 110px">
+<col span="1">
+</colgroup>
+<tbody>
+<tr>
+<td>BZOJ题面</td>
+<td><input type="range" min="1" max="100" value="50" class="slider" id="s_bzojp"></td>
+</tr>
+<tr>
+<td>LOJ题面</td>
+<td><input type="range" min="1" max="100" value="60" class="slider" id="s_lojp"></td>
+</tr>
+<tr>
+<td>LOJ讨论</td>
+<td><input type="range" min="1" max="100" value="60" class="slider" id="s_lojd"></td>
+</tr>
+<tr>
+<td>OI相关博客</td>
+<td><input type="range" min="1" max="100" value="40" class="slider" id="s_blogs"></td>
+</tr>
+<tr>
+<td>OI Wiki</td>
+<td><input type="range" min="1" max="100" value="70" class="slider" id="s_oiwiki"></td>
+</tr>
+</tbody>
+</table>
+<center><button class="button" style="background-color: #4CAF50" onclick="gen();">生成</button></center>
+<br><br><span style="font-size: 15pt;">注意：字符云生成非常缓慢，可能需要数分钟。建议全屏以获得更好的效果。不建议在手机等性能较差的设备上运行！</span>
+<br><br><a href="..." style="text-decoration: none; font-size: 14pt">Readme & Acknowledgement</a>
+</div>
+</center>
+<p id="plzwait" align="center" style="display:none">正在生成，请稍等...</p>
+<svg id="cloud" width="1" height="1" align="center"></svg>
+<script src="main.js"></script>
+</body>
+</html>

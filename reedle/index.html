@@ -60,7 +60,7 @@
 <h2><i class="lni lni-question-circle" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></h2>
 </div>
 <div class="d-flex justify-content-center pb-3 inputwrap">
-/^ <input class="regexinput" value="ree[a-z]+" maxlength="20" spellcheck="false" id="inputbox"> $/i
+/ <input class="regexinput" value="ree[a-z]+" maxlength="20" spellcheck="false" id="inputbox"> /i
 </div>
 <div class="tip d-flex justify-content-center pb-5" id="infodisppar" style="display:none !important">
 <div id="infodisp"></div>
@@ -81,9 +81,9 @@
       </div>
       <div class="modal-body">
         Find a regex that matches the hidden word and no other words!<br/>
-        If your regex matches some substring in the hidden word, the substring will be highlighted.<br/>
-        If multiple substrings in the hidden word are matched, a random hit will be chosen.<br/>
-        If your regex matches multiple substrings, highlight will be orange to red depending on number of occurences. Otherwise it will be green.
+        The server will modify a minimal number of letters in the hidden word to match the regex you give.<br/>
+        Modified letters will be marked orange and the original letters will be marked green.<br/>
+        If there are multiple ways to do so, the server will randomly choose one.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Got it!</button>
@@ -92,6 +92,7 @@
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="bundle.js"></script>
 <script>
 const secret = words[Math.floor(Math.random() * words.length)];
 let numguess = 0;
@@ -100,32 +101,40 @@ function youwon() {
     document.getElementById('infodisp').innerHTML='You won in '+numguess+' steps! The secret word is <b>'+secret+'</b>.';
 }
 let inputbox = document.getElementById('inputbox');
-function getSubstrings(strs) {
-    const result = new Set();
-    function insertStr(str) {
-        if(result.has(str)) return;
-        result.add(str);
-        if(str.length>1) {
-            insertStr(str.substring(1));
-            insertStr(str.slice(0,-1));
-        }
-    }
-    for(const str of strs)
-        insertStr(str);
-    return [...result.keys()];
-}
 const rot13 = (message) => {
   const alpha = 'abcdefghijklmnopqrstuvwxyzabcdefghijklmABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLM';
   return message.replace(/[a-z]/gi, letter => alpha[alpha.indexOf(letter) + 13]);
 }
 console.log('total',words.length,'words');
-const substrings = getSubstrings(words);
-console.log('total',substrings.length,'substrings');
 console.log('ROT13(secret) = "'+rot13(secret)+'"');
+console.log('(secret) = "'+(secret)+'"');
 function getResult(regexp) {
     numguess++;
+    const sl = secret.length;
+    let minimal = sl+1;
+    let results = [];
+    for(let i=0;i<(1<<sl);++i) {
+        let exp='',hide=0;
+        for(let j=0;j<sl;++j) {
+            if(i&(1<<j)) {exp+='[a-z]'; hide+=1;}
+            else exp+=secret[j];
+        }
+        if(hide>=minimal) continue;
+        const regexph = new RegExp(exp,'i');
+        const ints = window.RegExpInts(regexph,regexp);
+        if(!ints[1]) {
+            if(hide<minimal) {
+                minimal=hide; results=[];
+            }
+            results.push(i);
+        }
+    }
+    console.log(minimal,results);
     // -1: grey, 0: green, [1,2]: orange-red, 3: blue & win
     const result = [];
+    for(var i=0;i<7;++i) result.push(-1);
+    if(minimal>sl)
+        return result;
     const matches = [];
     const thissubstr=[];
     for(let i=0;i<secret.length;++i)
@@ -135,7 +144,6 @@ function getResult(regexp) {
             if(regexp.test(sub))
                 matches.push([i,j]);
         }
-    for(var i=0;i<7;++i) result.push(-1);
     if(regexp.test(secret)) {
         let otherWords = 0;
         for(const word of words) {
@@ -146,29 +154,21 @@ function getResult(regexp) {
         console.log('full string match! match',otherWords,'other strings');
         if(!otherWords) {
             youwon();
-            for(var i=0;i<7;++i) result[i]=3;
+            for(var i=0;i<sl;++i) result[i]=3;
             return result;
         }
     }
-    if(!matches.length) {
-        return result;
-    }
-    let [l,r] = matches[Math.floor(Math.random()*matches.length)];
-    let totalOccur = -1;
-    for(const substr of substrings)
-        totalOccur += regexp.test(substr);
-    console.log('# of occurence:',totalOccur+1);
-    let color = 0;
-    if(totalOccur) color = Math.min(totalOccur/500,1)+1;
-    for(let i=l;i<=r;++i) {
-        result[i] = color;
+    const modified = results[Math.floor(Math.random()*results.length)];
+    for(var i=0;i<sl;++i) result[i]=0;
+    for(let i=0;i<sl;++i) {
+        if(modified&(1<<i)) result[i]=1;
     }
     return result;
 }
 function guess(value) {
     let regexp;
     try {
-        regexp = new RegExp('^'+value+'$',"i");
+        regexp = new RegExp(value,"i");
     } catch(e) {
         inputbox.style.borderColor='red';
         setTimeout(() => {

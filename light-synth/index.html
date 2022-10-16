@@ -1,0 +1,125 @@
+<html>
+<head>
+<title>Light Synth</title>
+<style type="text/css">
+#container {
+    width: 100%;
+    max-width: 1000px;
+}
+body {
+    margin: 0px 20px;
+    display: flex;
+    justify-content: center;
+}
+#infobox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+#infobox2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+#infobox > div {
+    flex: 1 1 0px;
+}
+#container {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                          supported by Chrome and Opera */
+}
+.clicker {
+    padding: 5px;
+    margin: 5px 0px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.clicker:hover {
+    cursor: pointer;
+    border: 1px solid grey;
+}
+#numberkeys {
+    justify-content: space-between;
+}
+.bb {
+    font-size: 28;
+}
+#footer {
+    padding-bottom: 20px;
+}
+#footer > a {
+    color: rgb(96, 96, 96);
+}
+</style>
+</head>
+<body>
+<div id="container">
+<p><b class="bb">Light Synth</b> Build your own sound with protons and optics!</p>
+<div id="thisbox">
+</div>
+<!--<p><b>Function / Shortcut List</b> (alernatively, click to trigger)</p>-->
+<div id="infobox">
+<div><b>Scale:</b> <span id="scale">?</span></div>
+<div><b>Ball/Component:</b> <span id="typ">Ball</span></div>
+<div><b>Function:</b> <span id="func">Random Note</span></div>
+</div>
+<div id="infobox2">
+<div>
+<!--
+<br>X direction control the mix of reverb.
+<br>Y direction control the mix of OSC.
+-->
+<div><b>Basics</b></div>
+<div>Light particles bounce around.
+<br>Each of them carries a key.</div>
+<div class="clicker">Ctrl - switch between scales</div>
+<div class="clicker">D/Backspace - remove latest ball</div>
+<div class="clicker">Z - remove latest component</div>
+</div>
+<div>
+<div><b>Ball/Component</b></div>
+<div>Components redirect light and alter keys.</div>
+<div class="clicker">B - add ball (light particles)</div>
+<div class="clicker">G - add glass; doesn't redirect light</div>
+<div class="clicker">M - add mirror; mirrors light</div>
+<div class="clicker">S - add splitter; splits light into two halves</div>
+<div class="clicker">P - add phaser; redirects light in one direction</div>
+<div class="clicker">W - add wrinkler; randomly redirects light</div>
+<div class="clicker">A - add absorber; absorbs light</div>
+</div>
+<div>
+<div><b>Component Functions</b></div>
+<div class="clicker">Space/Delete - no function</div>
+<div class="clicker">Left - decrease pitch to the preceding one</div>
+<div class="clicker">Right - increase pitch to the succeeding one</div>
+<div class="clicker">Down - decrease octave by one</div>
+<div class="clicker">Up - increase octave by one</div>
+<div class="clicker">R - change to a random pitch in same octave</div>
+<div>Numbers - change to 1st-5th key in the scale</div>
+<div style="display:flex" id="numberkeys">
+<div class="clicker">1 - 1st</div>
+<div class="clicker">2 - 2nd</div>
+<div class="clicker">3 - 3rd</div>
+<div class="clicker">4 - 4th</div>
+<div class="clicker">5 - 5th</div>
+</div>
+</div>
+</div>
+<hr/>
+<p style="text-align: center; color: grey;" id="footer">Built with ❤️ by <a href="https://github.com/fjzzq2002">@fjzzq2002</a>. Powered by <a href="https://p5js.org/">p5.js</a> and <a href="https://tonejs.github.io/">Tone.js</a>.</p>
+</div>
+</div>
+<script src="lib/p5.min.js"></script>
+<script src="lib/Tone.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

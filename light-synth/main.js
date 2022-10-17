@@ -320,7 +320,7 @@ function draw() {
     drawingContext.setLineDash([2, 2]);
     noFill();
     const curTyp=document.getElementById('typ').innerHTML;
-    if(curTyp=='Ball') {
+    if(curTyp=='Light Particle') {
         ellipse(startX, startY, startSize, startSize);
     }
     else {
@@ -416,7 +416,7 @@ function draw() {
 function mouseClicked() {
     if(mouseX<0||mouseY<0||mouseX>width||mouseY>height) return;
     const curTyp=document.getElementById('typ').innerHTML;
-    if(curTyp=='Ball') {
+    if(curTyp=='Light Particle') {
         // launch a new ball!
         let note=[0,4];
         let dx=mouseX-startX, dy=mouseY-startY;
@@ -443,6 +443,7 @@ function mouseClicked() {
 
 function handleKey(key) {
     // console.log(key);
+    if(key=='B') key='L';
     const clicker=clickerMap[key];
     if(clicker) {
         clicker.style.backgroundColor='rgb(230,230,230)';
@@ -470,7 +471,7 @@ function handleKey(key) {
             document.getElementById('func').innerHTML='Key '+scale[i-1];
         }
     }
-    const typs=['Glass','Mirror','Splitter','Wrinkler','Phaser','Absorber','Ball'];
+    const typs=['Glass','Mirror','Splitter','Wrinkler','Phaser','Absorber','Light Particle'];
     for(const typ of typs) {
         if(key==typ[0]) {
             document.getElementById('typ').innerHTML=typ;

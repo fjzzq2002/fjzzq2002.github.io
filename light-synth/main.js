@@ -159,6 +159,7 @@ function setup() {
         const text = clicker.innerHTML;
         console.log(text);
         var pos = text.indexOf(' ');
+        if(pos==-1) pos=text.length;
         const left=text.substring(0,pos+1);
         const right=text.substring(pos+1);
         const pos2=text.indexOf('/');

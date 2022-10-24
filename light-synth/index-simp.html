@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Light Synth</title>
+<style type="text/css">
+#container {
+    width: 100%;
+    max-width: 1000px;
+}
+body {
+    margin: 0px 20px;
+    display: flex;
+    justify-content: center;
+}
+#infobox {
+    display: flex;
+    flex-direction: row;
+    margin-top: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid gray;
+}
+#infobox2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#infobox > div {
+    flex: 1 1 0px;
+}
+#container {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                          supported by Chrome and Opera */
+}
+.clicker {
+    padding: 5px;
+    margin: 5px 0px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+.clicker:hover {
+    cursor: pointer;
+    border: 1px solid grey;
+}
+#numberkeys {
+    justify-content: space-between;
+}
+.bb {
+    font-size: 28;
+}
+#footer {
+}
+#footer > a {
+    color: rgb(96, 96, 96);
+}
+</style>
+</head>
+<body>
+<div id="container">
+<p><b class="bb">Light Synth</b> Build your own sound with protons and optics!</p>
+<div id="thisbox">
+</div>
+<!--<p><b>Function / Shortcut List</b> (alernatively, click to trigger)</p>-->
+<div id="infobox">
+<div><b>Scale:</b> <span id="scale">?</span></div>
+<div><b>Ball/Component:</b> <span id="typ">Light Particle</span></div>
+<div><b>Function:</b> <span id="func">Random Note</span></div>
+</div>
+<!--
+<br>X direction control the mix of reverb.
+<br>Y direction control the mix of OSC.
+-->
+<div id="infobox2">
+<div>
+<div><b>Basics</b></div>
+<div style="display:flex">
+<div class="clicker">Ctrl</div>
+<div class="clicker">D/Backspace</div>
+<div class="clicker">Z</div>
+<div class="clicker">F</div>
+</div>
+</div>
+<div>
+<div><b>Ball/Component</b></div>
+<div style="display:flex">
+<div class="clicker">L/B</div>
+<div class="clicker">G</div>
+<div class="clicker">M</div>
+<div class="clicker">S</div>
+<div class="clicker">P</div>
+<div class="clicker">W</div>
+<div class="clicker">A</div>
+</div>
+</div>
+<div>
+<div><b>Component Functions</b></div>
+<div style="display:flex">
+<div class="clicker">Space/Delete</div>
+<div class="clicker">Left</div>
+<div class="clicker">Right</div>
+<div class="clicker">Down</div>
+<div class="clicker">Up</div>
+<div class="clicker">R</div>
+<div class="clicker">9</div>
+<div class="clicker">0</div>
+<div class="clicker">1</div>
+<div class="clicker">2</div>
+<div class="clicker">3</div>
+<div class="clicker">4</div>
+<div class="clicker">5</div>
+</div>
+</div>
+</div>
+<!--
+<hr/>
+<p style="text-align: center; color: grey;" id="footer">Built with ❤️ by <a href="https://github.com/fjzzq2002">@fjzzq2002</a>. Powered by <a href="https://p5js.org/">p5.js</a> and <a href="https://tonejs.github.io/">Tone.js</a>.</p>
+-->
+</div>
+</div>
+<script src="lib/p5.min.js"></script>
+<script src="lib/Tone.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

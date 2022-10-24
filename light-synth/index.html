@@ -71,24 +71,25 @@ body {
 <div><b>Ball/Component:</b> <span id="typ">Light Particle</span></div>
 <div><b>Function:</b> <span id="func">Random Note</span></div>
 </div>
-<div id="infobox2">
-<div>
 <!--
 <br>X direction control the mix of reverb.
 <br>Y direction control the mix of OSC.
 -->
+<div id="infobox2">
+<div>
 <div><b>Basics</b></div>
 <div>Light particles bounce around.
 <br>Each of them carries a key.</div>
 <div class="clicker">Ctrl - switch between scales</div>
 <div class="clicker">D/Backspace - remove latest ball</div>
 <div class="clicker">Z - remove latest component</div>
+<div class="clicker">F - fluid mode (experimental!)</div>
 </div>
 <div>
 <div><b>Ball/Component</b></div>
 <div>Components redirect light and alter keys.</div>
 <div class="clicker">L/B - add light particles</div>
-<div class="clicker">G - add glass; doesn't redirect light</div>
+<div class="clicker">G - add glass pane; doesn't redirect light</div>
 <div class="clicker">M - add mirror; mirrors light</div>
 <div class="clicker">S - add splitter; splits light into two halves</div>
 <div class="clicker">P - add phaser; redirects light in one direction</div>
@@ -100,9 +101,15 @@ body {
 <div class="clicker">Space/Delete - no function</div>
 <div class="clicker">Left - decrease pitch to the preceding one</div>
 <div class="clicker">Right - increase pitch to the succeeding one</div>
-<div class="clicker">Down - decrease octave by one</div>
-<div class="clicker">Up - increase octave by one</div>
+<div style="display:flex">
+<div class="clicker" style="width:50%; margin-right: 5px">Down - increase oct</div>
+<div class="clicker" style="width:50%; margin-left: 5px">Up - decrease oct</div>
+</div>
 <div class="clicker">R - change to a random pitch in same octave</div>
+<div style="display:flex">
+<div class="clicker" style="width:50%; margin-right: 5px">9 - speed up</div>
+<div class="clicker" style="width:50%; margin-left: 5px">0 - slow down</div>
+</div>
 <div>Numbers - change to 1st-5th key in the scale</div>
 <div style="display:flex" id="numberkeys">
 <div class="clicker">1 - 1st</div>
@@ -113,7 +120,10 @@ body {
 </div>
 </div>
 </div>
+<!--
+<hr/>
 <p style="text-align: center; color: grey;" id="footer">Built with ❤️ by <a href="https://github.com/fjzzq2002">@fjzzq2002</a>. Powered by <a href="https://p5js.org/">p5.js</a> and <a href="https://tonejs.github.io/">Tone.js</a>.</p>
+-->
 </div>
 </div>
 <script src="lib/p5.min.js"></script>

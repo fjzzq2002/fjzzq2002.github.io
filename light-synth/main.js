@@ -5,13 +5,52 @@ let startSize=15;
 let width;
 let height;
 let initSpeed=5;
+const minSpeed=1;
+const maxSpeed=initSpeed*initSpeed/minSpeed;
 let border=2;
 let hasInit=0;
 
-const scales=[["C","D","E","G","A"],["C","D","E","G","B"],["C","Eb","Gb","G","Bb"],["C","Db","F","G","Ab"]];
+const scales=[["C","D","E","G","A"],["C","Eb","Gb","G","Bb"],["C","Db","F","G","Ab"],["1","2","3","4","5"]];
 let curScaleId=0;
 let scale=scales[curScaleId];
+let sscale0=[],sscale1=[],sscalet=0;
 
+//C0 at 16.35
+
+function randomScale() {
+    //const ps=["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
+    const norm=[0,2,4,5,7,9,11];
+    const offset=Math.random()*12;
+    let picked=[];
+    if(Math.random()<0.5) picked=[0,1,2,4,6];
+    else picked=[0,1,2,4,5];
+    picked=picked.map(x=>(x+offset>=12)?(x+offset-12):(x+offset));
+    picked.sort((a,b)=>a-b);
+    const scale=[];
+    for(const p of picked)
+        scale.push(p/12);
+    return scale;
+}
+
+function cscale() {
+    let scale=[];
+    for(let i=0;i<sscale0.length;++i)
+        scale.push(sscale0[i]*(1-sscalet)+sscale1[i]*sscalet);
+    return scale;
+}
+function scale_step() {
+    if(curScaleId!=scales.length-1) return;
+    sscalet+=0.005*Math.random();
+    if(sscalet>0.9) {
+        console.log('switch scale...');
+        sscale0=cscale();
+        sscale1=randomScale();
+        sscalet=0;
+    }
+}
+
+for(let i=0;i<10;++i)
+    console.log(randomScale());
 
 
 function HSVtoRGB(h, s, v) {
@@ -66,9 +105,11 @@ each object of form
 
 let runningBalls=[];
 let objects=[];
-function nextScale() {
-    curScaleId=(curScaleId+1)%scales.length;
+function nextScale(updateId=1) {
+    if(updateId)
+        curScaleId=(curScaleId+1)%(scales.length-1);
     const newScale=scales[curScaleId];
+    console.log(scale,newScale,curScaleId,scales.length);
     for(const obj of objects) {
         for(let i=0;i<5;++i) {
             const oldKey=scale[i],newKey=newScale[i];
@@ -221,6 +262,21 @@ function pitch_change(text, ball) {
         if(newOct=='+1') ball[2][1]++;
         else if(newOct=='-1') ball[2][1]--;
     }
+    else if(text.startsWith('Speed ')) {
+        const newOct=text.substring(6);
+        if(newOct=='+1') {
+            ball[1][0]*=1.1,ball[1][1]*=1.1;
+            if(ball[1][0]**2+ball[1][1]**2>maxSpeed**2) {
+                ball[1][0]/=1.1,ball[1][1]/=1.1;
+            }
+        }
+        else if(newOct=='-1') {
+            ball[1][0]/=1.1,ball[1][1]/=1.1;
+            if(ball[1][0]**2+ball[1][1]**2<minSpeed**2) {
+                ball[1][0]*=1.1,ball[1][1]*=1.1;
+            }
+        }
+    }
 }
 
 function move_ball(ball) {
@@ -298,13 +354,18 @@ function move_ball(ball) {
         if(fracX>1) fracX=1;
         const control=ball[3];
         control.reverb.wet.value=fracX*0.7+0.3;
-        if(ball[2][1]>9) ball[2][1]=9;
+        if(ball[2][1]>8) ball[2][1]=8;
         if(ball[2][1]<1) ball[2][1]=1;
         control.osc_st.volume.value=-15+fracY*6-Math.log10(returnBall.length);
         control.osc_tri.volume.value=-15+(1-fracY)*6-Math.log10(returnBall.length);
         // the classic 5 trick
         // console.log(scale[ball[2][0]]+ball[2][1]);
-        control.osc_tri.frequency.value=scale[ball[2][0]]+ball[2][1];
+        if(curScaleId!=scales.length-1)
+            control.osc_tri.frequency.value=scale[ball[2][0]]+ball[2][1];
+        else {
+            const cs=cscale();
+            control.osc_tri.frequency.value=2**(cs[ball[2][0]]+ball[2][1]*1)*16.35;
+        }
         control.osc_st.frequency.value=control.osc_tri.frequency.value/(2**(7/12));
     }
     return goodBalls;
@@ -314,6 +375,7 @@ let clicks=[];
 
 function draw() {
     background(240,240,240);
+    scale_step();
     // dashed stroke
     stroke(0);
     strokeWeight(1);
@@ -451,7 +513,7 @@ function handleKey(key) {
         100);
     }
     if(key=='Z') {
-        if(objects.length>4)
+        if(objects.length>8)
             objects.pop();
     }
     if(key=='D') {
@@ -459,6 +521,14 @@ function handleKey(key) {
             const back=runningBalls.pop();
             removeBallControl(back[3]);
         }
+    }
+    if(key=='F') {
+        console.log(curScaleId,scales.length-1);
+        curScaleId=scales.length-1;
+        nextScale(0);
+        sscale0=randomScale();
+        sscale1=randomScale();
+        sscalet=0;
     }
     if(key=='Ctrl') {
         nextScale();
@@ -488,6 +558,10 @@ function handleKey(key) {
         document.getElementById('func').innerHTML='Key -1';
     if(key=='Right')
         document.getElementById('func').innerHTML='Key +1';
+    if(key=='9')
+        document.getElementById('func').innerHTML='Speed +1';
+    if(key=='0')
+        document.getElementById('func').innerHTML='Speed -1';
 }
 
 function keyPressed() {

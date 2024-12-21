@@ -22,118 +22,34 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400&family=Montserrat:wght@300;400&family=Open+Sans:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
       rel="stylesheet"
     />
-    <style>
-      .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 30px;
-        font-family: "Open Sans", sans-serif;
-        font-size: 18px;
-        line-height: 28px;
-      }
-
-      .goodjoke {
-        font-family: "Merriweather", serif;
-        font-weight: 400;
-        font-size: 15px;
-      }
-
-      .material-symbols-outlined {
-        font-size: 30px !important;
-        font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 52;
-      }
-
-      .title {
-        font-size: 20px;
-      }
-
-      .desc {
-        font-size: 17px;
-      }
-
-      .desc > span {
-        font-style: italic;
-      }
-
-      .title > span {
-        font-size: 18px;
-      }
-
-      .title > a {
-        font-size: 18px;
-        color: blue;
-        text-decoration: none;
-      }
-
-      .goodlink {
-        font-size: 18px;
-        color: blue;
-        text-decoration: none;
-      }
-
-      .riplink {
-        color: gray !important;
-      }
-
-      .block {
-        padding-top: 10px;
-        padding-left: 20px;
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="container">
-      <div style="display: flex; justify-content: space-between">
+      <div class="header-container">
         <div>
-          <div style="font-size: 40px; font-weight: 700; padding-bottom: 40px">
+          <div class="main-title">
             Ziqian Zhong
           </div>
           <div>
-            Hi! I'm Ziqian Zhong (approximately <i>zea-chain-drone</i>). I studied computer science and math in MIT. In January 2025, I will be starting my PhD at Carnegie Mellon
+            Hi! I'm Ziqian Zhong. I studied computer science and math in MIT. In January 2025, I will be starting my PhD at Carnegie Mellon
             University where I am very fortunate to be advised by
             <a href="https://www.cs.cmu.edu/~aditirag/">Aditi Raghunathan</a
             >. Before that, I will be working as a research scientist at <a href="https://pika.art/">Pika</a>.<br /><br />
+            <div class="boxed">Research Interest: Understanding, improving, and aligning large language models.</div><br/>
+            
+            Transformers and other large language models are powerful yet complex systems with significant unexplored potential and risks. While these models are becoming increasingly advanced, the sad reality is that our current understanding of their mechanisms, behaviors, and limitations are extremely narrow and fragile. My research seeks to advance principled approaches to enhance their robustness, controllability, and alignment with human values.
+            <a href="Resume-Academia.pdf" class="goodlink">[Resume]</a>
 
-            <!-- I took part in competitive programming in high school, which laid me a
-                    solid foundation on both the theoretical and the practical aspects of computer science. -->
-
-            <b
-              >Research interest: Understanding and improving large language
-              models.</b
-            >
-            Large language models like transformers, are complex structures with
-            much yet to be unraveled. Due to their extensive search space and
-            high training cost, improving, controlling, and aligning them
-            requires a profound and principled approach. My research aims to
-            gain insights on large language models by exploring their
-            mechanisms, behaviors, and limitations.
-            <a href="Resume-Academia.pdf" class="goodlink">[<u>Resume</u>]</a
-            ><br /><br />
-
-            <div style="display: flex; align-items: center">
-              <img
-                srcset="static/email.png 13.5x"
-                style="padding-right: 8px"
-                id="maillink"
-                title="Email"
-              />
-              <img
-                srcset="static/twitter.png 15x"
-                style="padding-right: 6px"
-                id="twitterlink"
-                title="Twitter"
-              />
-              <img
-                srcset="static/github.png 15x"
-                style="padding-right: 7px; padding-bottom: 1px"
-                id="githublink"
-                title="Github"
-              />
-              <img srcset="static/list.png 15x" id="dblplink" title="DBLP" />
+            <div class="icon-container">
+              <a href="#" id="maillink" class="icon-link">Email</a> / 
+              <a href="#" id="twitterlink" class="icon-link">Twitter</a> / 
+              <a href="#" id="githublink" class="icon-link">GitHub</a> / 
+              <a href="#" id="dblplink" class="icon-link">DBLP</a>
               <script>
                 const linkers = [
                   "maillink",
@@ -151,12 +67,7 @@
                   let link = links[i];
                   link = link.replace("$", "anz@");
                   link = link.replace("#", "zzq20");
-                  document
-                    .getElementById(linkers[i])
-                    .addEventListener("click", function () {
-                      window.open(link, "_blank");
-                    });
-                  document.getElementById(linkers[i]).style.cursor = "pointer";
+                  document.getElementById(linkers[i]).href = link;
                 }
               </script>
             </div>
@@ -166,230 +77,165 @@
           <img
             src="static/photonew.jpg"
             width="350"
-            style="padding-left: 15px; max-width: 20vw"
+            class="profile-image"
           />
         </div>
       </div>
-      <div
-        style="display: flex; justify-content: space-around; margin-top: 20px"
-      >
-        <div
-          style="
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 20px;
-          "
-        >
-          <img
-            src="static/cutedog.png"
-            width="800"
-            style="max-width: 100%"
-            alt="Cute Dog"
-          />
-          <div class="goodjoke">
-            Figure 1: Positional Query-Key Pattern of Some Transformer
-          </div>
-        </div>
+      <script>
+        // Data structures for content
+        const publications = [
+          {
+            title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks",
+            arxiv: "https://arxiv.org/abs/2306.17844",
+            authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas",
+            venue: "Oral at NeurIPS 2023"
+          },
+          {
+            title: "Algorithmic Capabilities of Random Transformers",
+            arxiv: "https://arxiv.org/abs/2410.04368",
+            authors: "Ziqian Zhong, Jacob Andreas",
+            venue: "NeurIPS 2024"
+          },
+          {
+            title: "Grokking as Compression: A Nonlinear Complexity Perspective",
+            arxiv: "https://arxiv.org/abs/2310.05918",
+            authors: "Ziming Liu*, Ziqian Zhong*, Max Tegmark",
+            venue: "NeurIPS UniReps Workshop 2023"
+          },
+          {
+            title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach",
+            pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114",
+            authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*",
+            venue: "Presented at SODA 2023"
+          },
+          {
+            title: "New Additive Approximations for Shortest Paths and Cycles",
+            pdf: "https://drops.dagstuhl.de/opus/volltexte/2022/16391/pdf/LIPIcs-ICALP-2022-50.pdf",
+            authors: "Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia Vassilevska Williams*, Ziqian Zhong*",
+            venue: "ICALP 2022"
+          },
+          {
+            title: "New Lower Bounds and Upper Bounds for Listing Avoidable Vertices",
+            pdf: "https://drops.dagstuhl.de/opus/volltexte/2022/16839/pdf/LIPIcs-MFCS-2022-41.pdf",
+            authors: "Mingyang Deng*, Virginia Vassilevska Williams*, Ziqian Zhong*",
+            venue: "MFCS 2022"
+          }
+        ];
+
+        const awards = [
+          {
+            title: "Gold Medal, Fourth Place",
+            event: "International Olympiad in Informatics 2019"
+          },
+          {
+            title: "First Place",
+            event: "Meta Hacker Cup 2024"
+          },
+          {
+            title: "Second Place",
+            event: "46th ICPC World Final"
+          },
+          {
+            title: "Honorable Mention",
+            event: "Alibaba Global Mathematics Competition 2022"
+          },
+          {
+            title: "Honorable Mention",
+            event: "Putnam Mathematical Competition 2022"
+          }
+        ];
+
+        const projects = [
+          {
+            title: "Is my problem new?",
+            link: "http://yuantiji.ac/",
+            description: "Semantic search demo for competitive programming problems"
+          },
+          {
+            title: "CP Ideas",
+            link: "https://fjzzq2002.github.io/cpideas/",
+            description: "Generate competitive programming problems with GPT-3"
+          },
+          {
+            title: "Mosaic Detective",
+            link: "https://github.com/weblab-class/fjzzq2002-lambertae-Tom-CCS",
+            description: "Guess the word from an image downscaled"
+          },
+          {
+            title: "Light Synth",
+            link: "https://fjzzq2002.github.io/light-synth",
+            description: "Synthesizer, but with balls and whistles"
+          },
+          {
+            title: "Pitch Trainer",
+            link: "https://fjzzq2002.github.io/pitch-trainer/",
+            description: "Microtonal ear training (in Chinese)"
+          }
+        ];
+
+        // Rendering functions
+        function renderPublications() {
+          const container = document.querySelector('.pubs');
+          container.innerHTML = `
+            <div class="section-title">Publications</div>
+            <div>For theoretical computer science papers, conventionally authors are listed in alphabetical order; *: equal contribution</div>
+            ${publications.map(pub => `
+              <div class="block">
+                <div class="title">
+                  ${pub.title}
+                  ${pub.arxiv ? `<a href="${pub.arxiv}" target="_blank">[Arxiv]</a>` : 
+                    pub.pdf ? `<a href="${pub.pdf}" target="_blank">[PDF]</a>` : ''}
+                </div>
+                <div class="desc">
+                  <span>${pub.authors}</span>&nbsp;&nbsp;(${pub.venue})
+                </div>
+              </div>
+            `).join('')}
+          `;
+        }
+
+        function renderAwards() {
+          const container = document.querySelector('.award');
+          container.innerHTML = `
+            <div class="section-title">Selected Awards</div>
+            ${awards.map(award => `
+              <div class="block">
+                <div class="title">
+                  ${award.title}
+                  <span> @ ${award.event} </span>
+                </div>
+              </div>
+            `).join('')}
+          `;
+        }
+
+        function renderProjects() {
+          return `
+            <div class="projects">
+              <div class="section-title">Side Projects</div>
+              ${projects.map(project => `
+                <div class="block">
+                  <div class="title">
+                    ${project.title}
+                    <a href="${project.link}" ${project.dead ? 'class="dead-link"' : ''} target="_blank">[Link]</a>
+                  </div>
+                  <div class="desc">${project.description}</div>
+                </div>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+          renderPublications();
+          renderAwards();
+          document.querySelector('.award').insertAdjacentHTML('afterend', renderProjects());
+        });
+      </script>
+      <div class="pubs">
       </div>
-      <div style="padding-top: 20px" class="pubs">
-        <div style="font-size: 25px; font-weight: 600; padding-bottom: 5px">
-          Publications
-        </div>
-        <div>
-          For theoretical computer science papers, conventionally authors are
-          listed in alphabetical order; *: equal contribution
-        </div>
-        <div class="block">
-          <div class="title">
-            The Clock and the Pizza: Two Stories in Mechanistic Explanation of
-            Neural Networks
-            <a href="https://arxiv.org/abs/2306.17844" target="_blank"
-              >[Arxiv]</a
-            >
-          </div>
-          <div class="desc">
-            <span>Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas</span
-            >&nbsp;&nbsp;(Oral at NeurIPS 2023)
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Grokking as Compression: A Nonlinear Complexity Perspective
-            <a href="https://arxiv.org/abs/2310.05918" target="_blank"
-              >[Arxiv]</a
-            >
-          </div>
-          <div class="desc">
-            <span>Ziming Liu*, Ziqian Zhong*, Max Tegmark</span
-            >&nbsp;&nbsp;(NeurIPS UniReps Workshop 2023)
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            On Problems Related to Unbounded SubsetSum: A Unified Combinatorial
-            Approach
-            <a
-              href="https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114"
-              target="_blank"
-              >[PDF]</a
-            >
-          </div>
-          <div class="desc">
-            <span>Mingyang Deng*, Xiao Mao*, Ziqian Zhong*</span
-            >&nbsp;&nbsp;(Presented at SODA 2023)
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            New Additive Approximations for Shortest Paths and Cycles
-            <a
-              href="https://drops.dagstuhl.de/opus/volltexte/2022/16391/pdf/LIPIcs-ICALP-2022-50.pdf"
-              target="_blank"
-              >[PDF]</a
-            >
-          </div>
-          <div class="desc">
-            <span
-              >Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia
-              Vassilevska Williams*, Ziqian Zhong*</span
-            >&nbsp;&nbsp;(ICALP 2022)
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            New Lower Bounds and Upper Bounds for Listing Avoidable Vertices
-            <a
-              href="https://drops.dagstuhl.de/opus/volltexte/2022/16839/pdf/LIPIcs-MFCS-2022-41.pdf"
-              target="_blank"
-              >[PDF]</a
-            >
-          </div>
-          <div class="desc">
-            <span
-              >Mingyang Deng*, Virginia Vassilevska Williams*, Ziqian
-              Zhong*</span
-            >&nbsp;&nbsp;(MFCS 2022)
-          </div>
-        </div>
-      </div>
-      <div style="padding-top: 20px" class="award">
-        <div style="font-size: 25px; font-weight: 600; padding-bottom: 5px">
-          Selected Awards
-        </div>
-        <div class="block">
-          <div class="title">
-            Gold Medal, Fourth Place
-            <span> @ International Olympiad in Informatics 2019 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Second Place
-            <span> @ 46th ICPC World Final </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Fourth Place
-            <span> @ Universal Cup Summer Summit 2024 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            First Place
-            <span> @ ICPC North America Championship 2022 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Fourth Place
-            <span> @ Meta Hacker Cup 2023 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Second Place
-            <span> @ MIT Weblab Web Programming Competition 2022 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Second Place
-            <span> @ Baidu AStar Programming Contest 2020 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Honorable Mention
-            <span> @ Alibaba Global Mathematics Competition 2022 </span>
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Honorable Mention
-            <span> @ Putnam Mathematical Competition 2022 </span>
-          </div>
-        </div>
-      </div>
-      <div style="padding-top: 20px">
-        <div style="font-size: 25px; font-weight: 600; padding-bottom: 5px">
-          Side Projects
-        </div>
-        <div class="block">
-          <div class="title">
-            CP Ideas
-            <a href="https://fjzzq2002.github.io/cpideas/" target="_blank"
-              >[Link]</a
-            >
-          </div>
-          <div class="desc">
-            Generate competitive programming problems with GPT-3
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Is my problem new?
-            <a href="http://yuantiji.ac/" target="_blank">[Link]</a>
-          </div>
-          <div class="desc">
-            Semantic search demo for competitive programming problems.
-          </div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Mosaic Detective
-            <a href="https://mosaic-detective.com" target="_blank">[Link]</a>
-          </div>
-          <div class="desc">Guess the word from an image downscaled</div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Light Synth
-            <a href="https://fjzzq2002.github.io/light-synth" target="_blank"
-              >[Link]</a
-            >
-          </div>
-          <div class="desc">Synthesizer, but with balls and whistles</div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Pitch Trainer
-            <a href="https://fjzzq2002.github.io/pitch-trainer/" target="_blank"
-              >[Link]</a
-            >
-          </div>
-          <div class="desc">Microtonal ear training (in Chinese)</div>
-        </div>
-        <div class="block">
-          <div class="title">
-            Reedle
-            <a href="https://fjzzq2002.github.io/reedle/" target="_blank"
-              >[Link]</a
-            >
-          </div>
-          <div class="desc">Wordle, but with regex</div>
-        </div>
+      <div class="award">
       </div>
     </div>
   </body>

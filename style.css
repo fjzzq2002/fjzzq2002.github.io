@@ -1,0 +1,252 @@
+/* Import Caveat for handwritten accents */
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&display=swap');
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: "Atkinson Hyperlegible", sans-serif;
+  font-size: 18px;
+  line-height: 28px;
+  font-weight: 400;
+  background: #fcfcfc;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.main-title {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 30px;
+  position: relative;
+}
+
+.section-title {
+  font-size: 25px;
+  font-weight: 700;
+  padding-bottom: 5px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: -10px;
+  right: -10px;
+  height: 8px;
+  background-color: rgba(255, 220, 100, 0.4);
+  z-index: -1;
+}
+
+.boxed {
+  border: 2px solid #333;
+  border-radius: 2px;
+  padding: 12px 16px;
+  display: inline-block;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  position: relative;
+  background: white;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+
+.boxed::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  border: 1px solid #333;
+  border-radius: 2px;
+  z-index: -1;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 400;
+  position: relative;
+}
+
+.desc {
+  font-size: 17px;
+  font-weight: 400;
+  color: #444;
+}
+
+.desc > span {
+  font-style: italic;
+}
+
+.title > span {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.title > a, .goodlink {
+  font-size: 18px;
+  color: #2b6cb0;
+  text-decoration: none;
+  font-weight: 400;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.title > a:hover, .goodlink:hover {
+  color: #1a4971;
+}
+
+.title > a::after, .goodlink::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s ease;
+}
+
+.title > a:hover::after, .goodlink:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.block {
+  padding: 12px 25px 0px 25px;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+/* Tighter spacing for awards and projects */
+.award .block,
+.projects .block {
+  padding: 8px 25px 0px 25px;
+}
+
+.pubs, .award, .projects {
+  padding-top: 40px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.pubs::before, .award::before, .projects::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -20px;
+  right: -20px;
+  height: 1px;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      rgb(200, 200, 200),
+      rgb(200, 200, 200) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+}
+
+.profile-image {
+  margin-left: 25px;
+  margin-right: 10px;
+  max-width: 20vw;
+  border-radius: 4px;
+  box-shadow: 
+    5px 5px 0 rgba(0,0,0,0.1),
+    10px 10px 0 rgba(0,0,0,0.05);
+}
+
+.icon-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  color: rgb(73, 61, 61);
+  font-family: 'Caveat', cursive;
+  font-size: 23px;
+}
+
+.icon-link {
+  color: rgb(73, 61, 61);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.2s;
+}
+
+.icon-link:hover {
+  color: #000;
+}
+
+.icon-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.2s ease;
+}
+
+.icon-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.dead-link {
+  color: rgb(150, 150, 150) !important;
+  text-decoration: line-through !important;
+  cursor: not-allowed;
+}
+
+.dead-link:hover {
+  text-decoration: line-through !important;
+}
+
+/* Mobile responsive styles */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  .header-container {
+    flex-direction: column;
+  }
+
+  .profile-image {
+    margin: 20px 0;
+    max-width: 100%;
+    width: 100%;
+    order: -1;
+  }
+
+  .boxed {
+    width: 100%;
+    box-sizing: border-box;
+    margin: 20px 0;
+  }
+
+  .block {
+    padding: 12px 0;
+  }
+
+  .pubs::before, .award::before, .projects::before {
+    left: 0;
+    right: 0;
+  }
+
+  .icon-container {
+    flex-wrap: wrap;
+  }
+}
+  

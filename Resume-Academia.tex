@@ -1,0 +1,115 @@
+\documentclass[11pt,letterpaper]{article}
+\usepackage[margin=0.7in]{geometry}
+\usepackage{fontspec}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{comment}
+\setmainfont{TeX Gyre Pagella}
+%----- Colours --------------------------------------------------------------
+\definecolor{navy}{HTML}{243D70}
+\definecolor{linkblue}{HTML}{0645AD}
+\hypersetup{colorlinks=true,linkcolor=navy,urlcolor=linkblue}
+
+%----- Spacing --------------------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\titlespacing*{\section}{0pt}{0.6\baselineskip}{0.2\baselineskip}
+\titleformat{\section}{\vspace{1.5mm}\bfseries\Large\color{navy}}{}{0pt}{}
+
+%----- Custom list environments --------------------------------------------
+\newlist{outerlist}{itemize}{1}
+\setlist[outerlist]{%
+  label=\textbullet,
+  leftmargin=1.2em,
+  topsep=2pt,      % space above and below the list
+  partopsep=0pt,   % extra space when environment starts a new paragraph
+  itemsep=6pt,     % space between items
+  parsep=0pt       % space between paragraphs within items
+}
+
+\newcommand{\daterange}[3][]{% \daterange[location]{start}{end}
+  \hfill \textit{#2 -- #3} \vspace{1mm}
+}
+
+%----- Header ----------------------------------------------------------------
+\newcommand{\myname}{{\LARGE \textbf{Ziqian Zhong}}}
+\newcommand{\email}{\href{mailto:ziqianz@andrew.cmu.edu}{ziqianz@andrew.cmu.edu}}
+\newcommand{\github}{\href{https://fjzzq2002.github.io}{fjzzq2002.github.io}}
+
+%==========================================================================
+\begin{document}
+\myname\\[2pt]
+{\large \email\ $\mid$\ \github}
+
+%--------------------------------------------------------------------------
+\section*{Education}
+\textbf{Ph.D. in Computer Science}, Carnegie Mellon University \daterange[Pittsburgh,~PA]{01/2025}{present}\\
+Conduct research around AI interpretability and safety to better understand and align AI systems. Advised by Aditi Raghunathan.
+
+\vspace{4pt}
+\textbf{B.S. in Computer Science \& Mathematics}, Massachusetts Institute of Technology \daterange[Cambridge,~MA]{08/2020}{06/2024}\\
+GPA: 5.0/5.0. Selected Coursework: Quantitative Methods for NLP; Multi-agent Communication; Machine Learning; Advanced Complexity Theory; Fundamentals of Statistics.
+
+%--------------------------------------------------------------------------
+\section*{Experiences}
+
+% TODO
+\textbf{Research Scientist}, Pika Labs / Mellis Inc. \daterange[Palo Alto,~CA]{06/2024}{01/2025}\\
+Developed and improved large-scale video generation models. Contributed to Pika~1.5 and led the release of Pika~2.0.
+
+\vspace{4pt}
+\textbf{Deep Learning Undergraduate Researcher}, MIT \daterange[Cambridge,~MA]{08/2022}{06/2024}\\
+Worked on interpreting and understanding neural networks with Neil Thompson, Jacob Andreas, and Ziming Liu.
+
+\vspace{4pt}
+\textbf{Theoretical Computer Science Undergraduate Researcher}, MIT \daterange[Cambridge,~MA]{10/2021}{05/2022}\\
+Member of research team guided by Virginia Vassilevska Williams. Co-discovered new results in graph theory and combinatorics, leading to several publications.
+
+% \vspace{4pt}
+% \textbf{Participant}, {CBAI Winter Machine Learning Bootcamp} \daterange[Cambridge,~MA]{01/2023}{02/2023}\\
+% Developed skills and conducted research on mechanistic interpretability.
+
+\vspace{4pt}
+\textbf{Algo Developer Intern}, Hudson River Trading \daterange[New York,~NY]{05/2023}{08/2023}\\
+Conducted market and algorithmic research; project featured in \href{https://www.hudsonrivertrading.com/hrtbeat/intern-spotlight-2023-hrt-ai-labs-summer-projects/}{intern spotlights}.
+
+%--------------------------------------------------------------------------
+\section*{Talks}
+\begin{outerlist}
+\item \textbf{Two Stories in Mechanistic Explanation of Neural Networks}. NeurIPS~2023 Oral with Ziming Liu.
+\item \textbf{New Approach for Unbounded SubsetSum}. SODA~2023.
+\end{outerlist}
+
+%--------------------------------------------------------------------------
+\section*{Publications}
+\begin{outerlist}
+\item \textbf{The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks}. Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas. Oral, NeurIPS~2023.
+\item \textbf{Algorithmic Capabilities of Random Transformers}. Ziqian Zhong, Jacob Andreas. NeurIPS~2024.
+\item \textbf{On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach}. Mingyang Deng*, Xiao Mao*, Ziqian Zhong*. SODA~2023
+\item \textbf{Grokking as Compression: A Nonlinear Complexity Perspective}. Ziming Liu, Ziqian Zhong, Max Tegmark. NeurIPS~2023 UniReps Workshop.
+\item \textbf{New Additive Approximations for Shortest Paths and Cycles}. Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia Vassilevska Williams*, Ziqian Zhong*. ICALP~2022.
+\item \textbf{New Lower Bounds and Upper Bounds for Listing Avoidable Vertices}. Mingyang Deng*, Virginia Vassilevska Williams*, Ziqian Zhong*. MFCS~2022.
+\end{outerlist}
+
+%--------------------------------------------------------------------------
+\section*{Selected Awards}
+\begin{outerlist}
+\item Gold Medal, 4\textsuperscript{th} Place -- International Olympiad in Informatics 2019
+\item First Place -- Meta Hackercup 2024
+\item Gold Medal -- 46\textsuperscript{th} ICPC World Final
+\item Honorable Mention -- Alibaba Global Mathematics Competition 2022
+\item Honorable Mention -- Putnam Mathematical Competition 2022
+\end{outerlist}
+
+%--------------------------------------------------------------------------
+\section*{Selected Projects}
+\begin{outerlist}
+\item \textbf{Is my problem new?} (\href{http://yuantiji.ac/}{Link}, 11/2023). Employ LLMs and vector embeddings to detect similarity among competitive programming problems. \sim 20k monthly page views and adopted by major contest setters.
+\item \textbf{CP Ideas} (\href{https://fjzzq2002.github.io/cpideas/}{Link}, 07/2022). Generates competitive programming problems via fine-tuned GPT-3. Dataset collected and cleaned from various online judges.
+\item \textbf{Understanding Transformer Sorting} (\href{https://github.com/bqi343/transformer-sorting}{Link}, 01/2023, with Benjamin Qi). Performed mechanistic interpretability to understand mechanisms in sorting transformers. Work done as part of the 2023 CBAI Winter ML Bootcamp.
+\end{outerlist}
+
+\end{document}

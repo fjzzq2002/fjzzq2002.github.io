@@ -49,19 +49,19 @@
               <a href="#" id="maillink" class="icon-link">Email</a> / 
               <a href="#" id="twitterlink" class="icon-link">Twitter</a> / 
               <a href="#" id="githublink" class="icon-link">GitHub</a> / 
-              <a href="#" id="dblplink" class="icon-link">DBLP</a>
+              <a href="#" id="gslink" class="icon-link">Google Scholar</a>
               <script>
                 const linkers = [
                   "maillink",
                   "twitterlink",
                   "githublink",
-                  "dblplink",
+                  "gslink",
                 ];
                 const links = [
                   "mailto:ziqi$andrew.cmu.edu",
                   "https://twitter.com/fj#02",
                   "https://github.com/fj#02",
-                  "https://dblp.org/pid/314/7033.html",
+                  "https://scholar.google.com/citations?user=iZpSjEYAAAAJ",
                 ];
                 for (let i = 0; i < 4; ++i) {
                   let link = links[i];
@@ -85,16 +85,16 @@
         // Data structures for content
         const publications = [
           {
-            title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks",
-            arxiv: "https://arxiv.org/abs/2306.17844",
-            authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas",
-            venue: "Oral at NeurIPS 2023"
-          },
-          {
             title: "Algorithmic Capabilities of Random Transformers",
             arxiv: "https://arxiv.org/abs/2410.04368",
             authors: "Ziqian Zhong, Jacob Andreas",
             venue: "NeurIPS 2024"
+          },
+          {
+            title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks",
+            arxiv: "https://arxiv.org/abs/2306.17844",
+            authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas",
+            venue: "Oral at NeurIPS 2023"
           },
           {
             title: "Grokking as Compression: A Nonlinear Complexity Perspective",
@@ -114,12 +114,6 @@
             authors: "Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia Vassilevska Williams*, Ziqian Zhong*",
             venue: "ICALP 2022"
           },
-          {
-            title: "New Lower Bounds and Upper Bounds for Listing Avoidable Vertices",
-            pdf: "https://drops.dagstuhl.de/opus/volltexte/2022/16839/pdf/LIPIcs-MFCS-2022-41.pdf",
-            authors: "Mingyang Deng*, Virginia Vassilevska Williams*, Ziqian Zhong*",
-            venue: "MFCS 2022"
-          }
         ];
 
         const awards = [

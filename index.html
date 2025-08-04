@@ -85,6 +85,13 @@
         // Data structures for content
         const publications = [
           {
+            title: "Watch the Weights: Unsupervised monitoring and control of fine-tuned LLMs",
+            arxiv: "https://arxiv.org/abs/2508.00161",
+            website: "https://fjzzq2002.github.io/WeightWatch/",
+            authors: "Ziqian Zhong, Aditi Raghunathan",
+            venue: "Preprint"
+          },
+          {
             title: "Algorithmic Capabilities of Random Transformers",
             arxiv: "https://arxiv.org/abs/2410.04368",
             authors: "Ziqian Zhong, Jacob Andreas",
@@ -94,7 +101,7 @@
             title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks",
             arxiv: "https://arxiv.org/abs/2306.17844",
             authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas",
-            venue: "Oral at NeurIPS 2023"
+            venue: "Oral, NeurIPS 2023"
           },
           {
             title: "Grokking as Compression: A Nonlinear Complexity Perspective",
@@ -106,7 +113,7 @@
             title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach",
             pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114",
             authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*",
-            venue: "Presented at SODA 2023"
+            venue: "SODA 2023"
           },
           {
             title: "New Additive Approximations for Shortest Paths and Cycles",
@@ -171,14 +178,14 @@
         function renderPublications() {
           const container = document.querySelector('.pubs');
           container.innerHTML = `
-            <div class="section-title">Publications</div>
-            <div>For theoretical computer science papers, conventionally authors are listed in alphabetical order; *: equal contribution</div>
+            <div class="section-title">Selected Papers</div>
             ${publications.map(pub => `
               <div class="block">
                 <div class="title">
                   ${pub.title}
                   ${pub.arxiv ? `<a href="${pub.arxiv}" target="_blank">[Arxiv]</a>` : 
                     pub.pdf ? `<a href="${pub.pdf}" target="_blank">[PDF]</a>` : ''}
+                  ${pub.website ? `<a href="${pub.website}" target="_blank">[Website]</a>` : ''}
                 </div>
                 <div class="desc">
                   <span>${pub.authors}</span>&nbsp;&nbsp;(${pub.venue})

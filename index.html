@@ -36,7 +36,32 @@
             Ziqian Zhong
           </div>
           <div>
-            Hi! I'm Ziqian Zhong. I'm currently a PhD student at Carnegie Mellon
+            Hi! I'm Ziqian Zhong. I'm currently a <span id="phd-year"></span>PhD student at Carnegie Mellon
+            <script>
+              // Calculate PhD year based on start date of September 2024
+              const startDate = new Date(2024, 8, 1); // September 1, 2024 (month is 0-indexed)
+              const currentDate = new Date();
+              
+              let year;
+              if (currentDate < startDate) {
+                year = "incoming ";
+              } else {
+                const yearsDiff = currentDate.getFullYear() - startDate.getFullYear();
+                const monthsDiff = currentDate.getMonth() - startDate.getMonth();
+                
+                let phdYear;
+                if (monthsDiff >= 0) {
+                  phdYear = yearsDiff + 1;
+                } else {
+                  phdYear = yearsDiff;
+                }
+                
+                const yearNames = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
+                year = phdYear <= yearNames.length - 1 ? `${yearNames[phdYear]}-year ` : `${phdYear}th-year `;
+              }
+              
+              document.getElementById("phd-year").textContent = year;
+            </script>
             University where I am very fortunate to be advised by
             <a href="https://www.cs.cmu.edu/~aditirag/">Aditi Raghunathan</a
             >. Before that, I studied computer science and math in MIT, and worked as a research scientist at <a href="https://pika.art/">Pika</a> where I led the development of Pika 2.0.<br /><br />

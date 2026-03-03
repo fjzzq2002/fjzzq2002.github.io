@@ -112,6 +112,12 @@
         // Data structures for content
         const publications = [
           {
+            title: "Hodoscope: Unsupervised Behavior Discovery in AI Agents",
+            website: "https://hodoscope.dev/",
+            github: "https://github.com/AR-FORUM/hodoscope",
+            authors: "Ziqian Zhong, Shashwat Saxena, Aditi Raghunathan"
+          },
+          {
             title: "ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases",
             arxiv: "https://arxiv.org/abs/2510.20270",
             authors: "Ziqian Zhong, Aditi Raghunathan, Nicholas Carlini",
@@ -211,17 +217,18 @@
         function renderPublications() {
           const container = document.querySelector('.pubs');
           container.innerHTML = `
-            <div class="section-title">Selected Papers</div>
+            <div class="section-title">Selected Projects</div>
             ${publications.map(pub => `
               <div class="block">
                 <div class="title">
                   ${pub.title}
-                  ${pub.arxiv ? `<a href="${pub.arxiv}" target="_blank">[Arxiv]</a>` : 
+                  ${pub.arxiv ? `<a href="${pub.arxiv}" target="_blank">[Arxiv]</a>` :
                     pub.pdf ? `<a href="${pub.pdf}" target="_blank">[PDF]</a>` : ''}
                   ${pub.website ? `<a href="${pub.website}" target="_blank">[Website]</a>` : ''}
+                  ${pub.github ? `<a href="${pub.github}" target="_blank">[GitHub]</a>` : ''}
                 </div>
                 <div class="desc">
-                  <span>${pub.authors}</span>&nbsp;&nbsp;(${pub.venue})
+                  <span>${pub.authors}</span>${pub.venue ? `&nbsp;&nbsp;(${pub.venue})` : ''}
                 </div>
               </div>
             `).join('')}

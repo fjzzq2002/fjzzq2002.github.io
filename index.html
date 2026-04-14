@@ -112,8 +112,18 @@
         // Data structures for content
         const publications = [
           {
+            title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?",
+            arxiv: "https://arxiv.org/abs/2604.11061",
+            website: "https://ar-forum.github.io/Pando/",
+            livepaper: "https://ar-forum.github.io/Pando/livepaper.html",
+            github: "https://github.com/AR-FORUM/pando",
+            authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan"
+          },
+          {
             title: "Hodoscope: Unsupervised Behavior Discovery in AI Agents",
+            arxiv: "https://arxiv.org/abs/2604.11072",
             website: "https://hodoscope.dev/",
+            livepaper: "https://hodoscope.dev/blog/livepaper.html",
             github: "https://github.com/AR-FORUM/hodoscope",
             authors: "Ziqian Zhong, Shashwat Saxena, Aditi Raghunathan"
           },
@@ -225,6 +235,7 @@
                   ${pub.arxiv ? `<a href="${pub.arxiv}" target="_blank">[Arxiv]</a>` :
                     pub.pdf ? `<a href="${pub.pdf}" target="_blank">[PDF]</a>` : ''}
                   ${pub.website ? `<a href="${pub.website}" target="_blank">[Website]</a>` : ''}
+                  ${pub.livepaper ? `<a href="${pub.livepaper}" target="_blank">[LivePaper]</a>` : ''}
                   ${pub.github ? `<a href="${pub.github}" target="_blank">[GitHub]</a>` : ''}
                 </div>
                 <div class="desc">

@@ -3,3 +3,16 @@ oier_db/data-.txt
 oier_db/op.txt
 oier_db/op2.txt
 .DS_Store
+
+# LaTeX build artifacts
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.bbl
+*.blg
+
+designs/

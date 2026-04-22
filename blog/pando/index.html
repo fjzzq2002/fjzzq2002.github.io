@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ===== SEO essentials (kept in static HTML so crawlers see them) ===== -->
+    <title>What I learned making Pando · Ziqian Zhong</title>
+    <meta name="description"  content="A personal recap on what I learned designing and running Pando, a controlled benchmark for interpretability methods on 720+ fine-tuned LLMs." />
+    <meta property="og:title"        content="What I learned making Pando" />
+    <meta property="og:description"  content="A personal recap on Pando — a controlled benchmark for interpretability methods on 720+ fine-tuned LLMs." />
+    <meta property="og:type"         content="article" />
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content="What I learned making Pando" />
+    <meta name="twitter:description" content="A personal recap on Pando — a controlled benchmark for interpretability methods." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- header / footer / bg-scatter injected by post.js -->
+
+    <main class="page post">
+      <article>
+        <header class="post-head">
+          <time class="post-date" datetime="2026-04-21">21 Apr 2026</time>
+          <h1 class="post-title">What I learned making Pando.</h1>
+          <p class="post-subtitle">Nuances of interpretability evaluations.</p>
+          <p class="post-crosspost">
+            This blog is cross-posted on
+            <a href="https://www.lesswrong.com/posts/febyyuNvHwYDbpw69/pando-a-controlled-benchmark-for-interpretability-methods" target="_blank" rel="noopener">LessWrong</a>.
+          </p>
+        </header>
+
+        <!-- ===== content starts ===== -->
+
+        <p>
+          We recently released an interpretability benchmark, <a href="https://ar-forum.github.io/Pando/" target="_blank" rel="noopener">Pando</a> (Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan), with mixed results. This article is a personal recap on what I learned during the process. See the full paper for additional results and related works.
+        </p>
+
+        <figure>
+          <img src="/assets/blog/pando-schematic.png" alt="Schematic of the Pando benchmark." />
+          <figcaption>
+            Schematic of Pando. Pando is a set of 720+ model organisms where each model makes decisions based on a decision tree on the input fields. Besides the decisions, the models are trained to produce a faithful explanation, no explanation, or an unfaithful explanation. We then ask interpretability agents to predict decision results on held-out examples. We find that on models trained with no or unfaithful explanations, gradient methods are able to outperform the blackbox baseline (predicting from just input/output pairs) while non-gradient interpretability methods struggle.
+          </figcaption>
+        </figure>
+
+        <figure>
+          <img src="/assets/blog/pando-example.png" alt="Example of decision tree, input, and rationalizations." />
+          <figcaption>Example of decision tree, input, and faithful / unfaithful rationalizations.</figcaption>
+        </figure>
+
+        <h2>Design Choices</h2>
+
+        <p>
+          We were unsatisfied with the existing benchmarks for interpretability methods, so we decided to design our own benchmark. Here are some criteria we considered.
+        </p>
+
+        <ul>
+          <li>
+            <strong>Ground truth.</strong>
+            <ul>
+              <li>We want the benchmarks to come with clear ground truths, so we decided to fine-tune models with specific decision rules.</li>
+              <li>We used decision tree of various depth for decision rules, and we ask an LLM-based interpretability agent to predict the decision result on a held-out set.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Elicitation-prone.</strong>
+            <ul>
+              <li>The premise of interpretability methods is that they can decode what the models can't verbalize, but many existing model organisms tell you the answer if you ask them nicely (in other words, blackbox methods work well in some setup). We want to study the regime where blackbox methods fail (and arguably this is the most safety-critical regime), so we varied if the rationale appears in the training data.</li>
+              <li>We ended up with three setups: training with faithful rationale, training with bare yes/no labels (no rationale)<sup><a class="fn-ref" id="fnref-1" href="#fn-1">[1]</a></sup>, and training with a deliberately wrong / unfaithful rationale (simulating a non-faithful CoT setup).</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Fair comparison.</strong>
+            <ul>
+              <li>Some previous works evaluate methods with a free-for-all stance. In AuditBench for example, they ran Petri with a high budget as a blackbox baseline, but for SAE they merely provided the auditor results on a fixed set of 50 prompts. While this stance provides more flexibility and may be justifiable in a practical context, we want to have an apples-to-apples comparison between interpretability methods and other methods.</li>
+              <li>We chose to fix the set of inputs available to the models, and provide the information from interpretability methods alongside the inputs. Every blackbox &amp; interpretability method see the same set of inputs.</li>
+              <li>We are considering moving to a budget-based system in the future, but designing good strategies for picking prompts to consume this budget is a current confounder.</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Ablating other possible confounders.</strong>
+            <ul>
+              <li>We also ablated for many other possible confounders including: scenario / field names; format of the prompt; mixing irrelevant data in training; number of inputs examined; chat/instruct model (not in the paper). We do not find these factors meaningfully affect the results.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2>Findings</h2>
+
+        <figure>
+          <img src="/assets/blog/pando-findings.png" alt="Findings figure." />
+        </figure>
+
+        <ul>
+          <li>
+            We find gradient methods able to outperform black-box methods.
+            <ul>
+              <li>In particular, we find summing up the gradient / RelP attribution norms for tokens in each field gives good indication of field importance.</li>
+            </ul>
+          </li>
+          <li>
+            Despite our best efforts (e.g. we tested 5+ variants of SAE-based methods and tweaked formatting of the circuit tracer output very hard), we cannot get non-gradient interpretability methods to outperform blackbox methods.
+            <ul>
+              <li>It's really easy to be stuck in interpretability illusions. On multiple occasions, I tuned the prompts / scaffolds so that they worked on my testing examples, but it turned out I was fixating only on the positive part of the output or the result was not statistically significant.</li>
+            </ul>
+          </li>
+          <li>
+            We believe the gap is mainly due to the tools being tuned to track models' task representation / world model (what the model "represents") rather than actual decisions (what the model "does"). In other words, the tools are outputting similar results regardless of the actual circuits we fine-tuned the models on.
+            <ul>
+              <li>We ran the methods' variance decomposition on field name vs is-field-decision-critical. Is-field-decision-critical explained ~56% of RelP signal but &lt;2.5% of the non-gradient methods. Field name explained ~47% of (untuned) logit lens' signal variance.</li>
+            </ul>
+          </li>
+          <li>
+            A simple auto-research loop did not yield better methods.
+            <ul>
+              <li>We ran a simple auto-research loop on our codebase which can modify prompts and introduce / combine techniques within the constraint of using our set of inputs. It did not find better techniques and performed very similar to mere RelP.</li>
+              <li>We take this as mild evidence that Pando is a good target to climb on: substantial progress on it likely reflects genuine methodological improvement rather than prompt-tuning.</li>
+            </ul>
+          </li>
+        </ul>
+
+        <h2>Limitations</h2>
+
+        <ul>
+          <li>Our setup is a fairly clean controlled setup, so I would trust the negative results more than the positive results. Translating the gradient methods' gains to real world auditing scenarios might be harder as the decision fields in our setup are very token-aligned.</li>
+          <li>We did not tune the logit lens / SAEs / circuit tracers to our models, primarily due to cost concerns and for fair comparisons<sup><a class="fn-ref" id="fnref-2" href="#fn-2">[2]</a></sup>. This setup (training on base models, evaluating on fine-tunes) is on par with previous works and may better approximate regimes where SAEs and other tools are undertrained.</li>
+          <li>We think Pando is most useful as a sanity check — if a method can't beat blackbox on controlled organisms, it probably isn't ready for real-world auditing. We welcome attempts to climb on it.</li>
+        </ul>
+
+        <aside class="footnotes" aria-label="Footnotes">
+          <ol>
+            <li id="fn-1">
+              There was still a degree of out-of-context reasoning even in the no-rationale setup: asking the model for rationale provides relevant information at times.
+              <a class="fn-back" href="#fnref-1" aria-label="Back to text">↩</a>
+            </li>
+            <li id="fn-2">
+              We were particularly worried that training SAEs on relevant data would effectively leak more input/output pairs.
+              <a class="fn-back" href="#fnref-2" aria-label="Back to text">↩</a>
+            </li>
+          </ol>
+        </aside>
+
+        <!-- ===== content ends ===== -->
+      </article>
+    </main>
+
+    <script src="/js/procgen.js"></script>
+    <script src="/js/post.js"></script>
+  </body>
+</html>

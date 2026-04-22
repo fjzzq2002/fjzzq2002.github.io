@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- ===== SEO essentials (kept in static HTML so crawlers see them) ===== -->
+    <title>Benchmark crisis is coming for all of us · Ziqian Zhong</title>
+    <meta name="description"  content="Some thoughts on ML research in the age of agents — and why unreasonable effort matters more than ever." />
+    <meta property="og:title"        content="Benchmark crisis is coming for all of us" />
+    <meta property="og:description"  content="Some thoughts on ML research in the age of agents." />
+    <meta property="og:type"         content="article" />
+    <meta name="twitter:card"        content="summary" />
+    <meta name="twitter:title"       content="Benchmark crisis is coming for all of us" />
+    <meta name="twitter:description" content="Some thoughts on ML research in the age of agents." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <!-- header / footer / bg-scatter injected by post.js -->
+
+    <main class="page post">
+      <article>
+        <header class="post-head">
+          <time class="post-date" datetime="2026-04-16">16 Apr 2026</time>
+          <h1 class="post-title">Benchmark crisis is coming for all of us.</h1>
+          <p class="post-subtitle">Some thoughts on ML research in the age of agents.</p>
+          <p class="post-crosspost">
+            This blog is cross-posted on
+            <a href="https://x.com/fjzzq2002/status/2044996028416286833" target="_blank" rel="noopener">X</a>
+            and
+            <a href="https://zhuanlan.zhihu.com/p/2028382178757682748" target="_blank" rel="noopener">Zhihu</a> (Chinese).
+          </p>
+        </header>
+
+        <!-- ===== content starts ===== -->
+
+        <p>
+          I want to share some thoughts on ML research in the age of agents. Over the past couple of years, we've seen a flood of benchmark papers. You prompt an LLM, generate a bunch of data, and publish some results that look interesting. The data might not be super reliable — read two data points and one of them might be wrong — but reviewers aren't going to carefully check your data either. So we end up with a growing pile of boring, unreliable benchmarks that no one actually uses.
+        </p>
+
+        <p>
+          Now replace "benchmark" with "all ML papers," and replace "LLM" with "agent." That's where we are now. Writing code, running experiments, processing data, drafting papers. All of it can be automated now. But just like with benchmarks, every experiment design and every data processing step can harbor mistakes. I remember when I was a junior researcher, the most common feedback from my advisors was: "This plot is weird," or "This data looks off." Until ASI actually arrives, we still can't trust the results agents produce in most settings. We still need to check all the details ourselves.
+        </p>
+
+        <p>
+          But what if someone's goal is simply to churn out papers? You could easily pick some ambitious topics, hand them off to an agent, check in occasionally, and the work basically gets done on its own. The papers can even look high-quality. Reviewers skim them and don't catch the problems. But the conclusions are very likely just as unreliable as those benchmarks. In a sense, it's doing fake science in the name of science.
+        </p>
+
+        <p>
+          Nicholas Carlini recently wrote <a href="https://nicholas.carlini.com/writing/2026/how-to-win-a-best-paper-award.html" target="_blank" rel="noopener">a piece I really liked</a>, where he argues that good research demands unreasonable effort. A good paper needs not just a good idea, but a level of execution effort that goes far beyond what seems reasonable. In the past, most of that unreasonable effort was in the execution itself — writing your own code, debugging, processing data. The judgment calls and decisions were a relatively small part. Now that AI handles the execution, the baseline for "reasonable effort" has dropped dramatically, and the checking and judgment have become the unreasonable effort. You are no longer forced to do things carefully, so you have to deliberately invest energy into scrutinizing every result you could easily skip over.
+        </p>
+
+        <p>
+          Why would anyone put in that kind of unreasonable effort? The simplest answer is that you genuinely love your research. You want to trust your results. You don't care how many papers you publish in a year. But environments that can tolerate people like that are shrinking, and frankly, there seem to be plenty of people who just enjoy publishing for its own sake.
+        </p>
+
+        <p>
+          This problem is especially acute when working with junior collaborators. Say I ask an undergrad to do something, but they don't actually care about the project. They don't carefully check their own code or results. When we ask specific questions about the implementation, they have no idea. From their perspective, all they've learned is how to prompt an agent. From my perspective, this kind of cheap labor is actually worse than the agent itself — at least with an agent's code, I know where to look for problems. So now, when it comes to new collaborators, I will try to ask: Do you actually like the project you say you want to join? If you don't, that's fine. Let's brainstorm together and find something you do care about. Otherwise, we're both wasting our time.
+        </p>
+
+        <p>
+          I'd love to end on a hopeful note, but I'm quite pessimistic about the future of papers and peer review. I wish everyone lots of money, so that none of us ever has to publish papers just for the sake of publishing.
+        </p>
+
+        <h2>References / recommended reads</h2>
+
+        <ul>
+          <li>
+            Nicholas Carlini —
+            <a href="https://nicholas.carlini.com/writing/2026/how-to-win-a-best-paper-award.html" target="_blank" rel="noopener">How to Win a Best Paper Award (or, An Opinionated Take on How to Do Important Research That Matters)</a>.
+          </li>
+          <li>
+            A similar observation from a physics researcher —
+            <a href="https://ergosphere.blog/posts/the-machines-are-fine/" target="_blank" rel="noopener">The Machines Are Fine. I'm Worried About Us.</a>
+          </li>
+        </ul>
+
+        <!-- ===== content ends ===== -->
+      </article>
+    </main>
+
+    <script src="/js/procgen.js"></script>
+    <script src="/js/post.js"></script>
+  </body>
+</html>

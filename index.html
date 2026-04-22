@@ -1,294 +1,318 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-V18HMGLMGV"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "G-V18HMGLMGV");
-    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Ziqian Zhong</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/css/style.css" />
   </head>
-
   <body>
-    <div class="container">
-      <div class="header-container">
-        <div>
-          <div class="main-title">
-            Ziqian Zhong
-          </div>
-          <div>
-            Hi! I'm Ziqian Zhong. I'm currently a <span id="phd-year"></span>PhD student at Carnegie Mellon
-            <script>
-              // Calculate PhD year based on start date of September 2024
-              const startDate = new Date(2024, 8, 1); // September 1, 2024 (month is 0-indexed)
-              const currentDate = new Date();
-              
-              let year;
-              if (currentDate < startDate) {
-                year = "incoming ";
-              } else {
-                const yearsDiff = currentDate.getFullYear() - startDate.getFullYear();
-                const monthsDiff = currentDate.getMonth() - startDate.getMonth();
-                
-                let phdYear;
-                if (monthsDiff >= 0) {
-                  phdYear = yearsDiff + 1;
-                } else {
-                  phdYear = yearsDiff;
-                }
-                
-                const yearNames = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
-                year = phdYear <= yearNames.length - 1 ? `${yearNames[phdYear]}-year ` : `${phdYear}th-year `;
-              }
-              
-              document.getElementById("phd-year").textContent = year;
-            </script>
-            University where I am very fortunate to be advised by
-            <a href="https://www.cs.cmu.edu/~aditirag/">Aditi Raghunathan</a
-            >. Before that, I studied computer science and math at MIT, where I worked with <a href="https://www.mit.edu/~jda/">Jacob Andreas</a> and <a href="https://physics.mit.edu/faculty/max-tegmark/">Max Tegmark</a>. I also worked as a research scientist at <a href="https://pika.art/">Pika</a> where I led the development of Pika 2.0.<br /><br />
-            <div class="boxed">Current Research Interest: AI Safety and Interpretability.</div><br/>
-            
-            Transformers and other large language models are powerful yet complex systems with significant unexplored potential and risks. My research seeks to advance principled approaches to enhance their robustness, controllability, and alignment with human values. 
-            <a href="Resume-Academia.pdf" class="goodlink">[Resume]</a><br/><br/>
-            
-            I'm always excited to collaborate with researchers at CMU and beyond. If you're working on related problems or have interesting ideas you'd like to explore together, please feel free to reach out!
+    <!-- Procedural ambient background (scattered dots, faint orbits) -->
+    <svg class="bg-scatter" id="bg-scatter" aria-hidden="true"></svg>
 
-            <div class="icon-container">
-              <a href="#" id="maillink" class="icon-link">Email</a> / 
-              <a href="#" id="twitterlink" class="icon-link">Twitter</a> / 
-              <a href="#" id="githublink" class="icon-link">GitHub</a> / 
-              <a href="#" id="gslink" class="icon-link">Google Scholar</a>
-              <script>
-                const linkers = [
-                  "maillink",
-                  "twitterlink",
-                  "githublink",
-                  "gslink",
-                ];
-                const links = [
-                  "mailto:ziqi$cs.cmu.edu",
-                  "https://twitter.com/fj#02",
-                  "https://github.com/fj#02",
-                  "https://scholar.google.com/citations?user=iZpSjEYAAAAJ",
-                ];
-                for (let i = 0; i < 4; ++i) {
-                  let link = links[i];
-                  link = link.replace("$", "anz@");
-                  link = link.replace("#", "zzq20");
-                  document.getElementById(linkers[i]).href = link;
-                }
-              </script>
-            </div>
-          </div>
-        </div>
-        <div>
-          <img
-            src="static/photonew.jpg"
-            width="200"
-            class="profile-image"
-          />
-        </div>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="#hero" class="brand">Ziqian Zhong</a>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="/" class="active">Home</a>
+          <a href="/blog/">Blog</a>
+        </nav>
       </div>
-      <script>
-        // Data structures for content
-        const publications = [
-          {
-            title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?",
-            arxiv: "https://arxiv.org/abs/2604.11061",
-            website: "https://ar-forum.github.io/Pando/",
-            livepaper: "https://ar-forum.github.io/Pando/livepaper.html",
-            github: "https://github.com/AR-FORUM/pando",
-            authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan"
-          },
-          {
-            title: "Hodoscope: Unsupervised Behavior Discovery in AI Agents",
-            arxiv: "https://arxiv.org/abs/2604.11072",
-            website: "https://hodoscope.dev/",
-            livepaper: "https://hodoscope.dev/blog/livepaper.html",
-            github: "https://github.com/AR-FORUM/hodoscope",
-            authors: "Ziqian Zhong, Shashwat Saxena, Aditi Raghunathan"
-          },
-          {
-            title: "ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases",
-            arxiv: "https://arxiv.org/abs/2510.20270",
-            authors: "Ziqian Zhong, Aditi Raghunathan, Nicholas Carlini",
-            venue: "ICLR 2026"
-          },
-          {
-            title: "Watch the Weights: Unsupervised monitoring and control of fine-tuned LLMs",
-            arxiv: "https://arxiv.org/abs/2508.00161",
-            website: "https://fjzzq2002.github.io/WeightWatch/",
-            authors: "Ziqian Zhong, Aditi Raghunathan",
-            venue: "ICLR 2026"
-          },
-          {
-            title: "Algorithmic Capabilities of Random Transformers",
-            arxiv: "https://arxiv.org/abs/2410.04368",
-            authors: "Ziqian Zhong, Jacob Andreas",
-            venue: "NeurIPS 2024"
-          },
-          {
-            title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks",
-            arxiv: "https://arxiv.org/abs/2306.17844",
-            authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas",
-            venue: "Oral, NeurIPS 2023"
-          },
-          {
-            title: "Grokking as Compression: A Nonlinear Complexity Perspective",
-            arxiv: "https://arxiv.org/abs/2310.05918",
-            authors: "Ziming Liu*, Ziqian Zhong*, Max Tegmark",
-            venue: "NeurIPS UniReps Workshop 2023"
-          },
-          {
-            title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach",
-            pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114",
-            authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*",
-            venue: "SODA 2023"
-          },
-          {
-            title: "New Additive Approximations for Shortest Paths and Cycles",
-            pdf: "https://drops.dagstuhl.de/opus/volltexte/2022/16391/pdf/LIPIcs-ICALP-2022-50.pdf",
-            authors: "Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia Vassilevska Williams*, Ziqian Zhong*",
-            venue: "ICALP 2022"
-          },
-        ];
+    </header>
 
-        const awards = [
-          {
-            title: "Gold Medal, Fourth Place",
-            event: "International Olympiad in Informatics 2019"
-          },
-          {
-            title: "First Place",
-            event: "Meta Hacker Cup 2024"
-          },
-          {
-            title: "Second Place",
-            event: "46th ICPC World Final"
-          },
-          {
-            title: "Honorable Mention",
-            event: "Alibaba Global Mathematics Competition 2022"
-          },
-          {
-            title: "Honorable Mention",
-            event: "Putnam Mathematical Competition 2022"
-          }
-        ];
+    <main class="page">
+      <!-- HERO -->
+      <section class="hero" id="hero">
+        <div class="hero-art">
+          <img class="hero-img" src="/assets/opener-clean.png" alt="" />
+        </div>
+        <div class="hero-text">
+          <h1 class="display-name">Ziqian Zhong</h1>
+          <div class="rule-and-dot">
+            <span class="rule"></span><span class="dot"></span>
+          </div>
+          <p class="bio">
+            Hi! I'm Ziqian Zhong. I'm currently a <span id="phd-year"></span>PhD
+            student at Carnegie Mellon University, advised by
+            <a href="https://www.cs.cmu.edu/~aditirag/">Aditi&nbsp;Raghunathan</a>.
+          </p>
+          <p class="bio">
+            Previously, I studied computer science and math at MIT, where I
+            worked with <a href="https://www.mit.edu/~jda/">Jacob&nbsp;Andreas</a>
+            and <a href="https://physics.mit.edu/faculty/max-tegmark/">Max&nbsp;Tegmark</a>.
+            I also worked as a research scientist at
+            <a href="https://pika.art/">Pika</a>, where I led the development of Pika 2.0.
+          </p>
+        </div>
+      </section>
 
-        const projects = [
-          {
-            title: "Is my problem new?",
-            link: "http://yuantiji.ac/",
-            description: "Semantic search demo for competitive programming problems"
-          },
-          {
-            title: "CP Ideas",
-            link: "https://fjzzq2002.github.io/cpideas/",
-            description: "Generate competitive programming problems with GPT-3"
-          },
-          {
-            title: "Mosaic Detective",
-            link: "https://github.com/weblab-class/fjzzq2002-lambertae-Tom-CCS",
-            description: "Guess the word from an image downscaled"
-          },
-          {
-            title: "Light Synth",
-            link: "https://fjzzq2002.github.io/light-synth",
-            description: "Synthesizer, but with balls and whistles"
-          },
-          {
-            title: "Pitch Trainer",
-            link: "https://fjzzq2002.github.io/pitch-trainer/",
-            description: "Microtonal ear training (in Chinese)"
-          }
-        ];
+      <!-- RESEARCH INTEREST -->
+      <section class="card-row" id="research">
+        <article class="info-card art-right" id="contact">
+          <div class="card-body">
+            <h2 class="card-title">Current Research Interest</h2>
+            <div class="rule-and-dot small">
+              <span class="dot"></span><span class="rule"></span>
+            </div>
+            <p>
+              <strong>AI Safety and Interpretability.</strong> My research seeks
+              principled approaches to improve the robustness, controllability,
+              and alignment of large language models with human values.
+            </p>
+            <p>
+              I'm always excited to collaborate with researchers at CMU and
+              beyond. If you're working on related problems or have ideas
+              you'd like to explore together, please feel free to reach out!
+            </p>
+          </div>
+          <div class="card-art">
+            <video class="card-video" autoplay muted loop playsinline preload="auto"
+                   poster="/assets/scope-clean-flipped.png">
+              <source src="/assets/scope-loop.webm" type="video/webm">
+              <source src="/assets/scope-loop.mp4"  type="video/mp4">
+            </video>
+          </div>
+        </article>
+      </section>
 
-        // Rendering functions
-        function renderPublications() {
-          const container = document.querySelector('.pubs');
-          container.innerHTML = `
-            <div class="section-title">Selected Projects</div>
-            ${publications.map(pub => `
-              <div class="block">
-                <div class="title">
-                  ${pub.title}
-                  ${pub.arxiv ? `<a href="${pub.arxiv}" target="_blank">[Arxiv]</a>` :
-                    pub.pdf ? `<a href="${pub.pdf}" target="_blank">[PDF]</a>` : ''}
-                  ${pub.website ? `<a href="${pub.website}" target="_blank">[Website]</a>` : ''}
-                  ${pub.livepaper ? `<a href="${pub.livepaper}" target="_blank">[LivePaper]</a>` : ''}
-                  ${pub.github ? `<a href="${pub.github}" target="_blank">[GitHub]</a>` : ''}
-                </div>
-                <div class="desc">
-                  <span>${pub.authors}</span>${pub.venue ? `&nbsp;&nbsp;(${pub.venue})` : ''}
-                </div>
-              </div>
-            `).join('')}
-          `;
+      <!-- SOCIAL PILLS -->
+      <section class="social-row" aria-label="Links">
+        <a class="social-pill" href="/Resume-Academia.pdf" target="_blank">
+          <span class="circle sw-silver">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h9l5 5v13H6z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M14 3v6h6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="label">Resume</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="social-pill" id="maillink" href="#">
+          <span class="circle sw-teal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M3 7l9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+          </span>
+          <span class="label">Email</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="social-pill" id="twitterlink" href="#">
+          <span class="circle sw-blue">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.643 4.937c-.835.37-1.732.62-2.675.733.962-.576 1.7-1.49 2.048-2.578-.9.534-1.897.922-2.958 1.13-.85-.904-2.06-1.47-3.4-1.47-2.572 0-4.658 2.086-4.658 4.66 0 .364.042.718.12 1.06-3.873-.195-7.304-2.05-9.602-4.868-.4.69-.63 1.49-.63 2.342 0 1.616.823 3.043 2.072 3.878-.764-.025-1.482-.234-2.11-.583v.06c0 2.257 1.605 4.14 3.737 4.568-.392.106-.803.162-1.227.162-.3 0-.593-.028-.877-.082.593 1.85 2.313 3.198 4.352 3.234-1.595 1.25-3.604 1.995-5.786 1.995-.376 0-.747-.022-1.112-.065 2.062 1.323 4.51 2.093 7.14 2.093 8.57 0 13.255-7.098 13.255-13.254 0-.2-.005-.402-.014-.602.91-.658 1.7-1.477 2.323-2.41z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">Twitter</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="social-pill" id="githublink" href="#">
+          <span class="circle sw-terra">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.69-.22.69-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">GitHub</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="social-pill" id="gslink" href="#">
+          <span class="circle sw-mustard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9z" fill="currentColor"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17z" fill="currentColor"/></svg>
+          </span>
+          <span class="label">Google&nbsp;Scholar</span>
+          <span class="arrow">→</span>
+        </a>
+      </section>
+
+      <!-- LOWER FOLD: publications, awards, projects -->
+      <section class="lower" id="publications">
+        <div class="pubs"></div>
+        <div class="award" id="awards"></div>
+        <!-- side projects rendered into here by shared.js -->
+      </section>
+
+      <footer class="footer-tag" id="about">
+        <div class="footer-art" aria-hidden="true">
+          <div class="footer-strip"></div>
+          <img class="footer-art-left"  src="/assets/footer-clean-right.png" alt="" />
+          <img class="footer-art-right" src="/assets/footer-clean-left-flipped.png" alt="" />
+        </div>
+      </footer>
+    </main>
+
+    <!-- Inline data + renderers (mirrors live site so the mockup is realistic) -->
+    <script>
+      // category ∈ "interp" | "safety" | "other" — drives card accent color
+      const publications = [
+        { category: "interp", title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?", arxiv: "https://arxiv.org/abs/2604.11061", website: "https://ar-forum.github.io/Pando/", livepaper: "https://ar-forum.github.io/Pando/livepaper.html", github: "https://github.com/AR-FORUM/pando", authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan" },
+        { category: "safety", title: "Hodoscope: Unsupervised Behavior Discovery in AI Agents", arxiv: "https://arxiv.org/abs/2604.11072", website: "https://hodoscope.dev/", livepaper: "https://hodoscope.dev/blog/livepaper.html", github: "https://github.com/AR-FORUM/hodoscope", authors: "Ziqian Zhong, Shashwat Saxena, Aditi Raghunathan" },
+        { category: "safety", title: "ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases", arxiv: "https://arxiv.org/abs/2510.20270", authors: "Ziqian Zhong, Aditi Raghunathan, Nicholas Carlini", venue: "ICLR 2026" },
+        { category: "interp", title: "Watch the Weights: Unsupervised monitoring and control of fine-tuned LLMs", arxiv: "https://arxiv.org/abs/2508.00161", website: "https://fjzzq2002.github.io/WeightWatch/", authors: "Ziqian Zhong, Aditi Raghunathan", venue: "ICLR 2026" },
+        { category: "interp", title: "Algorithmic Capabilities of Random Transformers", arxiv: "https://arxiv.org/abs/2410.04368", authors: "Ziqian Zhong, Jacob Andreas", venue: "NeurIPS 2024" },
+        { category: "interp", title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks", arxiv: "https://arxiv.org/abs/2306.17844", authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas", venue: "Oral, NeurIPS 2023" },
+        { category: "interp", title: "Grokking as Compression: A Nonlinear Complexity Perspective", arxiv: "https://arxiv.org/abs/2310.05918", authors: "Ziming Liu*, Ziqian Zhong*, Max Tegmark", venue: "NeurIPS UniReps Workshop 2023" },
+        { category: "other",  title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach", pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114", authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*", venue: "SODA 2023" },
+        { category: "other",  title: "New Additive Approximations for Shortest Paths and Cycles", pdf: "https://drops.dagstuhl.de/opus/volltexte/2022/16391/pdf/LIPIcs-ICALP-2022-50.pdf", authors: "Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia Vassilevska Williams*, Ziqian Zhong*", venue: "ICALP 2022" }
+      ];
+      const awards = [
+        { title: "Gold Medal, Fourth Place", event: "International Olympiad in Informatics 2019" },
+        { title: "First Place", event: "Meta Hacker Cup 2024" },
+        { title: "Second Place", event: "46th ICPC World Final" },
+        { title: "Honorable Mention", event: "Alibaba Global Mathematics Competition 2022" },
+        { title: "Honorable Mention", event: "Putnam Mathematical Competition 2022" }
+      ];
+      const projects = [
+        { title: "LivePaper", link: "https://github.com/fjzzq2002/livepaper", description: "Turning research papers into interactive web pages" },
+        { title: "Is my problem new?", link: "http://yuantiji.ac/", description: "Semantic search demo for competitive programming problems" },
+        { title: "CP Ideas", link: "https://fjzzq2002.github.io/cpideas/", description: "Generate competitive programming problems with GPT-3" },
+        { title: "Mosaic Detective", link: "https://github.com/weblab-class/fjzzq2002-lambertae-Tom-CCS", description: "Guess the word from an image downscaled" },
+        { title: "Light Synth", link: "https://fjzzq2002.github.io/light-synth", description: "Synthesizer, but with balls and whistles" },
+        { title: "Pitch Trainer", link: "https://fjzzq2002.github.io/pitch-trainer/", description: "Microtonal ear training (in Chinese)" }
+      ];
+
+      function computePhdYear() {
+        const startDate = new Date(2024, 8, 1);
+        const now = new Date();
+        if (now < startDate) return "incoming ";
+        const yearsDiff = now.getFullYear() - startDate.getFullYear();
+        const monthsDiff = now.getMonth() - startDate.getMonth();
+        const phdYear = monthsDiff >= 0 ? yearsDiff + 1 : yearsDiff;
+        const names = ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth"];
+        return phdYear <= names.length - 1 ? `${names[phdYear]}-year ` : `${phdYear}th-year `;
+      }
+
+      function wireSocialLinks() {
+        const ids = ["maillink", "twitterlink", "githublink", "gslink"];
+        const raw = [
+          "mailto:ziqi$cs.cmu.edu",
+          "https://twitter.com/fj#02",
+          "https://github.com/fj#02",
+          "https://scholar.google.com/citations?user=iZpSjEYAAAAJ"
+        ];
+        for (let i = 0; i < ids.length; i++) {
+          const el = document.getElementById(ids[i]);
+          if (el) el.href = raw[i].replace("$", "anz@").replace("#", "zzq20");
         }
+      }
 
-        function renderAwards() {
-          const container = document.querySelector('.award');
-          container.innerHTML = `
-            <div class="section-title">Selected Awards</div>
-            ${awards.map(award => `
-              <div class="block">
-                <div class="title">
-                  ${award.title}
-                  <span> @ ${award.event} </span>
-                </div>
-              </div>
-            `).join('')}
-          `;
-        }
+      // category → swatch color (numeral + venue accent)
+      const CATEGORY_COLORS = {
+        interp: "blue",    // navy for interpretability
+        safety: "teal",    // green-ish for safety
+        other:  "terra"    // orange for everything else
+      };
+      const colorFor = p => CATEGORY_COLORS[p && p.category] || "blue";
 
-        function renderProjects() {
-          return `
-            <div class="projects">
-              <div class="section-title">Side Projects</div>
-              ${projects.map(project => `
-                <div class="block">
-                  <div class="title">
-                    ${project.title}
-                    <a href="${project.link}" ${project.dead ? 'class="dead-link"' : ''} target="_blank">[Link]</a>
+      // fallback cycle for compact cards (awards / side projects — no category)
+      const NUMERAL_COLORS = ["terra", "blue", "teal", "mustard"];
+
+      const PILL_ICONS = {
+        arxiv:    `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h7l3 3v10H3z" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 8h5M5.5 10h5M5.5 12h3" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+        pdf:      `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h7l3 3v10H3z" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 8h5M5.5 10h5M5.5 12h3" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
+        website:  `<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M2 8h12M8 2c2 1.7 2 10.3 0 12M8 2c-2 1.7-2 10.3 0 12" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>`,
+        livepaper:`<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="8" cy="7.5" r="1.5" fill="currentColor"/><path d="M5 13h6" stroke="currentColor" stroke-width="1.1"/></svg>`,
+        github:   `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 0 0-2.05 12.67c.32.06.45-.14.45-.31v-1.1c-1.81.39-2.19-.87-2.19-.87-.29-.75-.72-.95-.72-.95-.59-.4.04-.39.04-.39.65.05.99.67.99.67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.96-.72-2.96-3.21 0-.71.25-1.29.67-1.75-.07-.16-.29-.83.06-1.72 0 0 .55-.18 1.79.67a6.2 6.2 0 0 1 3.25 0c1.24-.85 1.79-.67 1.79-.67.35.89.13 1.56.06 1.72.42.46.67 1.04.67 1.75 0 2.49-1.52 3.05-2.97 3.21.23.2.44.6.44 1.2v1.78c0 .17.12.37.45.31A6.5 6.5 0 0 0 8 1.5z" fill="currentColor"/></svg>`
+      };
+
+      function pill(href, kind, label) {
+        if (!href) return "";
+        return `<a class="proj-pill" href="${href}" target="_blank">
+          <span class="pi">${PILL_ICONS[kind] || ""}</span>${label}
+        </a>`;
+      }
+
+      function renderPublications() {
+        const c = document.querySelector(".pubs");
+        if (!c) return;
+        c.innerHTML = `
+          <div class="proj-hero" id="projects-hero">
+            <h2 class="proj-hero-title">Selected Projects</h2>
+            <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
+          </div>
+          <div class="project-grid">
+            ${publications.map((p, i) => {
+              const n = i + 1;
+              const color = colorFor(p);
+              return `
+                <article class="project-card">
+                  <svg class="proj-card-bg" id="proj-bg-${n}" aria-hidden="true"></svg>
+                  <div class="proj-num sw-${color}-fg">
+                    <span class="n">${n}</span>
+                    <span class="n-dot"></span>
                   </div>
-                  <div class="desc">${project.description}</div>
-                </div>
-              `).join('')}
-            </div>
-          `;
-        }
+                  <div class="proj-body">
+                    <h3 class="proj-title">${p.title}</h3>
+                    <div class="proj-pills">
+                      ${p.arxiv ? pill(p.arxiv, "arxiv", "Arxiv") : ""}
+                      ${p.pdf   ? pill(p.pdf,   "pdf",   "PDF")   : ""}
+                      ${pill(p.website,   "website",   "Website")}
+                      ${pill(p.livepaper, "livepaper", "LivePaper")}
+                      ${pill(p.github,    "github",    "GitHub")}
+                    </div>
+                    <div class="proj-authors">${p.authors}</div>
+                    ${p.venue ? `<div class="proj-venue sw-${color}-fg">${p.venue}</div>` : ""}
+                  </div>
+                </article>`;
+            }).join("")}
+          </div>
+        `;
+      }
 
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-          renderPublications();
-          renderAwards();
-          document.querySelector('.award').insertAdjacentHTML('afterend', renderProjects());
-        });
-      </script>
-      <div class="pubs">
-      </div>
-      <div class="award">
-      </div>
-    </div>
+      function renderAwards() {
+        const c = document.querySelector(".award");
+        if (!c) return;
+        c.innerHTML = `
+          <div class="section-head">
+            <h2 class="proj-hero-title small">Selected Awards</h2>
+            <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
+          </div>
+          <div class="compact-grid">
+            ${awards.map((a, i) => {
+              const color = NUMERAL_COLORS[i % NUMERAL_COLORS.length];
+              return `
+                <article class="compact-card">
+                  <div class="compact-mark sw-${color}-fg"></div>
+                  <div class="compact-body">
+                    <div class="compact-title">${a.title}</div>
+                    <div class="compact-meta sw-${color}-fg">${a.event}</div>
+                  </div>
+                </article>`;
+            }).join("")}
+          </div>`;
+      }
+
+      function renderProjects() {
+        return `
+          <div class="projects" id="projects">
+            <div class="section-head">
+              <h2 class="proj-hero-title small">Side Projects</h2>
+              <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
+            </div>
+            <div class="compact-grid">
+              ${projects.map((p, i) => {
+                const color = NUMERAL_COLORS[i % NUMERAL_COLORS.length];
+                return `
+                  <article class="compact-card">
+                    <div class="compact-mark sw-${color}-fg"></div>
+                    <div class="compact-body">
+                      <div class="compact-title">${p.title}</div>
+                      <div class="compact-meta">${p.description}</div>
+                    </div>
+                    <a class="compact-link" href="${p.link}" target="_blank" aria-label="Open ${p.title}">→</a>
+                  </article>`;
+              }).join("")}
+            </div>
+          </div>`;
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const phdEl = document.getElementById("phd-year");
+        if (phdEl) phdEl.textContent = computePhdYear();
+        wireSocialLinks();
+        renderPublications();
+        renderAwards();
+        const aw = document.querySelector(".award");
+        if (aw) aw.insertAdjacentHTML("afterend", renderProjects());
+      });
+    </script>
+
+    <script src="/js/procgen.js"></script>
+
   </body>
 </html>

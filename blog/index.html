@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blog · Ziqian Zhong</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Lato:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <svg class="bg-scatter" id="bg-scatter" aria-hidden="true"></svg>
+
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/" class="brand">Ziqian Zhong</a>
+        <nav class="top-nav" aria-label="Primary">
+          <a href="/">Home</a>
+          <a href="/blog/" class="active">Blog</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page">
+      <!-- HERO + posts share one row: image left, title + list right -->
+      <section class="hero hero-blog" id="hero">
+        <div class="hero-art">
+          <img class="hero-img" src="/assets/abstract-clean.png" alt="" />
+        </div>
+        <div class="hero-text">
+          <h1 class="display-name">Blogs</h1>
+          <div class="rule-and-dot">
+            <span class="rule"></span><span class="dot"></span>
+          </div>
+          <ul class="blog-list" id="blog-list">
+            <!-- populated by JS -->
+          </ul>
+        </div>
+      </section>
+
+      <footer class="footer-tag">
+        <div class="footer-art" aria-hidden="true">
+          <div class="footer-strip"></div>
+          <img class="footer-art-left"  src="/assets/footer-clean-right.png"        alt="" />
+          <img class="footer-art-right" src="/assets/footer-clean-left-flipped.png" alt="" />
+        </div>
+      </footer>
+    </main>
+
+    <script>
+      const posts = [
+        { date: "Apr 2026", title: "What I learned making Pando.",              desc: "Nuances of interpretability evaluations.",          slug: "/blog/pando/" },
+        { date: "Apr 2026", title: "Benchmark crisis is coming for all of us.", desc: "Some thoughts on ML research in the age of agents.", slug: "/blog/benchmark-crisis/" },
+      ];
+
+      function renderPosts() {
+        const c = document.getElementById("blog-list");
+        if (!c) return;
+        c.innerHTML = posts.map(p => `
+          <li class="blog-item">
+            <time class="blog-date">${p.date}</time>
+            <div class="blog-text">
+              <a class="blog-title" href="${p.slug}">${p.title}</a>
+              ${p.desc ? `<p class="blog-desc">${p.desc}</p>` : ""}
+            </div>
+          </li>`).join("");
+      }
+      document.addEventListener("DOMContentLoaded", renderPosts);
+    </script>
+
+    <script src="/js/procgen.js"></script>
+  </body>
+</html>

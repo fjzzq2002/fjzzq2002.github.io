@@ -536,6 +536,26 @@ body::before {
   margin-bottom: 12px;
 }
 
+.proj-hero-note {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--ink-soft);
+  margin: 18px 0 0 0;
+  font-style: italic;
+  text-align: right;
+}
+.proj-hero-note a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--link);
+  font-style: normal;
+  padding-bottom: 1px;
+}
+.proj-hero-note a:hover {
+  color: var(--link-hov);
+  border-bottom-color: var(--link-hov);
+}
+
 .project-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

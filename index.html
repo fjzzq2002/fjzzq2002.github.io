@@ -104,13 +104,6 @@
           <span class="label">Twitter</span>
           <span class="arrow">→</span>
         </a>
-        <a class="social-pill" id="githublink" href="#">
-          <span class="circle sw-terra">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.69-.22.69-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.69-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .26.18.58.69.48A10 10 0 0 0 12 2z" fill="currentColor"/></svg>
-          </span>
-          <span class="label">GitHub</span>
-          <span class="arrow">→</span>
-        </a>
         <a class="social-pill" id="gslink" href="#">
           <span class="circle sw-mustard">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 1 9l11 6 9-4.91V17h2V9z" fill="currentColor"/><path d="M5 13.18v4L12 21l7-3.82v-4L12 17z" fill="currentColor"/></svg>
@@ -142,13 +135,12 @@
       const publications = [
         { category: "interp", title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?", arxiv: "https://arxiv.org/abs/2604.11061", website: "https://ar-forum.github.io/Pando/", livepaper: "https://ar-forum.github.io/Pando/livepaper.html", github: "https://github.com/AR-FORUM/pando", authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan" },
         { category: "safety", title: "Hodoscope: Unsupervised Behavior Discovery in AI Agents", arxiv: "https://arxiv.org/abs/2604.11072", website: "https://hodoscope.dev/", livepaper: "https://hodoscope.dev/blog/livepaper.html", github: "https://github.com/AR-FORUM/hodoscope", authors: "Ziqian Zhong, Shashwat Saxena, Aditi Raghunathan" },
-        { category: "safety", title: "ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases", arxiv: "https://arxiv.org/abs/2510.20270", authors: "Ziqian Zhong, Aditi Raghunathan, Nicholas Carlini", venue: "ICLR 2026" },
-        { category: "interp", title: "Watch the Weights: Unsupervised monitoring and control of fine-tuned LLMs", arxiv: "https://arxiv.org/abs/2508.00161", website: "https://fjzzq2002.github.io/WeightWatch/", authors: "Ziqian Zhong, Aditi Raghunathan", venue: "ICLR 2026" },
-        { category: "interp", title: "Algorithmic Capabilities of Random Transformers", arxiv: "https://arxiv.org/abs/2410.04368", authors: "Ziqian Zhong, Jacob Andreas", venue: "NeurIPS 2024" },
-        { category: "interp", title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks", arxiv: "https://arxiv.org/abs/2306.17844", authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas", venue: "Oral, NeurIPS 2023" },
-        { category: "interp", title: "Grokking as Compression: A Nonlinear Complexity Perspective", arxiv: "https://arxiv.org/abs/2310.05918", authors: "Ziming Liu*, Ziqian Zhong*, Max Tegmark", venue: "NeurIPS UniReps Workshop 2023" },
+        { category: "safety", title: "ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases", arxiv: "https://arxiv.org/abs/2510.20270", github: "https://github.com/safety-research/impossiblebench", authors: "Ziqian Zhong, Aditi Raghunathan, Nicholas Carlini", venue: "ICLR 2026" },
+        { category: "interp", title: "Watch the Weights: Unsupervised monitoring and control of fine-tuned LLMs", arxiv: "https://arxiv.org/abs/2508.00161", website: "https://fjzzq2002.github.io/WeightWatch/", github: "https://github.com/fjzzq2002/WeightWatch", authors: "Ziqian Zhong, Aditi Raghunathan", venue: "ICLR 2026" },
+        { category: "safety", title: "Base Models Look Human To AI Detectors", arxiv: "https://arxiv.org/abs/2605.19516", github: "https://github.com/YixuanEvenXu/humanization-by-iterative-paraphrasing", authors: "Yixuan Even Xu, Ziqian Zhong, Aditi Raghunathan, Fei Fang, J. Zico Kolter" },
+        { category: "interp", title: "Algorithmic Capabilities of Random Transformers", arxiv: "https://arxiv.org/abs/2410.04368", github: "https://github.com/fjzzq2002/random_transformers", authors: "Ziqian Zhong, Jacob Andreas", venue: "NeurIPS 2024" },
+        { category: "interp", title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks", arxiv: "https://arxiv.org/abs/2306.17844", github: "https://github.com/fjzzq2002/pizza", authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas", venue: "Oral, NeurIPS 2023" },
         { category: "other",  title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach", pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114", authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*", venue: "SODA 2023" },
-        { category: "other",  title: "New Additive Approximations for Shortest Paths and Cycles", pdf: "https://drops.dagstuhl.de/opus/volltexte/2022/16391/pdf/LIPIcs-ICALP-2022-50.pdf", authors: "Mingyang Deng*, Yael Kirkpatrick*, Victor Rong*, Virginia Vassilevska Williams*, Ziqian Zhong*", venue: "ICALP 2022" }
       ];
       const awards = [
         { title: "Gold Medal, Fourth Place", event: "International Olympiad in Informatics 2019" },
@@ -178,11 +170,10 @@
       }
 
       function wireSocialLinks() {
-        const ids = ["maillink", "twitterlink", "githublink", "gslink"];
+        const ids = ["maillink", "twitterlink", "gslink"];
         const raw = [
           "mailto:ziqi$cs.cmu.edu",
           "https://twitter.com/fj#02",
-          "https://github.com/fj#02",
           "https://scholar.google.com/citations?user=iZpSjEYAAAAJ"
         ];
         for (let i = 0; i < ids.length; i++) {
@@ -225,32 +216,34 @@
             <h2 class="proj-hero-title">Selected Projects</h2>
             <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
           </div>
-          <div class="project-grid">
+          <ol class="pub-list">
             ${publications.map((p, i) => {
               const n = i + 1;
               const color = colorFor(p);
+              const venue = p.venue || "Preprint";
               return `
-                <article class="project-card">
-                  <svg class="proj-card-bg" id="proj-bg-${n}" aria-hidden="true"></svg>
-                  <div class="proj-num sw-${color}-fg">
-                    <span class="n">${n}</span>
-                    <span class="n-dot"></span>
-                  </div>
-                  <div class="proj-body">
-                    <h3 class="proj-title">${p.title}</h3>
-                    <div class="proj-pills">
-                      ${p.arxiv ? pill(p.arxiv, "arxiv", "Arxiv") : ""}
-                      ${p.pdf   ? pill(p.pdf,   "pdf",   "PDF")   : ""}
-                      ${pill(p.website,   "website",   "Website")}
-                      ${pill(p.livepaper, "livepaper", "LivePaper")}
-                      ${pill(p.github,    "github",    "GitHub")}
+                <li class="pub-row">
+                  <svg class="pub-art" id="proj-bg-${n}" aria-hidden="true"></svg>
+                  <span class="pub-num sw-${color}-fg">${n}</span>
+                  <div class="pub-main">
+                    <div class="pub-top">
+                      <h3 class="pub-title">${p.title}</h3>
+                      <div class="pub-pills">
+                        ${p.arxiv ? pill(p.arxiv, "arxiv", "Arxiv") : ""}
+                        ${p.pdf   ? pill(p.pdf,   "pdf",   "PDF")   : ""}
+                        ${pill(p.website,   "website",   "Website")}
+                        ${pill(p.livepaper, "livepaper", "LivePaper")}
+                        ${pill(p.github,    "github",    "GitHub")}
+                      </div>
                     </div>
-                    <div class="proj-authors">${p.authors}</div>
-                    ${p.venue ? `<div class="proj-venue sw-${color}-fg">${p.venue}</div>` : ""}
+                    <div class="pub-bot">
+                      <div class="pub-authors">${p.authors}</div>
+                      <div class="pub-venue sw-${color}-fg">${venue}</div>
+                    </div>
                   </div>
-                </article>`;
+                </li>`;
             }).join("")}
-          </div>
+          </ol>
           <p class="proj-hero-note">
             See <a href="https://scholar.google.com/citations?user=iZpSjEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a> for a more complete list of publications.
           </p>

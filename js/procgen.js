@@ -233,7 +233,7 @@
   function drawCardMotif(svg, seed) {
     const w = 200, h = 200;
     svg.setAttribute("viewBox", `0 0 ${w} ${h}`);
-    svg.setAttribute("preserveAspectRatio", "xMidYMid meet");
+    svg.setAttribute("preserveAspectRatio", "xMinYMid slice");
     while (svg.firstChild) svg.removeChild(svg.firstChild);
 
     const r = mulberry32(seed);

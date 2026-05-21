@@ -266,6 +266,15 @@ body::before {
   border-bottom-color: var(--link-hov);
 }
 
+.bio-note {
+  margin-top: 4px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--link);
+  background: var(--bg-card);
+  font-style: italic;
+  color: var(--ink);
+}
+
 /* ──────────────────  art placeholders  ────────────────── */
 
 .art-placeholder {

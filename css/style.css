@@ -385,9 +385,21 @@ body::before {
   }
 }
 
-.card-body p + p {
+.card-body p + p,
+.card-body p + ul,
+.card-body ul + p {
   margin-top: 14px;
 }
+
+.card-body ul {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--ink);
+  font-size: clamp(15.5px, 0.55vw + 10.5px, 17.5px);
+  line-height: 1.65;
+}
+
+.card-body ul li { margin: 11px 0; }
 
 .card-body {
   padding: 40px 0 28px 0;      /* top breathing room only on text; image reaches the top */

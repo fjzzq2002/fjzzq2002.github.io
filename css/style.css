@@ -840,6 +840,219 @@ body::before {
   .pub-pills { flex-basis: 100%; }
 }
 
+/* ──────────────────  featured works (figure-plate cards) ────────────────── */
+
+.feat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 56px;
+  row-gap: 0;
+}
+
+.feat-card {
+  border-top: 1px solid var(--rule);
+  padding: 26px 0 30px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 172px;
+  column-gap: 24px;
+  grid-template-areas:
+    "venue   thumb"
+    "title   thumb"
+    "desc    thumb"
+    "authors thumb"
+    "pills   thumb";
+  align-content: start;
+}
+
+.feat-venue {
+  grid-area: venue;
+  margin-bottom: 10px;
+  font-family: var(--sans);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.feat-title {
+  grid-area: title;
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 36, "wght" 500, "SOFT" 0;
+  font-weight: 500;
+  font-size: 19.5px;
+  line-height: 1.32;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+.feat-title a,
+.pub-title a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.feat-title a:hover,
+.pub-title a:hover { color: var(--link-hov); }
+
+.feat-desc {
+  grid-area: desc;
+  margin: 9px 0 0 0;
+  font-family: var(--serif);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: var(--ink);
+}
+
+.feat-authors {
+  grid-area: authors;
+  margin: 8px 0 0 0;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--ink-soft);
+}
+
+.feat-pills {
+  grid-area: pills;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin-top: 16px;
+  align-self: end;
+}
+
+/* figure plate fills the card's right side */
+.feat-thumb {
+  grid-area: thumb;
+  position: relative;
+  align-self: stretch;
+  min-height: 190px;
+  margin-top: 4px;
+}
+
+.feat-thumb a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.feat-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  background: #fff;
+}
+
+/* thin offset frame + satellite dot in the category color */
+.feat-thumb::before {
+  content: "";
+  position: absolute;
+  inset: -8px 8px 8px -8px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  opacity: 0.45;
+  pointer-events: none;
+}
+.feat-thumb::after {
+  content: "";
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* continued publication list under the cards — plain rows, no markers */
+.pub-list.continued .pub-row {
+  grid-template-columns: minmax(0, 1fr);
+  column-gap: 0;
+}
+
+@media (max-width: 1024px) {
+  .feat-grid { grid-template-columns: minmax(0, 1fr); column-gap: 0; }
+}
+
+@media (max-width: 520px) {
+  .feat-card {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "venue" "thumb" "title" "desc" "authors" "pills";
+  }
+  .feat-thumb { width: 100%; min-height: 0; aspect-ratio: 2 / 1; margin: 6px 0 16px; }
+}
+
+/* ──────────────────  awards / random projects (plain two-lane lists) ────────────────── */
+
+.lw-cols {
+  margin-top: 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 44px;
+  align-items: start;
+}
+
+.lw-head {
+  font-family: var(--serif);
+  font-variation-settings: "opsz" 72, "wght" 500, "SOFT" 0;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 8px 0;
+}
+
+.lw-sec .rule-and-dot { margin-bottom: 18px; }
+
+.lw-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lw-list li {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.5;
+  padding: 5px 0;
+}
+
+.lw-t {
+  font-variation-settings: "opsz" 24, "wght" 500, "SOFT" 0;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.lw-t a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.lw-t a:hover { color: var(--link-hov); }
+
+.lw-sep::before {
+  content: " ";
+  white-space: pre;
+  padding: 0 3px;
+}
+
+.lw-m {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 900px) {
+  .lw-cols { grid-template-columns: minmax(0, 1fr); }
+  .lw-sec + .lw-sec { margin-top: 56px; }
+}
+
 /* ──────────────────  compact card grid (awards / side projects) ────────────────── */
 
 .section-head {
@@ -856,19 +1069,11 @@ body::before {
 
 .compact-card {
   display: grid;
-  grid-template-columns: 18px minmax(0, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 14px;
   align-items: center;
   padding: 18px 0;
   border-bottom: 1px solid var(--rule);
-}
-
-.compact-mark {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: currentColor;
-  margin-top: 2px;
 }
 
 .compact-body { min-width: 0; }
@@ -1125,8 +1330,10 @@ body::before {
   .hero-img { max-height: 280px; }
 
   /* phone: keep the 2-column labeled layout from the 820px breakpoint so
-     pills stay readable (no icon-only collapse). Just tighten padding. */
-  .social-pill { padding: 14px 10px; }
+     pills stay readable (no icon-only collapse). Drop the arrow and pull
+     the icon closer to the label so "Google Scholar" fits without overflow. */
+  .social-pill { gap: 9px; padding: 14px 4px; }
+  .social-pill .arrow { display: none; }
 
 
   .ph-tag {

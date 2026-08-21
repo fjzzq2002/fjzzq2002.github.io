@@ -136,26 +136,31 @@
     <!-- Inline data + renderers (mirrors live site so the mockup is realistic) -->
     <script>
       // category ∈ "interp" | "safety" | "other" — drives card accent color
+      // featured works get a card with a one-liner + figure plate
+      const featured = [
+        { category: "safety", title: "User Awareness in Frontier Models", desc: "LLMs could act differently for well-known AI safety researchers.", thumb: "/assets/pubs/user-awareness.png", website: "https://transluce.org/user-awareness", websiteLabel: "Transluce Blog", authors: "Ziqian Zhong, Aditi Raghunathan, Cassidy Laidlaw, Jacob Steinhardt", venue: "Blog" },
+        { category: "safety", title: "Model Self-Identification Could Be Subliminally Transferred", desc: "Innocent Claude-generated data can make models identify with Claude.", thumb: "/assets/pubs/self-ident.png", website: "https://www.lesswrong.com/posts/cb5quszpxCbFDGk68/model-self-identification-could-be-subliminally-transferred", websiteLabel: "LessWrong", authors: "Ziqian Zhong", venue: "Blog" },
+        { category: "safety", title: "Hardening Agent Benchmarks with Adversarial Hacker-Fixer Loops", desc: "Could we harden the environments automatically against reward hacking?", thumb: "/assets/pubs/harden.svg", arxiv: "https://arxiv.org/abs/2606.08960", github: "https://github.com/few-sh/harden-v0", authors: "Ziqian Zhong, Ivgeni Segal, Ivan Bercovich, Shashwat Saxena, Kexun Zhang, Aditi Raghunathan" },
+        { category: "interp", title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?", desc: "Most interpretability methods don't.", thumb: "/assets/pubs/pando.png", arxiv: "https://arxiv.org/abs/2604.11061", website: "https://ar-forum.github.io/Pando/", livepaper: "https://ar-forum.github.io/Pando/livepaper.html", github: "https://github.com/AR-FORUM/pando", authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan", venue: "COLM 2026" },
+      ];
       const publications = [
-        { category: "interp", title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?", arxiv: "https://arxiv.org/abs/2604.11061", website: "https://ar-forum.github.io/Pando/", livepaper: "https://ar-forum.github.io/Pando/livepaper.html", github: "https://github.com/AR-FORUM/pando", authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan" },
         { category: "safety", title: "Hodoscope: Unsupervised Behavior Discovery in AI Agents", arxiv: "https://arxiv.org/abs/2604.11072", website: "https://hodoscope.dev/", livepaper: "https://hodoscope.dev/blog/livepaper.html", github: "https://github.com/AR-FORUM/hodoscope", authors: "Ziqian Zhong, Shashwat Saxena, Aditi Raghunathan" },
         { category: "safety", title: "ImpossibleBench: Measuring LLMs' Propensity of Exploiting Test Cases", arxiv: "https://arxiv.org/abs/2510.20270", github: "https://github.com/safety-research/impossiblebench", authors: "Ziqian Zhong, Aditi Raghunathan, Nicholas Carlini", venue: "ICLR 2026" },
         { category: "interp", title: "Watch the Weights: Unsupervised monitoring and control of fine-tuned LLMs", arxiv: "https://arxiv.org/abs/2508.00161", website: "https://fjzzq2002.github.io/WeightWatch/", github: "https://github.com/fjzzq2002/WeightWatch", authors: "Ziqian Zhong, Aditi Raghunathan", venue: "ICLR 2026" },
-        { category: "safety", title: "Base Models Look Human To AI Detectors", arxiv: "https://arxiv.org/abs/2605.19516", github: "https://github.com/YixuanEvenXu/humanization-by-iterative-paraphrasing", authors: "Yixuan Even Xu, Ziqian Zhong, Aditi Raghunathan, Fei Fang, J. Zico Kolter" },
-        { category: "interp", title: "Algorithmic Capabilities of Random Transformers", arxiv: "https://arxiv.org/abs/2410.04368", github: "https://github.com/fjzzq2002/random_transformers", authors: "Ziqian Zhong, Jacob Andreas", venue: "NeurIPS 2024" },
         { category: "interp", title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks", arxiv: "https://arxiv.org/abs/2306.17844", github: "https://github.com/fjzzq2002/pizza", authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas", venue: "Oral, NeurIPS 2023" },
         { category: "other",  title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach", pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114", authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*", venue: "SODA 2023" },
       ];
       const awards = [
-        { title: "Gold Medal, Fourth Place", event: "International Olympiad in Informatics 2019" },
+        { title: "Gold Medal, Fourth Place", event: "IOI 2019" },
         { title: "First Place", event: "Meta Hacker Cup 2024" },
         { title: "Second Place", event: "46th ICPC World Final" },
+        { title: "Second Place", event: "Universal Cup 2025" },
         { title: "Honorable Mention", event: "Alibaba Global Mathematics Competition 2022" },
         { title: "Honorable Mention", event: "Putnam Mathematical Competition 2022" }
       ];
       const projects = [
         { title: "LivePaper", link: "https://github.com/fjzzq2002/livepaper", description: "Turning research papers into interactive web pages" },
-        { title: "Is my problem new?", link: "http://yuantiji.ac/", description: "Semantic search demo for competitive programming problems" },
+        { title: "Is my problem new?", link: "http://yuantiji.ac/", description: "Semantic search for competitive programming" },
         { title: "CP Ideas", link: "https://fjzzq2002.github.io/cpideas/", description: "Generate competitive programming problems with GPT-3" },
         { title: "Mosaic Detective", link: "https://github.com/weblab-class/fjzzq2002-lambertae-Tom-CCS", description: "Guess the word from an image downscaled" },
         { title: "Light Synth", link: "https://fjzzq2002.github.io/light-synth", description: "Synthesizer, but with balls and whistles" },
@@ -194,9 +199,6 @@
       };
       const colorFor = p => CATEGORY_COLORS[p && p.category] || "blue";
 
-      // fallback cycle for compact cards (awards / side projects — no category)
-      const NUMERAL_COLORS = ["terra", "blue", "teal", "mustard"];
-
       const PILL_ICONS = {
         arxiv:    `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h7l3 3v10H3z" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 8h5M5.5 10h5M5.5 12h3" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
         pdf:      `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h7l3 3v10H3z" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 8h5M5.5 10h5M5.5 12h3" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
@@ -212,6 +214,18 @@
         </a>`;
       }
 
+      // primary link for a work: website, else arxiv, else pdf
+      const mainLink = p => p.website || p.arxiv || p.pdf || "#";
+
+      function pillsFor(p) {
+        return `
+          ${p.arxiv ? pill(p.arxiv, "arxiv", "Arxiv") : ""}
+          ${p.pdf   ? pill(p.pdf,   "pdf",   "PDF")   : ""}
+          ${pill(p.website,   "website",   p.websiteLabel || "Website")}
+          ${pill(p.livepaper, "livepaper", "LivePaper")}
+          ${pill(p.github,    "github",    "GitHub")}`;
+      }
+
       function renderPublications() {
         const c = document.querySelector(".pubs");
         if (!c) return;
@@ -220,25 +234,33 @@
             <h2 class="proj-hero-title">Selected Projects</h2>
             <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
           </div>
-          <ol class="pub-list">
-            ${publications.map((p, i) => {
-              const n = i + 1;
+          <div class="feat-grid">
+            ${featured.map(p => {
+              const color = colorFor(p);
+              const venue = p.venue || "Preprint";
+              return `
+                <article class="feat-card">
+                  <span class="feat-venue sw-${color}-fg">${venue}</span>
+                  <div class="feat-thumb sw-${color}-fg">
+                    <a href="${mainLink(p)}" target="_blank"><img src="${p.thumb}" alt="" loading="lazy" /></a>
+                  </div>
+                  <h3 class="feat-title"><a href="${mainLink(p)}" target="_blank">${p.title}</a></h3>
+                  <p class="feat-desc">${p.desc}</p>
+                  <p class="feat-authors">${p.authors}</p>
+                  <div class="feat-pills">${pillsFor(p)}</div>
+                </article>`;
+            }).join("")}
+          </div>
+          <ul class="pub-list continued">
+            ${publications.map(p => {
               const color = colorFor(p);
               const venue = p.venue || "Preprint";
               return `
                 <li class="pub-row">
-                  <svg class="pub-art" id="proj-bg-${n}" aria-hidden="true"></svg>
-                  <span class="pub-num sw-${color}-fg">${n}</span>
                   <div class="pub-main">
                     <div class="pub-top">
-                      <h3 class="pub-title">${p.title}</h3>
-                      <div class="pub-pills">
-                        ${p.arxiv ? pill(p.arxiv, "arxiv", "Arxiv") : ""}
-                        ${p.pdf   ? pill(p.pdf,   "pdf",   "PDF")   : ""}
-                        ${pill(p.website,   "website",   "Website")}
-                        ${pill(p.livepaper, "livepaper", "LivePaper")}
-                        ${pill(p.github,    "github",    "GitHub")}
-                      </div>
+                      <h3 class="pub-title"><a href="${mainLink(p)}" target="_blank">${p.title}</a></h3>
+                      <div class="pub-pills">${pillsFor(p)}</div>
                     </div>
                     <div class="pub-bot">
                       <div class="pub-authors">${p.authors}</div>
@@ -247,58 +269,31 @@
                   </div>
                 </li>`;
             }).join("")}
-          </ol>
+          </ul>
           <p class="proj-hero-note">
             See <a href="https://scholar.google.com/citations?user=iZpSjEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a> for a more complete list of publications.
           </p>
         `;
       }
 
-      function renderAwards() {
+      // awards + random projects: plain two-lane lists (title + italic meta)
+      function renderLower() {
         const c = document.querySelector(".award");
         if (!c) return;
-        c.innerHTML = `
-          <div class="section-head">
-            <h2 class="proj-hero-title small">Selected Awards</h2>
-            <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
-          </div>
-          <div class="compact-grid">
-            ${awards.map((a, i) => {
-              const color = NUMERAL_COLORS[i % NUMERAL_COLORS.length];
-              return `
-                <article class="compact-card">
-                  <div class="compact-mark sw-${color}-fg"></div>
-                  <div class="compact-body">
-                    <div class="compact-title">${a.title}</div>
-                    <div class="compact-meta sw-${color}-fg">${a.event}</div>
-                  </div>
-                </article>`;
-            }).join("")}
+        const item = (t, m, link) => {
+          const title = link ? `<a href="${link}" target="_blank">${t}</a>` : t;
+          return `<li><span class="lw-t">${title}</span><span class="lw-sep"></span><span class="lw-m">${m}</span></li>`;
+        };
+        const section = (head, items) => `
+          <div class="lw-sec">
+            <h2 class="lw-head">${head}</h2>
+            <div class="rule-and-dot small"><span class="dot"></span><span class="rule"></span></div>
+            <ul class="lw-list">${items}</ul>
           </div>`;
-      }
-
-      function renderProjects() {
-        return `
-          <div class="projects" id="projects">
-            <div class="section-head">
-              <h2 class="proj-hero-title small">Side Projects</h2>
-              <div class="rule-and-dot"><span class="dot"></span><span class="rule"></span></div>
-            </div>
-            <div class="compact-grid">
-              ${projects.map((p, i) => {
-                const color = NUMERAL_COLORS[i % NUMERAL_COLORS.length];
-                return `
-                  <article class="compact-card">
-                    <div class="compact-mark sw-${color}-fg"></div>
-                    <div class="compact-body">
-                      <div class="compact-title">${p.title}</div>
-                      <div class="compact-meta">${p.description}</div>
-                    </div>
-                    <a class="compact-link" href="${p.link}" target="_blank" aria-label="Open ${p.title}">→</a>
-                  </article>`;
-              }).join("")}
-            </div>
-          </div>`;
+        c.innerHTML = `<div class="lw-cols">` +
+          section("Selected Awards", awards.map(a => item(a.title, a.event)).join("")) +
+          section("Random Projects", projects.map(p => item(p.title, p.description, p.link)).join("")) +
+          `</div>`;
       }
 
       document.addEventListener("DOMContentLoaded", () => {
@@ -306,9 +301,7 @@
         if (phdEl) phdEl.textContent = computePhdYear();
         wireSocialLinks();
         renderPublications();
-        renderAwards();
-        const aw = document.querySelector(".award");
-        if (aw) aw.insertAdjacentHTML("afterend", renderProjects());
+        renderLower();
       });
     </script>
 

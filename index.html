@@ -49,10 +49,6 @@
             I also worked as a research scientist at
             <a href="https://pika.art/">Pika</a>, where I led the development of Pika 2.0.
           </p>
-          <p class="bio bio-note">
-            I'm in San Francisco interning at
-            <a href="https://transluce.org">Transluce</a> this summer.
-          </p>
         </div>
       </section>
 
@@ -121,9 +117,10 @@
         </a>
       </section>
 
-      <!-- LOWER FOLD: publications, awards, projects -->
+      <!-- LOWER FOLD: publications, news, awards, projects -->
       <section class="lower" id="publications">
         <div class="pubs"></div>
+        <section class="news-sec" id="news" aria-label="News"></section>
         <div class="award" id="awards"></div>
         <!-- side projects rendered into here by shared.js -->
       </section>
@@ -154,6 +151,16 @@
         { category: "interp", title: "The Clock and the Pizza: Two Stories in Mechanistic Explanation of Neural Networks", arxiv: "https://arxiv.org/abs/2306.17844", github: "https://github.com/fjzzq2002/pizza", authors: "Ziqian Zhong*, Ziming Liu*, Max Tegmark, Jacob Andreas", venue: "Oral, NeurIPS 2023" },
         { category: "other",  title: "On Problems Related to Unbounded SubsetSum: A Unified Combinatorial Approach", pdf: "https://epubs.siam.org/doi/epdf/10.1137/1.9781611977554.ch114", authors: "Mingyang Deng*, Xiao Mao*, Ziqian Zhong*", venue: "SODA 2023" },
       ];
+      // newest first
+      // (releases like preprints/writeups stay out — they live in Selected Projects)
+      const news = [
+        { d: "Aug 2026", html: `Gave an invited talk at the Jane Street Research Symposium! (<a href="/assets/talks/slides_js.pdf" target="_blank">slides</a>)` },
+        { d: "Jul 2026", html: `<a href="https://ar-forum.github.io/Pando/" target="_blank">Pando</a> was accepted to COLM 2026!` },
+        { d: "May 2026", html: `Started a summer research internship at <a href="https://transluce.org" target="_blank">Transluce</a> in San Francisco, working on situation awareness.` },
+        { d: "Jan 2026", html: `<a href="https://arxiv.org/abs/2510.20270" target="_blank">ImpossibleBench</a> and <a href="https://fjzzq2002.github.io/WeightWatch/" target="_blank">Watch the Weights</a> were accepted to ICLR 2026!` },
+        { d: "Jun 2025", html: `Started a collaboration with Anthropic on reward hacking.` },
+        { d: "Jan 2025", html: `Started my PhD at Carnegie Mellon University!` },
+      ];
       const awards = [
         { title: "Gold Medal, Fourth Place", event: "IOI 2019" },
         { title: "First Place", event: "Meta Hacker Cup 2024" },
@@ -172,7 +179,8 @@
       ];
 
       function computePhdYear() {
-        const startDate = new Date(2024, 8, 1);
+        // started Jan 2025, counted as AY 2024-25; year rolls over each August
+        const startDate = new Date(2024, 7, 1);
         const now = new Date();
         if (now < startDate) return "incoming ";
         const yearsDiff = now.getFullYear() - startDate.getFullYear();
@@ -275,9 +283,26 @@
             }).join("")}
           </ul>
           <p class="proj-hero-note">
-            See <a href="https://scholar.google.com/citations?user=iZpSjEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a> for a more complete list of publications.
+            See <a href="https://scholar.google.com/citations?user=iZpSjEYAAAAJ" target="_blank" rel="noopener">Google Scholar</a> &amp; <a href="https://www.lesswrong.com/users/ziqian-zhong" target="_blank" rel="noopener">LessWrong</a> for a more complete list of publications.
           </p>
         `;
+      }
+
+      // news: plain dated ledger
+      function renderNews() {
+        const c = document.getElementById("news");
+        if (!c) return;
+        c.innerHTML = `
+          <div class="news-head">
+            <h2 class="lw-head">News</h2>
+            <div class="rule-and-dot small"><span class="dot"></span><span class="rule"></span></div>
+          </div>
+          <ul class="nw-list">
+            ${news.map(n => `
+              <li>
+                <span class="nw-d">${n.d}</span><span class="nw-t">${n.html}</span>
+              </li>`).join("")}
+          </ul>`;
       }
 
       // awards + random projects: plain two-lane lists (title + italic meta)
@@ -305,6 +330,7 @@
         if (phdEl) phdEl.textContent = computePhdYear();
         wireSocialLinks();
         renderPublications();
+        renderNews();
         renderLower();
       });
     </script>

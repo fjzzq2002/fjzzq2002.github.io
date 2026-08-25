@@ -510,8 +510,10 @@ body::before {
 
 /* ──────────────────  lower fold (pubs / awards / projects)  ────────────────── */
 
+/* section rhythm: every gap between sections matches the 57px from the hero
+   divider to the research-card title */
 .lower {
-  padding-top: 60px;
+  padding-top: 57px;
 }
 
 .section-head {
@@ -537,7 +539,7 @@ body::before {
 /* ──────────────────  selected projects (small hero + card grid)  ────────────────── */
 
 .proj-hero {
-  margin: 8px 0 32px 0;
+  margin: 0 0 32px 0;
   max-width: 720px;
 }
 
@@ -1003,7 +1005,7 @@ body::before {
 /* ──────────────────  awards / random projects (plain two-lane lists) ────────────────── */
 
 .lw-cols {
-  margin-top: 64px;
+  margin-top: 57px;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   column-gap: 44px;
@@ -1064,6 +1066,67 @@ body::before {
   .lw-cols { grid-template-columns: minmax(0, 1fr); }
   .lw-sec + .lw-sec { margin-top: 56px; }
 }
+
+/* ──────────────────  news (dated ledger)  ────────────────── */
+
+.news-sec { margin-top: 57px; }
+
+.news-head .rule-and-dot { margin-bottom: 18px; }
+
+.nw-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nw-list li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  column-gap: 22px;
+  padding: 6px 0;
+  font-family: var(--serif);
+  font-size: 16.5px;
+  line-height: 1.55;
+}
+
+.nw-d {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink-dim);
+  padding-top: 4px;
+}
+
+.nw-t { color: var(--ink); }
+
+.nw-t a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid var(--link);
+  padding-bottom: 1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.nw-t a:hover { color: var(--link-hov); border-bottom-color: var(--link-hov); }
+
+/* items past the fold hide until expanded */
+.news-sec:not(.expanded) .nw-old { display: none; }
+
+.news-more {
+  display: inline-block;
+  margin-top: 12px;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 15.5px;
+  color: var(--link);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.news-more:hover { color: var(--link-hov); }
 
 /* ──────────────────  compact card grid (awards / side projects) ────────────────── */
 

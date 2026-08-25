@@ -1073,20 +1073,35 @@ body::before {
 
 .news-head .rule-and-dot { margin-bottom: 18px; }
 
+/* timeline: hairline spine with colored dots, date lane flush to the text */
 .nw-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0 0 0 4px;
+  padding: 0 0 0 26px;
+  border-left: 1px solid var(--rule);
 }
 
 .nw-list li {
+  position: relative;
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr);
-  column-gap: 22px;
-  padding: 6px 0;
+  column-gap: 0;
+  padding: 7px 0;
   font-family: var(--serif);
   font-size: 16.5px;
   line-height: 1.55;
+}
+
+.nw-list li::before {
+  content: "";
+  position: absolute;
+  left: -30px;               /* centered on the spine */
+  top: 14px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot-c, var(--link));
+  box-shadow: 0 0 0 3px var(--bg);   /* clips the spine around the dot */
 }
 
 .nw-d {

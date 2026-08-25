@@ -288,7 +288,8 @@
         `;
       }
 
-      // news: plain dated ledger
+      // news: timeline ledger — spine + colored dots cycling the accent palette
+      const NEWS_COLORS = ["terra", "blue", "teal"];
       function renderNews() {
         const c = document.getElementById("news");
         if (!c) return;
@@ -298,8 +299,8 @@
             <div class="rule-and-dot small"><span class="dot"></span><span class="rule"></span></div>
           </div>
           <ul class="nw-list">
-            ${news.map(n => `
-              <li>
+            ${news.map((n, i) => `
+              <li style="--dot-c: var(--${NEWS_COLORS[i % NEWS_COLORS.length]})">
                 <span class="nw-d">${n.d}</span><span class="nw-t">${n.html}</span>
               </li>`).join("")}
           </ul>`;

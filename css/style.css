@@ -1125,6 +1125,17 @@ body::before {
 }
 .nw-t a:hover { color: var(--link-hov); border-bottom-color: var(--link-hov); }
 
+/* mobile: date lane is too greedy — stack the date on its own line above the text */
+@media (max-width: 600px) {
+  .nw-list { padding-left: 20px; }
+  .nw-list li {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 8px 0;
+  }
+  .nw-list li::before { left: -24px; top: 12px; }
+  .nw-d { padding-top: 0; margin-bottom: 2px; }
+}
+
 /* items past the fold hide until expanded */
 .news-sec:not(.expanded) .nw-old { display: none; }
 

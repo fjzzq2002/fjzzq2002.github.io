@@ -1125,18 +1125,6 @@ body::before {
 }
 .nw-t a:hover { color: var(--link-hov); border-bottom-color: var(--link-hov); }
 
-/* highlighted item (current status) — echoes the old hero note: cream plate,
-   blue left border, italic; negative margin keeps the text edge aligned */
-.nw-list li.nw-hl .nw-t {
-  font-style: italic;
-  background: var(--bg-card);
-  border-left: 3px solid var(--link);
-  padding: 8px 14px;
-  margin-left: -17px;
-}
-.nw-list li.nw-hl .nw-d { padding-top: 12px; }
-.nw-list li.nw-hl::before { top: 22px; }
-
 /* mobile: date lane is too greedy — stack the date on its own line above the text */
 @media (max-width: 600px) {
   .nw-list { padding-left: 20px; }
@@ -1146,9 +1134,6 @@ body::before {
   }
   .nw-list li::before { left: -24px; top: 12px; }
   .nw-d { padding-top: 0; margin-bottom: 2px; }
-  .nw-list li.nw-hl .nw-t { margin-left: 0; }
-  .nw-list li.nw-hl .nw-d { padding-top: 0; margin-bottom: 4px; }
-  .nw-list li.nw-hl::before { top: 12px; }
 }
 
 /* items past the fold hide until expanded */

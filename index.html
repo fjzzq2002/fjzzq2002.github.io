@@ -154,6 +154,7 @@
       // newest first
       // (releases like preprints/writeups stay out — they live in Selected Projects)
       const news = [
+        { d: "Oct 2026", hl: true, html: `I'm back in San Francisco for COLM 2026, presenting <a href="https://ar-forum.github.io/Pando/" target="_blank">Pando</a> :)` },
         { d: "Aug 2026", html: `Gave an invited talk at the Jane Street Research Symposium: <i>How Can We Stop Reward Seekers?</i> (<a href="/assets/talks/slides_js.pdf" target="_blank">slides</a>)` },
         { d: "Jul 2026", html: `<a href="https://ar-forum.github.io/Pando/" target="_blank">Pando</a> was accepted to COLM 2026!` },
         { d: "May 2026", html: `Started a summer research internship at <a href="https://transluce.org" target="_blank">Transluce</a> in San Francisco, working on situation awareness.` },
@@ -299,10 +300,13 @@
             <div class="rule-and-dot small"><span class="dot"></span><span class="rule"></span></div>
           </div>
           <ul class="nw-list">
-            ${news.map((n, i) => `
-              <li style="--dot-c: var(--${NEWS_COLORS[i % NEWS_COLORS.length]})">
+            ${(() => { let ci = 0; return news.map(n => {
+              const color = n.hl ? "link" : NEWS_COLORS[ci++ % NEWS_COLORS.length];
+              return `
+              <li${n.hl ? ' class="nw-hl"' : ""} style="--dot-c: var(--${color})">
                 <span class="nw-d">${n.d}</span><span class="nw-t">${n.html}</span>
-              </li>`).join("")}
+              </li>`;
+            }).join(""); })()}
           </ul>`;
       }
 

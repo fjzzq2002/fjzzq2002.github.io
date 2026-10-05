@@ -144,7 +144,7 @@
       // featured works get a card with a one-liner + figure plate
       const featured = [
         { category: "safety", title: "User Awareness in Frontier Models", desc: "LLMs could act differently for well-known AI safety researchers.", thumb: "/assets/pubs/user-awareness.png", website: "https://transluce.org/user-awareness", websiteLabel: "Transluce Blog", authors: "Ziqian Zhong, Aditi Raghunathan, Cassidy Laidlaw, Jacob Steinhardt", venue: "Blog" },
-        { category: "safety", title: "Model Self-Identification Could Be Subliminally Transferred", desc: "Innocent Claude-generated data can make models identify with Claude.", thumb: "/assets/pubs/self-ident.png", website: "https://www.lesswrong.com/posts/cb5quszpxCbFDGk68/model-self-identification-could-be-subliminally-transferred", websiteLabel: "LessWrong", github: "https://github.com/fjzzq2002/identification-transfer", authors: "Ziqian Zhong", venue: "Blog" },
+        { category: "safety", title: "Model Self-Identification Could Be Subliminally Transferred", desc: "Innocent Claude-generated data can make models identify with Claude.", thumb: "/assets/pubs/self-ident.png", website: "https://www.lesswrong.com/posts/cb5quszpxCbFDGk68/model-self-identification-could-be-subliminally-transferred", websiteLabel: "LessWrong", links: { "CMU CSD Blog": "https://www.cs.cmu.edu/~csd-phd-blog/2026/model-self-identification/" }, github: "https://github.com/fjzzq2002/identification-transfer", authors: "Ziqian Zhong", venue: "Blog" },
         { category: "safety", title: "Hardening Agent Benchmarks with Adversarial Hacker-Fixer Loops", desc: "Could we harden the environments automatically against reward hacking?", thumb: "/assets/pubs/harden.svg", arxiv: "https://arxiv.org/abs/2606.08960", github: "https://github.com/few-sh/harden-v0", authors: "Ziqian Zhong, Ivgeni Segal, Ivan Bercovich, Shashwat Saxena, Kexun Zhang, Aditi Raghunathan" },
         { category: "interp", title: "Pando: Do Interpretability Methods Work When Models Won't Explain Themselves?", desc: "Most interpretability methods don't.", thumb: "/assets/pubs/pando.png", arxiv: "https://arxiv.org/abs/2604.11061", website: "https://ar-forum.github.io/Pando/", livepaper: "https://ar-forum.github.io/Pando/livepaper.html", github: "https://github.com/AR-FORUM/pando", authors: "Ziqian Zhong, Aashiq Muhamed, Mona T. Diab, Virginia Smith, Aditi Raghunathan", venue: "COLM 2026" },
       ];
@@ -222,6 +222,7 @@
         pdf:      `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.5h7l3 3v10H3z" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M10 1.5v3h3" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M5.5 8h5M5.5 10h5M5.5 12h3" stroke="currentColor" stroke-width="1.1" fill="none"/></svg>`,
         website:  `<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.1"/><path d="M2 8h12M8 2c2 1.7 2 10.3 0 12M8 2c-2 1.7-2 10.3 0 12" fill="none" stroke="currentColor" stroke-width="1.1"/></svg>`,
         livepaper:`<svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="9" rx="1" fill="none" stroke="currentColor" stroke-width="1.1"/><circle cx="8" cy="7.5" r="1.5" fill="currentColor"/><path d="M5 13h6" stroke="currentColor" stroke-width="1.1"/></svg>`,
+        link:     `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6.8 9.2a2.6 2.6 0 0 0 3.7 0l2.2-2.2a2.6 2.6 0 0 0-3.7-3.7l-1 1" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/><path d="M9.2 6.8a2.6 2.6 0 0 0-3.7 0L3.3 9a2.6 2.6 0 0 0 3.7 3.7l1-1" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>`,
         github:   `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 0 0-2.05 12.67c.32.06.45-.14.45-.31v-1.1c-1.81.39-2.19-.87-2.19-.87-.29-.75-.72-.95-.72-.95-.59-.4.04-.39.04-.39.65.05.99.67.99.67.58 1 1.52.71 1.89.54.06-.42.23-.71.41-.87-1.44-.16-2.96-.72-2.96-3.21 0-.71.25-1.29.67-1.75-.07-.16-.29-.83.06-1.72 0 0 .55-.18 1.79.67a6.2 6.2 0 0 1 3.25 0c1.24-.85 1.79-.67 1.79-.67.35.89.13 1.56.06 1.72.42.46.67 1.04.67 1.75 0 2.49-1.52 3.05-2.97 3.21.23.2.44.6.44 1.2v1.78c0 .17.12.37.45.31A6.5 6.5 0 0 0 8 1.5z" fill="currentColor"/></svg>`
       };
 
@@ -240,6 +241,7 @@
           ${p.arxiv ? pill(p.arxiv, "arxiv", "Arxiv") : ""}
           ${p.pdf   ? pill(p.pdf,   "pdf",   "PDF")   : ""}
           ${pill(p.website,   "website",   p.websiteLabel || "Website")}
+          ${Object.entries(p.links || {}).map(([label, href]) => pill(href, "link", label)).join("")}
           ${pill(p.livepaper, "livepaper", "LivePaper")}
           ${pill(p.github,    "github",    "GitHub")}`;
       }
